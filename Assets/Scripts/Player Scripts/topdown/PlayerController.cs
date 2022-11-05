@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //[SerializeField] private WeaponInfo currentWeapon;
+
     [SerializeField] private float speed;
+    
     private Vector2 direction;
+
     private Rigidbody2D rb;
 
     private void Awake()
@@ -14,7 +18,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
+
         LookAtMouse();
     }
 

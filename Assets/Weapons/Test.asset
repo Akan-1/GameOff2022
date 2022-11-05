@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  _weaponSprite: {fileID: 21300000, guid: 9ea72647c24be493ba6f15a9cd2a24ae, type: 3}
+  bulletPrefab: {fileID: 2550605733867124238, guid: 131568cb9e68e0d448028345749a0972,
+    type: 3}
+  scatter: 1
+  _fireRate: 60
+  bulletForce: 75
+  firePoint: {fileID: 0}
+  weaponBody: {fileID: 0}
