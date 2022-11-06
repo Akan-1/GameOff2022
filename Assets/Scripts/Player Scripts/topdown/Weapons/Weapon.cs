@@ -5,20 +5,26 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private WeaponInfo _weaponInfo;
-    [SerializeField] private Transform _firePoint;
+    [SerializeField] private Transform _firePointWeapon;
+
+    [SerializeField] private int _ammoValueOne;
+    [SerializeField] private int _ammoValueTwo;
+
+    public int ammo ;
 
     private float nextTimeOfFire = 0;
 
     private void Start()
     {
+        ammo = Random.Range(_ammoValueOne, _ammoValueTwo);
         GetComponent<SpriteRenderer>().sprite = _weaponInfo.weaponSprite;
-        _weaponInfo.firePoint = _firePoint;
-        _weaponInfo.weaponBody = this.transform;
+        _weaponInfo.firePoint = _firePointWeapon;
+        _weaponInfo.weaponBody = transform;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (ammo > 0)
         {
             if (Input.GetMouseButton(0))
             {
@@ -26,9 +32,13 @@ public class Weapon : MonoBehaviour
                 {
                     _weaponInfo.Shoot();
                     nextTimeOfFire = Time.time + 1 / _weaponInfo.fireRate;
+                    ammo--;
                 }
             }
         }
+
+        if (ammo <= 0)
+            ammo = 0;
     }
 
 }
