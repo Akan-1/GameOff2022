@@ -3,6 +3,7 @@
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
 public class WeaponInfo : ScriptableObject
 {
+    #region Configuration
     [Space]
     [Header("Weapon Config")]
     [SerializeField] private Sprite _weaponSprite;
@@ -17,15 +18,25 @@ public class WeaponInfo : ScriptableObject
     [SerializeField] private int _bulletQuantityPerShoot;
     
     private float bulletForce;
+    #endregion
 
-    [HideInInspector]public Transform firePoint;
+    [HideInInspector] public Transform firePoint;
     [HideInInspector] public Transform weaponBody;
-    
+
     public Sprite weaponSprite => _weaponSprite;
     public float fireRate => _fireRate;
 
+    [SerializeField] private int _ammoValueOne;
+    [SerializeField] private int _ammoValueTwo;
+
+    [SerializeField] private int _ammo;
+
+    [HideInInspector] public int ammo => _ammo;
+
     public void Shoot()
     {
+        if (_ammo > 0)
+        {
             for (int i = 0; i < _bulletQuantityPerShoot; i++)
             {
                 GameObject bullet = Instantiate(_bulletPrefab, firePoint.transform.position, Quaternion.identity);
@@ -38,5 +49,16 @@ public class WeaponInfo : ScriptableObject
                 Vector2 pdir = Vector2.Perpendicular(dir) * Random.Range(-_scatter, _scatter);
                 rb.velocity = (dir + pdir) * bulletForce;
             }
+        }
+
+        _ammo--;
+
+        if (_ammo <= 0)
+            _ammo = 0;
+    }
+
+    public void SetAmmoAmount()
+    {
+        _ammo = Random.Range(_ammoValueOne, _ammoValueTwo);
     }
 }

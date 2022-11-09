@@ -19,6 +19,9 @@ MonoBehaviour:
     type: 3}
   _bulletForceValueOne: 40
   _bulletForceValueTwo: 80
-  _bulletQuantityPerShoot: 8
+  _bulletQuantityPerShoot: 6
   firePoint: {fileID: 0}
   weaponBody: {fileID: 0}
+  _ammoValueOne: 3
+  _ammoValueTwo: 6
+  _ammo: 3
