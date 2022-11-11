@@ -39,13 +39,13 @@ public class WeaponInfo : ScriptableObject
         {
             for (int i = 0; i < _bulletQuantityPerShoot; i++)
             {
-                GameObject bullet = Instantiate(_bulletPrefab, firePoint.transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(_bulletPrefab, firePoint.position, firePoint.rotation);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
                 bulletForce = Random.Range(_bulletForceValueOne, _bulletForceValueTwo);
-                rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+                rb.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);
 
-                Vector2 dir = weaponBody.transform.rotation * Vector2.up;
+                Vector2 dir = weaponBody.transform.rotation * -Vector2.right;
                 Vector2 pdir = Vector2.Perpendicular(dir) * Random.Range(-_scatter, _scatter);
                 rb.velocity = (dir + pdir) * bulletForce;
             }

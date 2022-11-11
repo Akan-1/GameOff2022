@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         Invoke("DestroyBullet", bulletLifetime);
-       // Physics2D.IgnoreLayerCollision(layer1: 9, layer2: 9);
+        Physics2D.IgnoreLayerCollision(layer1: 9, layer2: 9);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

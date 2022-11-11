@@ -13,7 +13,7 @@ public class WeaponPickUp : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerController player))
+        if (collision.gameObject.TryGetComponent(out PlayerController2d player))
         {
             if (Input.GetMouseButton(1))
             { 
@@ -33,7 +33,7 @@ public class WeaponPickUp : MonoBehaviour
 
                 GetComponent<Rigidbody2D>().isKinematic = true;
 
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
 
                 //Это позже, когда будут спрайты в игре
                 //player.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = weaponInfo.weaponSprite;

@@ -7,12 +7,16 @@ public class PlayerController2d : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
 
+    private float nextTimeOfFire = 0;
+    private bool haveGun = false;
+
+
     [SerializeField] private LayerMask _whatIsGround;
 
     private int _facingDirection = 1;
 
     // переменные Bool
-    private bool _isFacingRight;
+   [SerializeField] private bool _isFacingRight;
     private bool _isGround;
     private bool _isTouchWall;
     private bool _isWallSliding;
@@ -20,23 +24,33 @@ public class PlayerController2d : MonoBehaviour
 
     // переменные Transform
     [SerializeField] private Transform _groudCheck;
-    [SerializeField] private Transform _wallCheck;
-
+    
     // не изменяемые переменные типа float
     private float _movementInputDirection; // хранит значение при нажатии клавиш (A, D)
 
     // изменяемые переменные типа float
-    [SerializeField] private float _wallCheckRadius;
+    
     [SerializeField] private float _groundCheckRadius;
-    [SerializeField] private float _wallSlideSpeed;
+    
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+
+    [Space]
+    [Header("Checking wall configuration")]
+    [SerializeField] private Transform _wallCheck;
+    [SerializeField] private float _wallCheckRadius;
     [SerializeField] private float _wallHopForce;
     [SerializeField] private float _wallJumpForce;
-
+    [SerializeField] private float _wallSlideSpeed;
+    
+    [Space]
     [SerializeField] private Vector2 _wallHopDirection;
     [SerializeField] private Vector2 _wallJumpDirection;
 
+    [Space]
+    [Header("Weapon Config")]
+    public WeaponInfo currentWeapon;
+    public Transform firePointPlayer;
 
     void Start()
     {
@@ -48,7 +62,18 @@ public class PlayerController2d : MonoBehaviour
     }
     void Update()
     {
-        CheckMovement();
+        if (haveGun)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                if (Time.time >= nextTimeOfFire)
+                {
+                    currentWeapon.Shoot();
+                    nextTimeOfFire = Time.time + 1 / currentWeapon.fireRate;
+                }
+            }
+        }
+            CheckMovement();
         CheckMovementDirection();
         UpdateAnimation();
         CheckSurroundings();
@@ -61,6 +86,11 @@ public class PlayerController2d : MonoBehaviour
         ApllyMovement();
     }
 
+    public bool WeaponInHand(bool inHand)
+    {
+        haveGun = inHand;
+        return true;
+    }
 
     private void CheckMovementDirection() // Проверяет поворот игрока (влево, вправо)
     {
@@ -116,17 +146,19 @@ public class PlayerController2d : MonoBehaviour
 
     private void JumpOnWall()
     {
-        if(_isWallSliding && _movementInputDirection == 0)
+
+        if (_isWallSliding && _movementInputDirection == 0)
         {
             Vector2 forceToAdd = new Vector2(_wallHopDirection.x /* _wallHopForce * _facingDirection*/, _wallHopDirection.y /* _wallHopForce*/);
             _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
             _isWallSliding = false;
         }
-        else if((_isWallSliding || _isTouchWall) && _movementInputDirection != 0)
+
+        if ((_isWallSliding || _isTouchWall) && _movementInputDirection != 0)
         {
-            Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallJumpForce);
-            _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
-            _isWallSliding = false;
+                Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallJumpForce);
+                _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+                _isWallSliding = false;
         }
     }
 
