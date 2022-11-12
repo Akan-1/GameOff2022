@@ -42,7 +42,8 @@ public class PlayerController2d : MonoBehaviour
     [SerializeField] private float _wallHopForce;
     [SerializeField] private float _wallJumpForce;
     [SerializeField] private float _wallSlideSpeed;
-    
+    [SerializeField] private float _wallSpeed;
+
     [Space]
     [SerializeField] private Vector2 _wallHopDirection;
     [SerializeField] private Vector2 _wallJumpDirection;
@@ -120,6 +121,7 @@ public class PlayerController2d : MonoBehaviour
     {
         if(_isTouchWall && !_isGround && _rb.velocity.y < 0)
         {
+            _movementInputDirection = 0;
             _isWallSliding = true;
             _canJump = true;
         }
@@ -132,7 +134,11 @@ public class PlayerController2d : MonoBehaviour
 
     private void CheckMovement()
     {
-        _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
+        if (!_isWallSliding)
+        {
+            _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
+        }
+
 
         if (Input.GetButton("Jump") && _isGround && _canJump)
         {
@@ -149,16 +155,18 @@ public class PlayerController2d : MonoBehaviour
 
         if (_isWallSliding && _movementInputDirection == 0)
         {
-            Vector2 forceToAdd = new Vector2(_wallHopDirection.x /* _wallHopForce * _facingDirection*/, _wallHopDirection.y /* _wallHopForce*/);
+            Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
             _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
             _isWallSliding = false;
+            _movementInputDirection = -_facingDirection;
         }
 
         if ((_isWallSliding || _isTouchWall) && _movementInputDirection != 0)
         {
-                Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallJumpForce);
+                Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallSpeed);
                 _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
                 _isWallSliding = false;
+            /**/
         }
     }
 
