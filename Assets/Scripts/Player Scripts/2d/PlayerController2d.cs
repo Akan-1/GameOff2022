@@ -16,11 +16,13 @@ public class PlayerController2d : MonoBehaviour
     private int _facingDirection = 1;
 
     // переменные Bool
-   [SerializeField] private bool _isFacingRight;
+    [SerializeField] private bool _isFacingRight;
+    [SerializeField] private bool _canSquat;
     private bool _isGround;
     private bool _isTouchWall;
     private bool _isWallSliding;
     private bool _canJump;
+
 
     // переменные Transform
     [SerializeField] private Transform _groudCheck;
@@ -37,6 +39,7 @@ public class PlayerController2d : MonoBehaviour
 
     [Space]
     [Header("Checking wall configuration")]
+    [SerializeField] private LayerMask _wallMask;
     [SerializeField] private Transform _wallCheck;
     [SerializeField] private float _wallCheckRadius;
     [SerializeField] private float _wallHopForce;
@@ -52,11 +55,23 @@ public class PlayerController2d : MonoBehaviour
     [Header("Weapon Config")]
     public WeaponInfo currentWeapon;
     public Transform firePointPlayer;
+    public Transform gunHolder;
+
+    [Space]
+    [Header("Squat Config")]
+    [SerializeField] private LayerMask _roofMask;
+    [SerializeField] private Transform _topCheck;
+    [SerializeField] private float _topCheckRadius;
+    [SerializeField] private Collider2D _poseStand;
+    [SerializeField] private Collider2D _poseSquat;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        
+        if(_canSquat)
+            _topCheckRadius = _topCheck.GetComponent<CircleCollider2D>().radius;
 
         _wallHopDirection.Normalize();
         _wallJumpDirection.Normalize();
@@ -74,12 +89,15 @@ public class PlayerController2d : MonoBehaviour
                 }
             }
         }
-            CheckMovement();
+        CheckMovement();
         CheckMovementDirection();
         UpdateAnimation();
         CheckSurroundings();
         WallSlide();
         CanJump();
+
+        if (_canSquat)
+            Squat();
     }
 
     private void FixedUpdate()
@@ -193,9 +211,9 @@ public class PlayerController2d : MonoBehaviour
 
     private void CheckSurroundings()
     {
-        _isGround = Physics2D.OverlapCircle (_groudCheck.position, _groundCheckRadius, _whatIsGround);
+        _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
 
-        _isTouchWall = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _whatIsGround);
+        _isTouchWall = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
     }
 
     private void UpdateAnimation() // здесь находится вся анимация
@@ -211,6 +229,25 @@ public class PlayerController2d : MonoBehaviour
             _isFacingRight = !_isFacingRight;
             transform.Rotate(0, 180, 0);
         }      
+    }
+
+    private void Squat()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && _isGround)
+        {
+            //тут для анимашки местечко, делаем параметр анимашки трушным
+            _poseStand.enabled = false;
+            _poseSquat.enabled = true;
+            _canJump = false;
+        }
+        else if (!Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask))
+        {
+            //тут фолзим
+            _poseStand.enabled = true;
+            _poseSquat.enabled = false;
+            _canJump = true;
+
+        }
     }
 
     private void OnDrawGizmos()

@@ -16,10 +16,10 @@ TagManager:
   - 
   - 
   - Ground
+  - Wall
+  - Bullet
   - Character
-  - 
-  - 
-  - 
+  - Roof
   - 
   - 
   - 
