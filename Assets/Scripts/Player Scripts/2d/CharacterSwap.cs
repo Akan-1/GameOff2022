@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSwap : MonoBehaviour
@@ -8,7 +7,6 @@ public class CharacterSwap : MonoBehaviour
     [SerializeField] AudioClip _swapSound;
     
     [Space]
-
     [SerializeField] private Transform character;
     [SerializeField] private List<Transform> possibleCharacters;
     [SerializeField] private int whichCharacter;
@@ -68,6 +66,7 @@ public class CharacterSwap : MonoBehaviour
             {
                 possibleCharacters[i].GetComponent<PlayerController2d>().enabled = false;
                 possibleCharacters[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+                possibleCharacters[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             }
         }
     }

@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController2d : MonoBehaviour
 {
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _pushOffWallSound;
+
     private Rigidbody2D _rb;
     private Animator _anim;
 
@@ -164,13 +165,14 @@ public class PlayerController2d : MonoBehaviour
         }
         else if(Input.GetButton("Jump") && _isWallSliding && _canJump)
         {
+            _audioSource.PlayOneShot(_pushOffWallSound);
             JumpOnWall();
         }
     }
 
     private void JumpOnWall()
     {
-
+       
         if (_isWallSliding && _movementInputDirection == 0)
         {
             Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
