@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerController2d : MonoBehaviour
+public class PlayerController2d : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _pushOffWallSound;
@@ -11,35 +11,33 @@ public class PlayerController2d : MonoBehaviour
     private float nextTimeOfFire = 0;
     private bool haveGun = false;
 
-
-    [SerializeField] private LayerMask _whatIsGround;
-
     private int _facingDirection = 1;
 
     // переменные Bool
-    [SerializeField] private bool _isFacingRight;
+    private bool _isFacingRight;
     [SerializeField] private bool _canSquat;
     private bool _isGround;
     private bool _isTouchWall;
     private bool _isWallSliding;
     private bool _canJump;
 
-
-    // переменные Transform
-    [SerializeField] private Transform _groudCheck;
-    
     // не изменяемые переменные типа float
     private float _movementInputDirection; // хранит значение при нажатии клавиш (A, D)
 
     // изменяемые переменные типа float
-    
+    #region Configurations
+    [Space]
+    [Header("Player Config")]
+    [SerializeField] private Transform _groudCheck;
+    [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private float _groundCheckRadius;
-    
+    [SerializeField] private int _health = 1;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
+    
     [Space]
-    [Header("Checking wall configuration")]
+    [Header("Checking wall Config")]
     [SerializeField] private LayerMask _wallMask;
     [SerializeField] private Transform _wallCheck;
     [SerializeField] private float _wallCheckRadius;
@@ -56,7 +54,9 @@ public class PlayerController2d : MonoBehaviour
     [Header("Weapon Config")]
     public WeaponInfo currentWeapon;
     public Transform firePointPlayer;
-    public Transform gunHolder;
+    [SerializeField] private Transform _gunHolder;
+
+    public Transform gunHolder => _gunHolder;
 
     [Space]
     [Header("Squat Config")]
@@ -65,7 +65,7 @@ public class PlayerController2d : MonoBehaviour
     [SerializeField] private float _topCheckRadius;
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
-
+    #endregion
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -77,6 +77,7 @@ public class PlayerController2d : MonoBehaviour
         _wallHopDirection.Normalize();
         _wallJumpDirection.Normalize();
     }
+
     void Update()
     {
         if (haveGun)
@@ -104,6 +105,12 @@ public class PlayerController2d : MonoBehaviour
     private void FixedUpdate()
     {
         ApllyMovement();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        GameObjectsManager.CheckLifeAmount(_health, gameObject);    
     }
 
     public bool WeaponInHand(bool inHand)
@@ -248,7 +255,6 @@ public class PlayerController2d : MonoBehaviour
             _poseStand.enabled = true;
             _poseSquat.enabled = false;
             _canJump = true;
-
         }
     }
 

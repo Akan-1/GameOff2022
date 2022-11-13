@@ -130,10 +130,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1994984}
-  - component: {fileID: 1994983}
   - component: {fileID: 1994985}
-  - component: {fileID: 1994987}
   - component: {fileID: 1994986}
+  - component: {fileID: 1994983}
+  - component: {fileID: 1994987}
+  - component: {fileID: 1994988}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -390,6 +391,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 585345ca716756545ba74843a8727a78, type: 3}
   - {fileID: 8300000, guid: 198388dc1031dfd4aa404a866457e4b1, type: 3}
   timer: 180
+--- !u!114 &1994988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d5698ec86c6bf44a786d1105ecd4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &12938170
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,13 +515,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 193466142}
   _pushOffWallSound: {fileID: 8300000, guid: 8ecac8cf3d2430f4895971e6e3c38ba5, type: 3}
+  _canSquat: 1
+  _groudCheck: {fileID: 1652780863}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  _isFacingRight: 0
-  _canSquat: 1
-  _groudCheck: {fileID: 1652780863}
   _groundCheckRadius: 0.6
+  _health: 1
   _speed: 12
   _jumpForce: 20
   _wallMask:
@@ -524,7 +537,7 @@ MonoBehaviour:
   _wallJumpDirection: {x: 1, y: 2}
   currentWeapon: {fileID: 0}
   firePointPlayer: {fileID: 843906656}
-  gunHolder: {fileID: 1930512796}
+  _gunHolder: {fileID: 1930512796}
   _roofMask:
     serializedVersion: 2
     m_Bits: 256
@@ -799,7 +812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383283961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.163, z: 0}
+  m_LocalPosition: {x: 0, y: -0.352, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1468369636}
@@ -815,9 +828,9 @@ GameObject:
   m_Component:
   - component: {fileID: 747306607}
   - component: {fileID: 747306606}
+  - component: {fileID: 747306610}
   - component: {fileID: 747306609}
   - component: {fileID: 747306608}
-  - component: {fileID: 747306610}
   - component: {fileID: 747306611}
   m_Layer: 0
   m_Name: Circle
@@ -884,7 +897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747306605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.07, y: -3.74, z: 0}
+  m_LocalPosition: {x: 13.29, y: -3.68, z: 0}
   m_LocalScale: {x: 1.3171057, y: 1.2882798, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -920,11 +933,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 747306605}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0d8beb7f4a8b0c24ab03735f2dfe1d3a, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.6236558, y: 0}
+  m_Offset: {x: 0.6236558, y: -0.103292525}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -935,7 +948,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.20409745, y: 1}
+  m_Size: {x: 0.20409751, y: 1.206585}
   m_EdgeRadius: 0
 --- !u!114 &747306610
 MonoBehaviour:
@@ -950,6 +963,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  _health: 0
+  _damage: 1
 --- !u!61 &747306611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1484,7 +1499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263433148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.071, y: -0.677, z: 0}
+  m_LocalPosition: {x: 17.33, y: -0.677, z: 0}
   m_LocalScale: {x: 0.9621256, y: 9.188379, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1700,7 +1715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329510127}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.495, y: -4.9020176, z: 0}
+  m_LocalPosition: {x: -0.04, y: -4.9020176, z: 0}
   m_LocalScale: {x: 36.14009, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1768,13 +1783,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1468369638}
   _pushOffWallSound: {fileID: 8300000, guid: bb1f6e81042d9624d9c950eafc956e32, type: 3}
+  _canSquat: 0
+  _groudCheck: {fileID: 383283962}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  _isFacingRight: 0
-  _canSquat: 0
-  _groudCheck: {fileID: 383283962}
-  _groundCheckRadius: 0.8
+  _groundCheckRadius: 0.54
+  _health: 2
   _speed: 10
   _jumpForce: 10
   _wallMask:
@@ -1790,7 +1805,7 @@ MonoBehaviour:
   _wallJumpDirection: {x: 1, y: 2}
   currentWeapon: {fileID: 0}
   firePointPlayer: {fileID: 12938171}
-  gunHolder: {fileID: 982269272}
+  _gunHolder: {fileID: 982269272}
   _roofMask:
     serializedVersion: 2
     m_Bits: 0
@@ -1877,7 +1892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468369631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.72, y: -2.95, z: 0}
+  m_LocalPosition: {x: -1.42, y: -2.63, z: 0}
   m_LocalScale: {x: 1.5894, y: 1.5894, z: 0}
   m_Children:
   - {fileID: 383283962}
@@ -2165,7 +2180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873558220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.82, y: 2.97, z: 0}
+  m_LocalPosition: {x: -10.72, y: 2.17, z: 0}
   m_LocalScale: {x: 1, y: 9.333721, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2273,7 +2288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905461268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.18, y: 0.24, z: 0}
+  m_LocalPosition: {x: -17.4, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 9.333721, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2317,7 +2332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092938514593416243}
   m_LocalRotation: {x: -0, y: -0, z: 0.10744211, w: 0.99421144}
-  m_LocalPosition: {x: 3.15, y: -3.14, z: 0}
+  m_LocalPosition: {x: 2.39, y: -2.47, z: 0}
   m_LocalScale: {x: 0.43872777, y: 0.4080416, z: 0.57607967}
   m_Children: []
   m_Father: {fileID: 0}

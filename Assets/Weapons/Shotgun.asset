@@ -22,6 +22,4 @@ MonoBehaviour:
   _bulletQuantityPerShoot: 6
   firePoint: {fileID: 0}
   weaponBody: {fileID: 0}
-  _ammoValueOne: 3
-  _ammoValueTwo: 6
-  _ammo: 3
+  _ammo: 6

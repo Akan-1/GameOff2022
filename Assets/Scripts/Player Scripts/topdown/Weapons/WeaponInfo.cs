@@ -26,16 +26,14 @@ public class WeaponInfo : ScriptableObject
     public Sprite weaponSprite => _weaponSprite;
     public float fireRate => _fireRate;
 
-    [SerializeField] private int _ammoValueOne;
-    [SerializeField] private int _ammoValueTwo;
-
     [SerializeField] private int _ammo;
+    private int _realAmmo;
 
     [HideInInspector] public int ammo => _ammo;
 
     public void Shoot()
     {
-        if (_ammo > 0)
+        if (_realAmmo > 0)
         {
             for (int i = 0; i < _bulletQuantityPerShoot; i++)
             {
@@ -51,14 +49,14 @@ public class WeaponInfo : ScriptableObject
             }
         }
 
-        _ammo--;
+        _realAmmo--;
 
-        if (_ammo <= 0)
-            _ammo = 0;
+        if (_realAmmo <= 0)
+            _realAmmo = 0;
     }
 
-    public void SetAmmoAmount()
+    public void SetAmmo()
     {
-        _ammo = Random.Range(_ammoValueOne, _ammoValueTwo);
+        _realAmmo = _ammo;
     }
 }

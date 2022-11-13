@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private float moveSpeed = 1f;
+
+    [SerializeField] private int _health;
+    [SerializeField] private int _damage;
+
 
     private Rigidbody2D rb;
 
@@ -12,6 +14,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _health = Random.Range(2, 5);
     }
 
     // Update is called once per frame
@@ -32,8 +35,19 @@ public class Enemy : MonoBehaviour
         return transform.localScale.x > Mathf.Epsilon;
     }
 
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        GameObjectsManager.CheckLifeAmount(_health, gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), transform.localScale.y);
+
+        if(collision.gameObject.TryGetComponent(out ITakeDamage takeDamage))
+        {
+            takeDamage.TakeDamage(_damage);
+        }
     }
 }
