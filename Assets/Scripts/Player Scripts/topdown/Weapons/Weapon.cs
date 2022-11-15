@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using QFSW.MOP2;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -67,6 +66,8 @@ public class Weapon : MonoBehaviour
 
     #endregion
 
+    #region Shooting
+
     public void ShotFrom(PlayerController2d playerController2D)
     {
         if (CurrentAmmoInMagazine > 0)
@@ -77,17 +78,13 @@ public class Weapon : MonoBehaviour
             {
                 for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
                 {
-                    Vector2 dir = playerController2D.transform.rotation * -Vector2.right;
-                    Vector2 pdir = Vector2.Perpendicular(dir) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
+                    Vector2 playerDirection = playerController2D.transform.rotation * -Vector2.right;
+                    Vector2 perpendiculaarPlayerDirection = Vector2.Perpendicular(playerDirection) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
 
-                    GameObject bullet = Instantiate(WeaponInfo.BulletPrefab);
-                    float bulletNewXPosition = playerController2D.transform.position.x + WeaponInfo.DivineFirePoint.x * dir.x;
-                    float bulletNewYPosition = playerController2D.transform.position.y + WeaponInfo.DivineFirePoint.y;
-                    bullet.transform.position = new Vector3(bulletNewXPosition, bulletNewYPosition, transform.position.z);
+                    GameObject bullet = CreateBullet();
+                    SetPositionToBullet(bullet, playerController2D.transform.position, playerDirection.x);
+                    AddForceToBullet(bullet, playerDirection, perpendiculaarPlayerDirection);
 
-                    Rigidbody2D bulletRigibody = bullet.GetComponent<Rigidbody2D>();
-                    float bulletForce = Random.Range(WeaponInfo.BulletForceBetween.x, WeaponInfo.BulletForceBetween.y);
-                    bulletRigibody.velocity = (dir + pdir) * bulletForce;
                     CurrentAmmoInMagazine--;
                 }
 
@@ -99,6 +96,27 @@ public class Weapon : MonoBehaviour
             GunHolder.ReloadWeaponAfter(WeaponInfo.ReloadTime);
         }
     }
+
+    private GameObject CreateBullet()
+    {
+        return MasterObjectPooler.Instance.GetObject($"{WeaponInfo.BulletPoolName}");
+    }
+
+    private void SetPositionToBullet(GameObject bullet, Vector3 startPosition, float playerDirectionX)
+    {
+        float bulletNewXPosition = startPosition.x + WeaponInfo.DivineFirePoint.x * playerDirectionX;
+        float bulletNewYPosition = startPosition.y + WeaponInfo.DivineFirePoint.y;
+        bullet.transform.position = new Vector3(bulletNewXPosition, bulletNewYPosition, transform.position.z);
+    }
+
+    private void AddForceToBullet(GameObject bullet, Vector2 playerDirection, Vector2 perpendicularPlayerDirection)
+    {
+        Rigidbody2D bulletRigibody = bullet.GetComponent<Rigidbody2D>();
+        float bulletForce = Random.Range(WeaponInfo.BulletForceBetween.x, WeaponInfo.BulletForceBetween.y);
+        bulletRigibody.velocity = (playerDirection + perpendicularPlayerDirection) * bulletForce;
+    }
+
+    #endregion
 
     public void ThrowOut(float throwForce, float throwAngularVelocity)
     {

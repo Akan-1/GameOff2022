@@ -7,27 +7,27 @@ public class WeaponInfo : ScriptableObject
     [Space]
     [Header("Weapon Config")]
     [SerializeField] private Sprite _sprite;
+    [SerializeField] private ObjectPoolsNames _bulletPoolName;
     [SerializeField] private Vector2 _divineFirePoint;
-    [SerializeField] private int _maximumBulletsInMagazine;
-    [SerializeField] private int _bulletPerShot;
-    [SerializeField] private int _bulletsAviable;
-    [SerializeField] private float _fireRate = 1;
-    [SerializeField] private float _scatter;
-    [SerializeField] private float _reloadTime;
+    [SerializeField] [Min(1)] private int _maximumBulletsInMagazine;
+    [SerializeField] [Min(1)] private int _bulletPerShot;
+    [SerializeField] [Min(1)] private int _bulletsAviable;
+    [SerializeField] [Min(1)] private float _fireRate = 1;
+    [SerializeField] [Min(0)] private float _scatter;
+    [SerializeField] [Min(0.01f)] private float _reloadTime;
+    [SerializeField] [Min(.1f)] private float _secondsBeforeNextShot;
 
     [Space]
     [Header("Bullet Config")]
-    [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Vector2 _bulletForceBetween;
-    [SerializeField] private float _secondsBeforeNextShot;
 
     #endregion
 
     public Sprite Sprite => _sprite;
+    public ObjectPoolsNames BulletPoolName => _bulletPoolName;
     public Vector2 DivineFirePoint => _divineFirePoint;
     public float FireRate => _fireRate;
     public float Scatter => _scatter;
-    public GameObject BulletPrefab => _bulletPrefab;
     public Vector2 BulletForceBetween => _bulletForceBetween;
     public float SecondsBeforeNextShot => _secondsBeforeNextShot;
     public float ReloadTime => _reloadTime;

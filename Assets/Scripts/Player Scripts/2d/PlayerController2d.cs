@@ -226,6 +226,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         if (hit)
         {
+
             _isTouchWall = true;
             if (CurrentWall != hit.collider?.transform)
             {
