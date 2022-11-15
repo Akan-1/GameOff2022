@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,9 +8,7 @@ public class Weapon : MonoBehaviour
     #region Configuration
 
     private Rigidbody2D _rigibody2D;
-    private float _currentTime;
-    private int _currentAmmo;
-    private int _remainingAmmo;
+    private int _currentAmmoInMagazine;
 
     [SerializeField] private WeaponInfo _weaponInfo;
     public WeaponInfo WeaponInfo => _weaponInfo;
@@ -17,12 +16,34 @@ public class Weapon : MonoBehaviour
     {
         get => _rigibody2D;
     }
+    public GunHolder GunHolder
+    {
+        get;
+        set;
+    }
+    public float ShotDelayTime
+    {
+        get;
+        private set;
+    }
+    public int BulletsAviable
+    {
+        get;
+        set;
+    }
+    public int CurrentAmmoInMagazine
+    {
+        get => _currentAmmoInMagazine;
+        set => _currentAmmoInMagazine = value;
+    }
 
     #endregion
 
     private void Awake()
     {
         _rigibody2D = GetComponent<Rigidbody2D>();
+        BulletsAviable = WeaponInfo.BulletsAviable;
+        CurrentAmmoInMagazine = WeaponInfo.MaximumBulletsInMagazine;
     }
 
     #region PickUp
@@ -39,8 +60,8 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && playerController2D.GunHolder.Weapon == null)
         {
-            playerController2D.GunHolder.LoadWeapon(this);
-            playerController2D.WeaponInHand(true);
+            GunHolder = playerController2D.GunHolder;
+            GunHolder.LoadWeapon(this);
         }
     }
 
@@ -48,32 +69,60 @@ public class Weapon : MonoBehaviour
 
     public void ShotFrom(PlayerController2d playerController2D)
     {
-        if (_currentAmmo > 0)
+        if (CurrentAmmoInMagazine > 0)
         {
-            _currentTime += Time.deltaTime;
+            ShotDelayTime -= Time.deltaTime;
 
-            if (_currentTime >= WeaponInfo.SecondsBeforeNextShot)
+            if (ShotDelayTime <= 0)
             {
-                Vector2 dir = playerController2D.transform.rotation * -Vector2.right;
-                Vector2 pdir = Vector2.Perpendicular(dir) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
+                for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
+                {
+                    Vector2 dir = playerController2D.transform.rotation * -Vector2.right;
+                    Vector2 pdir = Vector2.Perpendicular(dir) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
 
-                GameObject bullet = Instantiate(WeaponInfo.BulletPrefab);
-                float bulletNewXPosition = playerController2D.transform.position.x + WeaponInfo.DivineFirePoint.x * dir.x;
-                float bulletNewYPosition = playerController2D.transform.position.y + WeaponInfo.DivineFirePoint.y;
-                bullet.transform.position = new Vector3(bulletNewXPosition, bulletNewYPosition, transform.position.z);
+                    GameObject bullet = Instantiate(WeaponInfo.BulletPrefab);
+                    float bulletNewXPosition = playerController2D.transform.position.x + WeaponInfo.DivineFirePoint.x * dir.x;
+                    float bulletNewYPosition = playerController2D.transform.position.y + WeaponInfo.DivineFirePoint.y;
+                    bullet.transform.position = new Vector3(bulletNewXPosition, bulletNewYPosition, transform.position.z);
 
-                Rigidbody2D bulletRigibody = bullet.GetComponent<Rigidbody2D>();
-                float bulletForce = Random.Range(WeaponInfo.BulletForceBetween.x, WeaponInfo.BulletForceBetween.y);
-                bulletRigibody.velocity = (dir + pdir) * bulletForce;
-                _currentAmmo--;
+                    Rigidbody2D bulletRigibody = bullet.GetComponent<Rigidbody2D>();
+                    float bulletForce = Random.Range(WeaponInfo.BulletForceBetween.x, WeaponInfo.BulletForceBetween.y);
+                    bulletRigibody.velocity = (dir + pdir) * bulletForce;
+                    CurrentAmmoInMagazine--;
+                }
 
-                _currentTime = 0;
+                ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
             }
+        }
+        else
+        {
+            GunHolder.ReloadWeaponAfter(WeaponInfo.ReloadTime);
         }
     }
 
-    public void Reload()
+    public void ThrowOut(float throwForce, float throwAngularVelocity)
     {
-        _currentAmmo = WeaponInfo.MaximumAmmo;
+
+        transform.position = GunHolder.transform.position;
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 dir;
+
+        dir.x = mousePos.x - transform.position.x;
+        dir.y = mousePos.y - transform.position.y;
+        dir.z = 0;
+
+        gameObject.SetActive(true);
+
+        Rigibody2D.AddForce(dir * throwForce, ForceMode2D.Impulse);
+        Rigibody2D.angularVelocity = throwAngularVelocity;
+
+        GunHolder.ClearWeapon();
+    }
+
+    public void ResetShotDelayTime()
+    {
+        ShotDelayTime = 0;
     }
 }

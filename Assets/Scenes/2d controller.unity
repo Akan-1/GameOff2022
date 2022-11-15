@@ -1304,7 +1304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _throwOutAngularVelocity: 245
-  _throwForce: 3
+  _throwForce: 0.1
 --- !u!212 &982269274
 SpriteRenderer:
   m_ObjectHideFlags: 0
