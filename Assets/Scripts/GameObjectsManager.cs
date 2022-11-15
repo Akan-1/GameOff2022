@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 public class GameObjectsManager : MonoBehaviour
 {
@@ -14,16 +13,30 @@ public class GameObjectsManager : MonoBehaviour
         GlobalEventManager.onDie -= DeleteObjectFromScene;
     }
 
-    private void DeleteObjectFromScene(GameObject obj)
+    
+
+    public static Action onShownBar;
+
+    public static string tagInfo;
+
+    private void DeleteObjectFromScene(GameObject obj, string tagLocal)
     {
-        Destroy(obj);
+        if (obj.CompareTag("Tomas") || obj.CompareTag("Alice"))
+        {
+            onShownBar?.Invoke();
+            Destroy(obj); //Временное решение, позже, думаю, будем просто спавнить спрайт с анимацией смерти игрока.
+        }
+        else
+            Destroy(obj);
     }
 
-    public static void CheckLifeAmount(int health, GameObject obj)
+    public static void CheckLifeAmount(int health, GameObject obj, string tag)
     {
         if (health <= 0)
         {
-            GlobalEventManager.SendDieInfo(obj);
+            tag = obj.tag;
+            tagInfo = tag;
+            GlobalEventManager.SendDieInfo(obj, tag);
         }
     }
 

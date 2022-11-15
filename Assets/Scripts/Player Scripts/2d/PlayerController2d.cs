@@ -35,7 +35,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
-    
+    private float _realMoveSpeed;
+
     [Space]
     [Header("Checking wall Config")]
     [SerializeField] private LayerMask _wallMask;
@@ -63,6 +64,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private LayerMask _roofMask;
     [SerializeField] private Transform _topCheck;
     [SerializeField] private float _topCheckRadius;
+    [SerializeField] private float _squatMoveSpeed;
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
     #endregion
@@ -70,7 +72,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        
+
+        _realMoveSpeed = _speed;
+
         if(_canSquat)
             _topCheckRadius = _topCheck.GetComponent<CircleCollider2D>().radius;
 
@@ -110,7 +114,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        GameObjectsManager.CheckLifeAmount(_health, gameObject);    
+        GameObjectsManager.CheckLifeAmount(_health, gameObject, gameObject.tag);    
     }
 
     public bool WeaponInHand(bool inHand)
@@ -201,7 +205,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         if (!_isWallSliding)
         {
-            _rb.velocity = new Vector2(_movementInputDirection * _speed, _rb.velocity.y); // придаёт движение
+            _rb.velocity = new Vector2(_movementInputDirection * _realMoveSpeed, _rb.velocity.y); // придаёт движение
         }
 
         if (_isWallSliding)
@@ -248,6 +252,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _poseStand.enabled = false;
             _poseSquat.enabled = true;
             _canJump = false;
+            _realMoveSpeed = _squatMoveSpeed;
         }
         else if (!Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask))
         {
@@ -255,6 +260,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _poseStand.enabled = true;
             _poseSquat.enabled = false;
             _canJump = true;
+            _realMoveSpeed = _speed;
         }
     }
 

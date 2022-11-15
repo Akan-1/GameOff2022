@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class GlobalEventManager : MonoBehaviour
 {
-    public static Action<GameObject> onDie;
+    public static Action<GameObject, string> onDie;
 
-    public static void SendDieInfo(GameObject obj)
+    public static void SendDieInfo(GameObject obj, string tag)
     {
-        onDie?.Invoke(obj);
+        onDie?.Invoke(obj, tag);
     }
     
 

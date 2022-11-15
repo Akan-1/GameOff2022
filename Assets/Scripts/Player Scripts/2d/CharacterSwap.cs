@@ -35,6 +35,7 @@ public class CharacterSwap : MonoBehaviour
                 whichCharacter -= 1;
             }
             Swap();
+            _audioSource.PlayOneShot(_swapSound);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -47,6 +48,7 @@ public class CharacterSwap : MonoBehaviour
                 whichCharacter += 1;
             }
             Swap();
+            _audioSource.PlayOneShot(_swapSound);
         }
     }
 
@@ -57,8 +59,6 @@ public class CharacterSwap : MonoBehaviour
 
         character.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
         character.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        _audioSource.PlayOneShot(_swapSound);
 
         for (int i = 0; i < possibleCharacters.Count; i++)
         {

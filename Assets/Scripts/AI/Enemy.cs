@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        GameObjectsManager.CheckLifeAmount(_health, gameObject);
+        GameObjectsManager.CheckLifeAmount(_health, gameObject, gameObject.tag);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
