@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
   m_Name: M4
   m_EditorClassIdentifier: 
-  _weaponSprite: {fileID: 0}
+  _sprite: {fileID: -2820930097560456536, guid: 6d5f5084499f0b74795b73d970dc19f9,
+    type: 3}
+  _divineFirePoint: {x: 3.5, y: 0.2}
+  _maximumAmmo: 32
   _fireRate: 15
   _scatter: 0.1
   _bulletPrefab: {fileID: 2550605733867124238, guid: 131568cb9e68e0d448028345749a0972,
     type: 3}
-  _bulletForceValueOne: 45
-  _bulletForceValueTwo: 50
-  _bulletQuantityPerShoot: 1
-  firePoint: {fileID: 0}
-  weaponBody: {fileID: 0}
-  _ammo: 32
+  _bulletForceBetween: {x: 20, y: 25}
+  _secondsBeforeNextShot: 0.1

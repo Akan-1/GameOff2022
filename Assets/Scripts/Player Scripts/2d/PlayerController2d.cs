@@ -2,14 +2,14 @@
 
 public class PlayerController2d : MonoBehaviour, ITakeDamage
 {
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _pushOffWallSound;
-
     private Rigidbody2D _rb;
     private Animator _anim;
 
-    private float nextTimeOfFire = 0;
-    private bool haveGun = false;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _pushOffWallSound;
+
+    private float _nextTimeOfFire = 0;
+    private bool _haveGun = false;
 
     private int _facingDirection = 1;
 
@@ -45,6 +45,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _wallJumpForce;
     [SerializeField] private float _wallSlideSpeed;
     [SerializeField] private float _wallSpeed;
+    [SerializeField] private int _maximumWallJumpCount;
+    private int _currentWallJumpCount;
 
     [Space]
     [SerializeField] private Vector2 _wallHopDirection;
@@ -52,11 +54,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     [Space]
     [Header("Weapon Config")]
-    public WeaponInfo currentWeapon;
+    [SerializeField] private GunHolder _gunHolder;
     public Transform firePointPlayer;
-    [SerializeField] private Transform _gunHolder;
-
-    public Transform gunHolder => _gunHolder;
 
     [Space]
     [Header("Squat Config")]
@@ -65,6 +64,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _topCheckRadius;
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
+
+    public GunHolder GunHolder => _gunHolder;
     #endregion
     void Start()
     {
@@ -80,14 +81,14 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     void Update()
     {
-        if (haveGun)
+        if (_haveGun)
         {
             if (Input.GetMouseButton(0))
             {
-                if (Time.time >= nextTimeOfFire)
+                if (Time.time >= _nextTimeOfFire)
                 {
-                    currentWeapon.Shoot();
-                    nextTimeOfFire = Time.time + 1 / currentWeapon.fireRate;
+/*                    currentWeapon.Shoot();
+                    _nextTimeOfFire = Time.time + 1 / currentWeapon.fireRate;*/
                 }
             }
         }
@@ -115,7 +116,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     public bool WeaponInHand(bool inHand)
     {
-        haveGun = inHand;
+        _haveGun = inHand;
         return true;
     }
 
@@ -133,9 +134,10 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void CanJump()
     {
-        if(_isGround == true || _isTouchWall)
+        if(_isGround == true)
         {
             _canJump = true;
+            _currentWallJumpCount = 0;
         }
         else
         {
@@ -145,7 +147,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void WallSlide() 
     {
-        if(_isTouchWall && !_isGround && _rb.velocity.y < 0)
+        bool isHasWallJumps = _currentWallJumpCount < _maximumWallJumpCount;
+        if (_isTouchWall && !_isGround && _rb.velocity.y < 0 && isHasWallJumps)
         {
             _movementInputDirection = 0;
             _isWallSliding = true;
@@ -170,7 +173,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         {
             Jump();
         }
-        else if(Input.GetButton("Jump") && _isWallSliding && _canJump)
+        else if(Input.GetButton("Jump") && _isWallSliding && !_isGround)
         {
             _audioSource.PlayOneShot(_pushOffWallSound);
             JumpOnWall();
@@ -179,22 +182,27 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void JumpOnWall()
     {
-       
-        if (_isWallSliding && _movementInputDirection == 0)
+        if (_currentWallJumpCount < _maximumWallJumpCount)
         {
-            Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
-            _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
-            _isWallSliding = false;
-            _movementInputDirection = -_facingDirection;
-        }
 
-        if ((_isWallSliding || _isTouchWall) && _movementInputDirection != 0)
-        {
+            if (_isWallSliding && _movementInputDirection == 0)
+            {
+                Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
+                _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+                _isWallSliding = false;
+                _movementInputDirection = -_facingDirection;
+            }
+
+            if ((_isWallSliding || _isTouchWall) && _movementInputDirection != 0)
+            {
                 Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallSpeed);
                 _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
                 _isWallSliding = false;
-            /**/
+                /**/
+            }
         }
+
+        _currentWallJumpCount++;
     }
 
     private void ApllyMovement()
