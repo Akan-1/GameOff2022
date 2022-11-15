@@ -12,16 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  _sprite: {fileID: -2820930097560456536, guid: 6d5f5084499f0b74795b73d970dc19f9,
-    type: 3}
-  _divineFirePoint: {x: 3.5, y: 0.2}
-  _maximumBulletsInMagazine: 0
-  _bulletPerShot: 0
-  _bulletsAviable: 0
+  _weaponSprite: {fileID: 0}
   _fireRate: 2
-  _scatter: 1
-  _reloadTime: 0
+  _scatter: 0.3
   _bulletPrefab: {fileID: 2550605733867124238, guid: 131568cb9e68e0d448028345749a0972,
     type: 3}
-  _bulletForceBetween: {x: 25, y: 35}
-  _secondsBeforeNextShot: 2
+  _bulletForceValueOne: 40
+  _bulletForceValueTwo: 80
+  _bulletQuantityPerShoot: 6
+  firePoint: {fileID: 0}
+  weaponBody: {fileID: 0}
+  _ammo: 6

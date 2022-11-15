@@ -7,8 +7,6 @@ public class GunHolder : MonoBehaviour
 {
     private PlayerController2d _playerController2D;
     private SpriteRenderer _spriteRenderer;
-    private IEnumerator _reloadWeapon;
-    private bool _isReloading;
 
     [SerializeField] private float _throwOutAngularVelocity = 245;
     [SerializeField] private float _throwForce = 3;
@@ -38,24 +36,13 @@ public class GunHolder : MonoBehaviour
                 IsCanThrowWeapon = true;
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                Weapon.ResetShotDelayTime();
-            }
-
-            if (Input.GetMouseButton(0) && !_isReloading)
+            if (Input.GetMouseButton(0))
             {
                 Weapon.ShotFrom(_playerController2D);
             }
-            
-            if (Input.GetMouseButtonDown(1) && IsCanThrowWeapon)
+            else if (Input.GetMouseButtonDown(1) && IsCanThrowWeapon)
             {
-                Weapon.ThrowOut(_throwForce, _throwOutAngularVelocity);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                ReloadWeaponAfter(Weapon.WeaponInfo.ReloadTime);
+                ThrowOut();
             }
         }
     }
@@ -65,62 +52,37 @@ public class GunHolder : MonoBehaviour
         _spriteRenderer.sprite = weapon.WeaponInfo.Sprite;
         weapon.gameObject.SetActive(false);
         Weapon = weapon;
-        Debug.Log($"{Weapon.gameObject.name} has {Weapon.CurrentAmmoInMagazine} bullets in magazine and has {Weapon.BulletsAviable} aviableBullets");
+        Weapon.Reload();
     }
 
     public void ClearWeapon()
     {
-        StopReloadWeapon();
         _spriteRenderer.sprite = null;
-        IsCanThrowWeapon = false;
-        Weapon.GunHolder = null;
         Weapon = null;
-        Debug.Log("Clear weapon");
     }
 
-    #region Reload
-
-    public void ReloadWeaponAfter(float time)
+    private void ThrowOut()
     {
-        if (!_isReloading)
-        {
-            _isReloading = true;
 
-            StopReloadWeapon();
+        Weapon.transform.position = transform.position;
 
-            _reloadWeapon = ReloadWeapon(time);
-            StartCoroutine(_reloadWeapon);
-        }
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 dir;
+
+        dir.x = mousePos.x - Weapon.transform.position.x;
+        dir.y = mousePos.y - Weapon.transform.position.y;
+        dir.z = 0;
+
+        Weapon.transform.SetParent(null);
+        Weapon.gameObject.SetActive(true);
+
+        Weapon.Rigibody2D.AddForce(dir * _throwForce, ForceMode2D.Impulse);
+        Weapon.Rigibody2D.angularVelocity = _throwOutAngularVelocity;
+
+        ClearWeapon();
+
     }
 
-    private void StopReloadWeapon()
-    {
-        if (_reloadWeapon != null)
-        {
-            StopCoroutine(_reloadWeapon);
-        }
-    }
-
-    private IEnumerator ReloadWeapon(float time)
-    {
-        Debug.Log($"{gameObject.name} realoading {Weapon.gameObject.name} for {Weapon.WeaponInfo.ReloadTime}");
-        yield return new WaitForSecondsRealtime(time);
-
-        if (Weapon.BulletsAviable >= Weapon.WeaponInfo.MaximumBulletsInMagazine)
-        {
-            Weapon.BulletsAviable -= Weapon.WeaponInfo.MaximumBulletsInMagazine;
-            Weapon.CurrentAmmoInMagazine += Weapon.WeaponInfo.MaximumBulletsInMagazine;
-        }
-        else
-        {
-            Weapon.CurrentAmmoInMagazine += Weapon.BulletsAviable;
-            Weapon.BulletsAviable = 0;
-        }
-
-        _isReloading = false;
-    }
-
-    #endregion
-
-
+    
 }
