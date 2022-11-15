@@ -4,12 +4,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 {
     private Rigidbody2D _rb;
     private Animator _anim;
+    private Transform _currentWall;
 
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _pushOffWallSound;
 
     private float _nextTimeOfFire = 0;
-    private bool _haveGun = false;
 
     private int _facingDirection = 1;
 
@@ -23,6 +23,16 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     // не изменяемые переменные типа float
     private float _movementInputDirection; // хранит значение при нажатии клавиш (A, D)
+
+    public Transform CurrentWall
+    {
+        get => _currentWall;
+        private set
+        {
+            _currentWall = value;
+            _currentWallJumpCount = 0;
+        }
+    }
 
     // изменяемые переменные типа float
     #region Configurations
@@ -81,17 +91,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     void Update()
     {
-        if (_haveGun)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                if (Time.time >= _nextTimeOfFire)
-                {
-/*                    currentWeapon.Shoot();
-                    _nextTimeOfFire = Time.time + 1 / currentWeapon.fireRate;*/
-                }
-            }
-        }
         CheckMovement();
         CheckMovementDirection();
         UpdateAnimation();
@@ -112,12 +111,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         _health -= damage;
         GameObjectsManager.CheckLifeAmount(_health, gameObject);    
-    }
-
-    public bool WeaponInHand(bool inHand)
-    {
-        _haveGun = inHand;
-        return true;
     }
 
     private void CheckMovementDirection() // Проверяет поворот игрока (влево, вправо)
@@ -148,7 +141,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private void WallSlide() 
     {
         bool isHasWallJumps = _currentWallJumpCount < _maximumWallJumpCount;
-        if (_isTouchWall && !_isGround && _rb.velocity.y < 0 && isHasWallJumps)
+        if (_currentWall != null && _isTouchWall && !_isGround && _rb.velocity.y < 0 && isHasWallJumps)
         {
             _movementInputDirection = 0;
             _isWallSliding = true;
@@ -193,7 +186,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
                 _movementInputDirection = -_facingDirection;
             }
 
-            if ((_isWallSliding || _isTouchWall) && _movementInputDirection != 0)
+            if ((_isWallSliding || _currentWall != null) && _movementInputDirection != 0)
             {
                 Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallSpeed);
                 _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
@@ -229,8 +222,20 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private void CheckSurroundings()
     {
         _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
+        RaycastHit2D hit = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
 
-        _isTouchWall = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
+        if (hit)
+        {
+            _isTouchWall = true;
+            if (CurrentWall != hit.collider?.transform)
+            {
+                CurrentWall = hit.collider?.transform;
+            }
+        } else
+        {
+            _isTouchWall = false;
+        }
+
     }
 
     private void UpdateAnimation() // здесь находится вся анимация
