@@ -24,4 +24,4 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 2550605733867124238, guid: 131568cb9e68e0d448028345749a0972,
     type: 3}
   _bulletForceBetween: {x: 20, y: 25}
-  _secondsBeforeNextShot: 0.01
+  _secondsBeforeNextShot: 0.1
