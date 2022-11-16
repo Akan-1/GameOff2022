@@ -194,8 +194,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
                 /**/
             }
         }
-
-        _currentWallJumpCount++;
+        _maximumWallJumpCount = 0;
     }
 
     private void ApllyMovement()

@@ -381,15 +381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26df1a1ff87a4b443b383f7b02e220bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1994986}
-  audioClipsArr:
-  - {fileID: 8300000, guid: bcfba7e347eec2d4597154c41672cea3, type: 3}
-  - {fileID: 8300000, guid: 0c0c1da5c3da38645b4d95dcf072454d, type: 3}
-  - {fileID: 8300000, guid: f9cfec43f0454914b900bc0e5ffd34e3, type: 3}
-  - {fileID: 8300000, guid: 6f67832feda4cbe4f89a1e50481b3937, type: 3}
-  - {fileID: 8300000, guid: 1e7ddec502f0841409d2066be0eb776c, type: 3}
-  - {fileID: 8300000, guid: 585345ca716756545ba74843a8727a78, type: 3}
-  - {fileID: 8300000, guid: 198388dc1031dfd4aa404a866457e4b1, type: 3}
+  _audioSource: {fileID: 0}
+  _ambientSounds: []
+  volumeScater: 0.5
   timer: 180
 --- !u!114 &1994988
 MonoBehaviour:
@@ -533,17 +527,16 @@ MonoBehaviour:
   _wallJumpForce: 50
   _wallSlideSpeed: 0
   _wallSpeed: 10
+  _maximumWallJumpCount: 0
   _wallHopDirection: {x: 1, y: 0.5}
   _wallJumpDirection: {x: 1, y: 2}
-  currentWeapon: {fileID: 0}
-  firePointPlayer: {fileID: 843906656}
   _gunHolder: {fileID: 1930512796}
+  firePointPlayer: {fileID: 843906656}
   _roofMask:
     serializedVersion: 2
     m_Bits: 256
   _topCheck: {fileID: 801316436}
   _topCheckRadius: 1
-  _squatMoveSpeed: 5
   _poseStand: {fileID: 193466136}
   _poseSquat: {fileID: 193466141}
 --- !u!50 &193466138
@@ -963,9 +956,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268b3376c9caac34ea2f2a9051e815a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
   _health: 0
-  _damage: 1
+  _speedIncreaseAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _speedDecreaseAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _distanceToStopping: 0
+  _agressiveAdditionalSpeed: 2
+  _patrolingPoints: []
+  _stayTimeOnPointBetween: {x: 0, y: 0}
+  _characterMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _viewDistance: 0
+  _damageBetween: {x: 0, y: 0}
+  _timeBetweenAtacks: 1
+  _distanceToAttack: 0
+  _attackTime: 0.5
 --- !u!61 &747306611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1954,17 +1969,16 @@ MonoBehaviour:
   _wallJumpForce: 20
   _wallSlideSpeed: 0
   _wallSpeed: 10
+  _maximumWallJumpCount: 0
   _wallHopDirection: {x: 1, y: 0.5}
   _wallJumpDirection: {x: 1, y: 2}
-  currentWeapon: {fileID: 0}
-  firePointPlayer: {fileID: 12938171}
   _gunHolder: {fileID: 982269272}
+  firePointPlayer: {fileID: 12938171}
   _roofMask:
     serializedVersion: 2
     m_Bits: 0
   _topCheck: {fileID: 0}
   _topCheckRadius: 0
-  _squatMoveSpeed: 0
   _poseStand: {fileID: 0}
   _poseSquat: {fileID: 0}
 --- !u!50 &1468369634
@@ -2855,4 +2869,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0986671e7de24794aa84aff192f6fe33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponInfo: {fileID: 11400000, guid: bde344c0fd21f8d45ba23f8234a3399e, type: 2}
