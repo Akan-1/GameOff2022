@@ -110,7 +110,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        GameObjectsManager.CheckLifeAmount(_health, gameObject);    
+        GameObjectsManager.CheckLifeAmount(_health, gameObject);
     }
 
     private void CheckMovementDirection() // Проверяет поворот игрока (влево, вправо)

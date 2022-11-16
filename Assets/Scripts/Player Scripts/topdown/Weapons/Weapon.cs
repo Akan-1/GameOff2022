@@ -102,8 +102,8 @@ public class Weapon : MonoBehaviour
 
     private void SetPositionToBullet(GameObject bullet, Vector3 startPosition, float playerDirectionX)
     {
-        float bulletNewXPosition = startPosition.x + WeaponInfo.DivineFirePoint.x * playerDirectionX;
-        float bulletNewYPosition = startPosition.y + WeaponInfo.DivineFirePoint.y;
+        float bulletNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * playerDirectionX;
+        float bulletNewYPosition = startPosition.y + WeaponInfo.OffsetFirePoint.y;
         bullet.transform.position = new Vector3(bulletNewXPosition, bulletNewYPosition, transform.position.z);
     }
 
