@@ -2,6 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 public class Weapon : MonoBehaviour
 {
     #region Configuration
@@ -10,6 +11,7 @@ public class Weapon : MonoBehaviour
     private int _currentAmmoInMagazine;
 
     [SerializeField] private WeaponInfo _weaponInfo;
+    private CircleCollider2D _pickUpTrigger;
     public WeaponInfo WeaponInfo => _weaponInfo;
     public Rigidbody2D Rigibody2D
     {
@@ -41,6 +43,8 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         _rigibody2D = GetComponent<Rigidbody2D>();
+        _pickUpTrigger = GetComponent<CircleCollider2D>();
+
         BulletsAviable = WeaponInfo.BulletsAviable;
         CurrentAmmoInMagazine = WeaponInfo.MaximumBulletsInMagazine;
     }
@@ -57,10 +61,14 @@ public class Weapon : MonoBehaviour
 
     private void PickUpTo(PlayerController2d playerController2D)
     {
-        if (Input.GetMouseButtonDown(1) && playerController2D.GunHolder.Weapon == null)
+        bool playerHasntWeaapon = playerController2D.GunHolder.Weapon == null;
+        bool playerIsActive = playerController2D.enabled;
+
+        if (Input.GetMouseButtonDown(1) && playerHasntWeaapon && playerIsActive)
         {
             GunHolder = playerController2D.GunHolder;
             GunHolder.LoadWeapon(this);
+            _pickUpTrigger.enabled = false;
         }
     }
 
@@ -135,6 +143,9 @@ public class Weapon : MonoBehaviour
         Rigibody2D.angularVelocity = throwAngularVelocity;
 
         GunHolder.ClearWeapon();
+        _pickUpTrigger.enabled = true;
+
+
     }
 
     public void ResetShotDelayTime()

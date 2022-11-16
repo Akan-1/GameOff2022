@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     [SerializeField] [Min(0)] private float _attackTime = .5f;
     private float _currentAtackTime;
     private bool _isAttack;
+    private bool _isInZoneAttack;
 
     private Rigidbody2D _rigibidy2D;
 
@@ -121,11 +122,15 @@ public class Enemy : MonoBehaviour, ITakeDamage
                 if (GetDistanceToTarget() <= _distanceToAttack)
                 {
                     _currentAtackTime += Time.deltaTime;
+                    _isInZoneAttack = true;
 
                     if (_currentAtackTime >= _timeBetweenAtacks && !_isAttack)
                     {
                         Attack();
                     }
+                } else
+                {
+                    _isInZoneAttack = false;
                 }
             }
         } else
@@ -148,13 +153,14 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private float GetCurrentSpeed()
     {
         float additionSpeed = _state == States.Aggresive ? _agressiveAdditionalSpeed : 0;
-        bool isNeedStoping = _isStopping || _isAttack;
+        bool isNeedStoping = _isStopping || _isInZoneAttack;
 
         _speedAnimationCurve = isNeedStoping ? _speedDecreaseAnimationCurve : _speedIncreaseAnimationCurve;
         _animationCurveCurrentTime = isNeedStoping ? _animationCurveCurrentTime - Time.deltaTime : _animationCurveCurrentTime + Time.deltaTime;
         _animationCurveCurrentTime = Mathf.Clamp(_animationCurveCurrentTime, 0, _speedAnimationCurve.keys[_speedAnimationCurve.length - 1].time);
 
         float currentSpeed = _speedAnimationCurve.Evaluate(_animationCurveCurrentTime) + (isNeedStoping ? 0 : additionSpeed);
+        Debug.Log(isNeedStoping);
         return currentSpeed;
     }
 
@@ -288,8 +294,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         if (_playerController2D != null)
         {
-            _currentAtackTime = 0;
             _isAttack = true;
+            _currentAtackTime = 0;
 
             int _damage = (int)Random.Range(_damageBetween.x, _damageBetween.y);
             _playerController2D.TakeDamage(_damage);

@@ -1,15 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController2d : MonoBehaviour, ITakeDamage
 {
-    private Rigidbody2D _rb;
     private Animator _anim;
-    private Transform _currentWall;
+    private Vector2 _positionOfCurrentWall;
 
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _pushOffWallSound;
-
-    private float _nextTimeOfFire = 0;
 
     private int _facingDirection = 1;
 
@@ -24,13 +22,14 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     // не изменяемые переменные типа float
     private float _movementInputDirection; // хранит значение при нажатии клавиш (A, D)
 
-    public Transform CurrentWall
+    public Vector2 PositionOfCurrentWall
     {
-        get => _currentWall;
+        get => _positionOfCurrentWall;
         private set
         {
-            _currentWall = value;
+            _positionOfCurrentWall = value;
             _currentWallJumpCount = 0;
+            Debug.Log("Update");
         }
     }
 
@@ -74,12 +73,21 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _topCheckRadius;
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
-
+    public Rigidbody2D Rigibody2D
+    {
+        get;
+        set;
+    }
+    public bool IsActive
+    {
+        get;
+        set;
+    }
     public GunHolder GunHolder => _gunHolder;
     #endregion
-    void Start()
+    void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        Rigibody2D = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         
         if(_canSquat)
@@ -87,19 +95,37 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         _wallHopDirection.Normalize();
         _wallJumpDirection.Normalize();
+
+        TryAddCharacterToPossible();
+    }
+
+    private void TryAddCharacterToPossible()
+    {
+        try
+        {
+            CharacterSwapper.Instance.AddCharacter(this);
+
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Possible characters not found, please start game from main menu");
+        }
     }
 
     void Update()
     {
-        CheckMovement();
-        CheckMovementDirection();
-        UpdateAnimation();
-        CheckSurroundings();
-        WallSlide();
-        CanJump();
+        if (IsActive)
+        {
+            CheckMovement();
+            CheckMovementDirection();
+            UpdateAnimation();
+            CheckSurroundings();
+            WallSlide();
+            CanJump();
 
-        if (_canSquat)
-            Squat();
+            if (_canSquat)
+                Squat();
+        }
     }
 
     private void FixedUpdate()
@@ -141,7 +167,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private void WallSlide() 
     {
         bool isHasWallJumps = _currentWallJumpCount < _maximumWallJumpCount;
-        if (_currentWall != null && _isTouchWall && !_isGround && _rb.velocity.y < 0 && isHasWallJumps)
+        if (PositionOfCurrentWall != null && _isTouchWall && !_isGround && Rigibody2D.velocity.y < 0 && isHasWallJumps)
         {
             _movementInputDirection = 0;
             _isWallSliding = true;
@@ -181,15 +207,15 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             if (_isWallSliding && _movementInputDirection == 0)
             {
                 Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
-                _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+                Rigibody2D.AddForce(forceToAdd, ForceMode2D.Impulse);
                 _isWallSliding = false;
                 _movementInputDirection = -_facingDirection;
             }
 
-            if ((_isWallSliding || _currentWall != null) && _movementInputDirection != 0)
+            if ((_isWallSliding || PositionOfCurrentWall != null) && _movementInputDirection != 0)
             {
                 Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallSpeed);
-                _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+                Rigibody2D.AddForce(forceToAdd, ForceMode2D.Impulse);
                 _isWallSliding = false;
                 /**/
             }
@@ -201,21 +227,21 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         if (!_isWallSliding)
         {
-            _rb.velocity = new Vector2(_movementInputDirection * _speed, _rb.velocity.y); // придаёт движение
+            Rigibody2D.velocity = new Vector2(_movementInputDirection * _speed, Rigibody2D.velocity.y); // придаёт движение
         }
 
         if (_isWallSliding)
         {
-            if(_rb.velocity.y < -_wallSlideSpeed)
+            if(Rigibody2D.velocity.y < -_wallSlideSpeed)
             {
-                _rb.velocity = new Vector2(_rb.velocity.x, -_wallSlideSpeed);
+                Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, -_wallSlideSpeed);
             }
         }
     }
 
     private void Jump()
     {
-        _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+        Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, _jumpForce);
     }
 
     private void CheckSurroundings()
@@ -227,9 +253,15 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         {
 
             _isTouchWall = true;
-            if (CurrentWall != hit.collider?.transform)
+            float roundedPositionOfCurrentWall = (float)Math.Round(PositionOfCurrentWall.x, 2);
+            float roundedPositionOfHit = (float)Math.Round(hit.point.x, 2);
+            Debug.Log($"rounded {roundedPositionOfCurrentWall}" );
+
+            bool IsNewWallPosition = roundedPositionOfCurrentWall != roundedPositionOfHit;
+
+            if (IsNewWallPosition)
             {
-                CurrentWall = hit.collider?.transform;
+                PositionOfCurrentWall = hit.point;
             }
         } else
         {

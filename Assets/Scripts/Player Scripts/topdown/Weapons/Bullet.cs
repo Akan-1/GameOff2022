@@ -9,12 +9,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int damage = 1;
     [SerializeField] float bulletLifetime = 3f;
 
-    private void Start()
+    private void OnEnable()
     {
         Invoke(nameof(ReleaseBullet), bulletLifetime);
-        //Physics2D.IgnoreLayerCollision(layer1: 9, layer2: 10);
     }
-        
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out ITakeDamage takeDamage))
@@ -27,6 +26,9 @@ public class Bullet : MonoBehaviour
 
     private void ReleaseBullet()
     {
-        MasterObjectPooler.Instance.Release(gameObject, $"{_poolName}");
+        if (gameObject.activeInHierarchy)
+        {
+            MasterObjectPooler.Instance.Release(gameObject, $"{_poolName}");
+        }
     }
 }
