@@ -104,7 +104,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         try
         {
             CharacterSwapper.Instance.AddCharacter(this);
-
         }
         catch (Exception e)
         {
@@ -203,7 +202,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         if (_currentWallJumpCount < _maximumWallJumpCount)
         {
-
             if (_isWallSliding && _movementInputDirection == 0)
             {
                 Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);

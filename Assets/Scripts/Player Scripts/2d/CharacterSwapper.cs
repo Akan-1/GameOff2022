@@ -19,12 +19,12 @@ public class CharacterSwapper : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            return;
-        }
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //    return;
+        //}
 
         Destroy(this);
     }
@@ -66,8 +66,6 @@ public class CharacterSwapper : MonoBehaviour
             Swap();
         }
     }
-
-
 
     public void ClearCharacters()
     {
