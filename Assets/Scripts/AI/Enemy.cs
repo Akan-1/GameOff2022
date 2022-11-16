@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         get => _health;
         set
         {
+            _health = value;
             GameObjectsManager.CheckLifeAmount(_health, gameObject);
         }
     }
@@ -129,7 +130,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
             }
         } else
         {
-            WaitAndGoToNextPoint();
+            Debug.LogWarning($"Target of {gameObject.name} is null");
         }
     }
 
@@ -246,12 +247,18 @@ public class Enemy : MonoBehaviour, ITakeDamage
                 StopWait();
                 RunToPlayer(playerController2D);
             }
-        }
+            else if (_playerController2D != null)
+            {
+                LoseAPlayer();
+            }
 
-        if (_playerController2D != null && IsPlayerNotInViewDistance())
+            return;
+        }
+        else if (_playerController2D != null)
         {
             LoseAPlayer();
         }
+
     }
 
     private void RunToPlayer(PlayerController2d playerController2D)
@@ -270,7 +277,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private bool IsPlayerNotInViewDistance()
     {
         float distanceToPlayer = Vector2.Distance(_transform.position, _playerController2D.transform.position);
-        return distanceToPlayer >= _viewDistance;
+        return distanceToPlayer > _viewDistance;
     }
 
     #endregion
@@ -303,19 +310,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
-
+        Health -= damage;
     }
-
-    /*    private void OnTriggerEnter2D(Collider2D collision)
-        {
-            transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), transform.localScale.y);
-
-            if(collision.gameObject.TryGetComponent(out ITakeDamage takeDamage))
-            {
-                takeDamage.TakeDamage(_damage);
-            }
-        }*/
 
     #endregion
 
