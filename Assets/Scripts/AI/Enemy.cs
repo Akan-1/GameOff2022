@@ -16,12 +16,13 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     [Header("Characteristic")]
     [SerializeField] private int _health;
-    [SerializeField] private int _damage;
 
     [Header("Movement")]
-    [SerializeField] private AnimationCurve _speedAnimationCurve;
+    [SerializeField] private AnimationCurve _speedIncreaseAnimationCurve;
+    [SerializeField] private AnimationCurve _speedDecreaseAnimationCurve;
     [SerializeField] [Range(0.1f, 0.5f)] private float _distanceToStopping;
     [SerializeField] private float _agressiveAdditionalSpeed = 2;
+    private AnimationCurve _speedAnimationCurve;
     private bool _isCanMove = true;
     private bool _isStopping;
     private bool _isWait;
@@ -36,9 +37,15 @@ public class Enemy : MonoBehaviour, ITakeDamage
     [Header("StateAggressive")]
     [SerializeField] private LayerMask _characterMask;
     [SerializeField] [Min(0)] private float _viewDistance;
-    [SerializeField] [Min(0)] private float _distanceToAttack;
-    [SerializeField] private Vector2 _offsetToPlayer;
     private PlayerController2d _playerController2D;
+
+    [Header("Attack")]
+    [SerializeField] [Min(0)] private Vector2 _damageBetween;
+    [SerializeField] [Min(0)] private float _timeBetweenAtacks = 1f;
+    [SerializeField] [Min(0)] private float _distanceToAttack;
+    [SerializeField] [Min(0)] private float _attackTime = .5f;
+    private float _currentAtackTime;
+    private bool _isAttack;
 
     private Rigidbody2D _rigibidy2D;
 
@@ -99,7 +106,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         {
             RotateToTarget();
 
-            _rigibidy2D.velocity = GetMovementVector() * GetCurrentSpeed();
+           _rigibidy2D.velocity = GetMovementVector() * GetCurrentSpeed();
 
             if (_state == States.Patroling)
             {
@@ -112,9 +119,17 @@ public class Enemy : MonoBehaviour, ITakeDamage
             {
                 if (GetDistanceToTarget() <= _distanceToAttack)
                 {
-                    Debug.Log("Attack");
+                    _currentAtackTime += Time.deltaTime;
+
+                    if (_currentAtackTime >= _timeBetweenAtacks && !_isAttack)
+                    {
+                        Attack();
+                    }
                 }
             }
+        } else
+        {
+            WaitAndGoToNextPoint();
         }
     }
 
@@ -132,11 +147,13 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private float GetCurrentSpeed()
     {
         float additionSpeed = _state == States.Aggresive ? _agressiveAdditionalSpeed : 0;
+        bool isNeedStoping = _isStopping || _isAttack;
 
-        _animationCurveCurrentTime = _isStopping ? _animationCurveCurrentTime - Time.deltaTime : _animationCurveCurrentTime + Time.deltaTime;
+        _speedAnimationCurve = isNeedStoping ? _speedDecreaseAnimationCurve : _speedIncreaseAnimationCurve;
+        _animationCurveCurrentTime = isNeedStoping ? _animationCurveCurrentTime - Time.deltaTime : _animationCurveCurrentTime + Time.deltaTime;
         _animationCurveCurrentTime = Mathf.Clamp(_animationCurveCurrentTime, 0, _speedAnimationCurve.keys[_speedAnimationCurve.length - 1].time);
 
-        float currentSpeed = _speedAnimationCurve.Evaluate(_animationCurveCurrentTime) + additionSpeed;
+        float currentSpeed = _speedAnimationCurve.Evaluate(_animationCurveCurrentTime) + (isNeedStoping ? 0 : additionSpeed);
         return currentSpeed;
     }
 
@@ -253,7 +270,31 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private bool IsPlayerNotInViewDistance()
     {
         float distanceToPlayer = Vector2.Distance(_transform.position, _playerController2D.transform.position);
-        return distanceToPlayer > _viewDistance;
+        return distanceToPlayer >= _viewDistance;
+    }
+
+    #endregion
+
+    #region Attack
+
+    private void Attack()
+    {
+        if (_playerController2D != null)
+        {
+            _currentAtackTime = 0;
+            _isAttack = true;
+
+            int _damage = (int)Random.Range(_damageBetween.x, _damageBetween.y);
+            _playerController2D.TakeDamage(_damage);
+
+            Invoke(nameof(StopAttack), _attackTime);
+            Debug.Log($"{_playerController2D.gameObject.name} take {_damage} damage from {gameObject.name}");
+        }
+    }
+
+    private void StopAttack()
+    {
+        _isAttack = false;
     }
 
     #endregion
@@ -280,9 +321,13 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, (_viewDistance - 2) * transform.localScale.x * transform.right);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, (_viewDistance + transform.localScale.x / 2) * Mathf.Clamp(transform.localScale.x, -1, 1) * transform.right);
 
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _distanceToStopping);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 0.2f), (_distanceToAttack + transform.localScale.x / 2) * Mathf.Clamp(transform.localScale.x, -1, 1) * transform.right);
     }
 }

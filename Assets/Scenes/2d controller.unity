@@ -819,7 +819,6 @@ GameObject:
   - component: {fileID: 747306607}
   - component: {fileID: 747306606}
   - component: {fileID: 747306610}
-  - component: {fileID: 747306609}
   - component: {fileID: 747306608}
   - component: {fileID: 747306611}
   m_Layer: 0
@@ -887,7 +886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747306605}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.31, y: 0.566211, z: 6.970367}
+  m_LocalPosition: {x: -10.48, y: 0.566211, z: 6.970367}
   m_LocalScale: {x: 1.317106, y: 1.2882798, z: 1}
   m_Children: []
   m_Father: {fileID: 1601203488}
@@ -914,32 +913,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &747306609
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 747306605}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 0d8beb7f4a8b0c24ab03735f2dfe1d3a, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.6236558, y: -0.103292525}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.20409751, y: 1.206585}
-  m_EdgeRadius: 0
 --- !u!114 &747306610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,7 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 0
   _damage: 1
-  _speedAnimationCurve:
+  _speedIncreaseAnimationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -968,7 +941,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 5
+      value: 3
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -978,7 +951,31 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _distanceToStopping: 1
+  _speedDecreaseAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _distanceToStopping: 0.229
   _agressiveAdditionalSpeed: 0.2
   _patrolingPoints:
   - {fileID: 2102910020}
@@ -989,8 +986,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   _viewDistance: 4
-  _distanceToAttack: 2
-  _offsetToPlayer: {x: 0, y: 0}
+  _timeBetweenAtacks: 0
+  _distanceToAttack: 3.56
+  _attackTime: 0.5
 --- !u!61 &747306611
 BoxCollider2D:
   m_ObjectHideFlags: 0
