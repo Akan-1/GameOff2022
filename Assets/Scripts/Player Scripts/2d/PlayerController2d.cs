@@ -44,7 +44,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
-    private float _realMoveSpeed;
     
     [Space]
     [Header("Checking wall Config")]
@@ -74,7 +73,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _topCheckRadius;
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
-<<<<<<< Updated upstream
     public Rigidbody2D Rigibody2D
     {
         get;
@@ -85,10 +83,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get;
         set;
     }
-=======
-    [SerializeField] private float _squatSpeed;
-
->>>>>>> Stashed changes
     public GunHolder GunHolder => _gunHolder;
     #endregion
     void Awake()
