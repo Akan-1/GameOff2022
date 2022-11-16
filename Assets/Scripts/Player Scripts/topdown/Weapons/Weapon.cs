@@ -84,10 +84,8 @@ public class Weapon : MonoBehaviour
                     GameObject bullet = CreateBullet();
                     SetPositionToBullet(bullet, playerController2D.transform.position, playerDirection.x);
                     AddForceToBullet(bullet, playerDirection, perpendiculaarPlayerDirection);
-
-                    CurrentAmmoInMagazine--;
                 }
-
+                CurrentAmmoInMagazine--;
                 ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
             }
         }
