@@ -284,7 +284,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1994985}
-  _ambientSounds: []
+  _ambientSounds:
+  - {fileID: 8300000, guid: bcfba7e347eec2d4597154c41672cea3, type: 3}
+  - {fileID: 8300000, guid: 0c0c1da5c3da38645b4d95dcf072454d, type: 3}
+  - {fileID: 8300000, guid: f9cfec43f0454914b900bc0e5ffd34e3, type: 3}
+  - {fileID: 8300000, guid: 6f67832feda4cbe4f89a1e50481b3937, type: 3}
+  - {fileID: 8300000, guid: 1e7ddec502f0841409d2066be0eb776c, type: 3}
+  - {fileID: 8300000, guid: 585345ca716756545ba74843a8727a78, type: 3}
+  - {fileID: 8300000, guid: 198388dc1031dfd4aa404a866457e4b1, type: 3}
   volumeScater: 0.5
   timer: 180
 --- !u!114 &1994988
@@ -584,7 +591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193466134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.58, y: -2.84, z: 0}
+  m_LocalPosition: {x: -7.13, y: -2.84, z: 0}
   m_LocalScale: {x: 1.5894, y: 1.5894, z: 0}
   m_Children:
   - {fileID: 801316436}
@@ -886,7 +893,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747306605}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.48, y: 0.566211, z: 6.970367}
+  m_LocalPosition: {x: -1.21, y: 0.82, z: 6.970367}
   m_LocalScale: {x: 1.317106, y: 1.2882798, z: 1}
   m_Children: []
   m_Father: {fileID: 1601203488}
@@ -906,7 +913,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: 0d8beb7f4a8b0c24ab03735f2dfe1d3a, type: 2}
   m_Interpolate: 0
@@ -926,7 +933,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 0
-  _damage: 1
   _speedIncreaseAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -986,8 +992,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   _viewDistance: 4
-  _timeBetweenAtacks: 0
-  _distanceToAttack: 3.56
+  _damageBetween: {x: 1, y: 2}
+  _timeBetweenAtacks: 0.5
+  _distanceToAttack: 2.97
   _attackTime: 0.5
 --- !u!61 &747306611
 BoxCollider2D:
@@ -1649,7 +1656,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398305960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.43, z: 0}
+  m_LocalPosition: {x: -4.34, y: 0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 147578061}
@@ -1826,7 +1833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468369631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.42, y: -2.63, z: 0}
+  m_LocalPosition: {x: 9.38, y: -2.63, z: 0}
   m_LocalScale: {x: 1.5894, y: 1.5894, z: 0}
   m_Children:
   - {fileID: 383283962}
@@ -2488,7 +2495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102910019}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.6, y: 0.43, z: 0}
+  m_LocalPosition: {x: 0.1, y: 0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 147578061}
