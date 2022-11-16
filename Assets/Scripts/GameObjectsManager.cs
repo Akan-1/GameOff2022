@@ -30,7 +30,7 @@ public class GameObjectsManager : MonoBehaviour
             Destroy(obj);
     }
 
-    public static void CheckLifeAmount(int health, GameObject obj, string tag)
+    public static void CheckLifeAmount(int health, GameObject obj, string tag = "")
     {
         if (health <= 0)
         {
