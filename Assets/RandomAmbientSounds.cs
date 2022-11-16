@@ -1,26 +1,27 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RandomAmbientSounds : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private List<AudioClip> _ambientSounds = new List<AudioClip>();
-    [SerializeField] private float volumeScater = 0.5f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] audioClipsArr;
 
     [SerializeField] private float timer;
 
-    public void Start()
+    // Start is called before the first frame update
+    //void Start()
+    //{
+    //    timeLeft = timer;
+    //}
+
+    IEnumerator Ambient()
     {
-        StartCoroutine(Play());
+        yield return new WaitForSeconds(timer);
+        audioSource.PlayOneShot(audioClipsArr[Random.Range(0, audioClipsArr.Length)], 0.5f);
     }
 
-    IEnumerator Play()
+    void Update()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(timer);
-            AudioPlayer.TryPlayRandom(transform, _audioSource, _ambientSounds, volumeScater);
-        }
+        StartCoroutine(Ambient());
     }
 }
