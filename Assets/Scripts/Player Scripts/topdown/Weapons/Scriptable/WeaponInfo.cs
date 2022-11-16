@@ -8,7 +8,7 @@ public class WeaponInfo : ScriptableObject
     [Header("Weapon Config")]
     [SerializeField] private Sprite _sprite;
     [SerializeField] private ObjectPoolsNames _bulletPoolName;
-    [SerializeField] private Vector2 _divineFirePoint;
+    [SerializeField] private Vector2 _FirePoint;
     [SerializeField] [Min(1)] private int _maximumBulletsInMagazine;
     [SerializeField] [Min(1)] private int _bulletPerShot;
     [SerializeField] [Min(1)] private int _bulletsAviable;
@@ -25,7 +25,7 @@ public class WeaponInfo : ScriptableObject
 
     public Sprite Sprite => _sprite;
     public ObjectPoolsNames BulletPoolName => _bulletPoolName;
-    public Vector2 DivineFirePoint => _divineFirePoint;
+    public Vector2 OffsetFirePoint => _FirePoint;
     public float FireRate => _fireRate;
     public float Scatter => _scatter;
     public Vector2 BulletForceBetween => _bulletForceBetween;

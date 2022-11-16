@@ -20,21 +20,24 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     [Header("Movement")]
     [SerializeField] private AnimationCurve _speedAnimationCurve;
-    [SerializeField] [Min(0.1f)] private float _distanceToStopping;
+    [SerializeField] [Range(0.1f, 0.5f)] private float _distanceToStopping;
     [SerializeField] private float _agressiveAdditionalSpeed = 2;
+    private bool _isCanMove = true;
     private bool _isStopping;
     private bool _isWait;
+    private IEnumerator _wait;
 
     [Header("StatePatroling")]
     [SerializeField] private List<Transform> _patrolingPoints = new List<Transform>();
     [SerializeField] [Min(0)] private Vector2 _stayTimeOnPointBetween;
     private int _indexOfCurrentfPatrolingPoint;
     private bool _isReversePatrooling;
-    private IEnumerator _patroling;
 
     [Header("StateAggressive")]
     [SerializeField] private LayerMask _characterMask;
     [SerializeField] [Min(0)] private float _viewDistance;
+    [SerializeField] [Min(0)] private float _distanceToAttack;
+    [SerializeField] private Vector2 _offsetToPlayer;
     private PlayerController2d _playerController2D;
 
     private Rigidbody2D _rigibidy2D;
@@ -65,8 +68,11 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     void Update()
     {
-        MoveToTarget();
-        RotateToTarget();
+        if (_isCanMove)
+        {
+            MoveToTarget();
+        }
+
         View();
     }
 
@@ -78,6 +84,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
     } 
     private void EnableAgressiveState()
     {
+        _isStopping = false;
+        _isWait = false;
         _state = States.Aggresive;
     }
 
@@ -89,27 +97,30 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         if (Target != null)
         {
-            float distanceToTarget = Vector2.Distance(_transform.position, Target.position);
+            RotateToTarget();
 
             _rigibidy2D.velocity = GetMovementVector() * GetCurrentSpeed();
 
             if (_state == States.Patroling)
             {
-                if (distanceToTarget <= _distanceToStopping)
+                if (GetDistanceToTarget() <= _distanceToStopping)
                 {
-                    _isStopping = true;
-
-                    if (_rigibidy2D.velocity == Vector2.zero)
-                    {
-                        WaitAndGoToNextPoint();
-                    }
+                    WaitAndGoToNextPoint();
                 }
             }
             else
             {
-                Debug.Log("Aggressive");
+                if (GetDistanceToTarget() <= _distanceToAttack)
+                {
+                    Debug.Log("Attack");
+                }
             }
         }
+    }
+
+    private float GetDistanceToTarget()
+    {
+        return Vector2.Distance(_transform.position, Target.position);
     }
 
     private Vector2 GetMovementVector()
@@ -121,9 +132,12 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private float GetCurrentSpeed()
     {
         float additionSpeed = _state == States.Aggresive ? _agressiveAdditionalSpeed : 0;
+
         _animationCurveCurrentTime = _isStopping ? _animationCurveCurrentTime - Time.deltaTime : _animationCurveCurrentTime + Time.deltaTime;
         _animationCurveCurrentTime = Mathf.Clamp(_animationCurveCurrentTime, 0, _speedAnimationCurve.keys[_speedAnimationCurve.length - 1].time);
-        return _speedAnimationCurve.Evaluate(_animationCurveCurrentTime) + additionSpeed;
+
+        float currentSpeed = _speedAnimationCurve.Evaluate(_animationCurveCurrentTime) + additionSpeed;
+        return currentSpeed;
     }
 
     private void RotateToTarget()
@@ -138,10 +152,41 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         if (!_isWait)
         {
-            Target = null;
-            _isWait = true;
-            Invoke(nameof(GoToNextPatrolingPoint), Random.Range(_stayTimeOnPointBetween.x, _stayTimeOnPointBetween.y));
+            float waitTIme = Random.Range(_stayTimeOnPointBetween.x, _stayTimeOnPointBetween.y);
+            StartWaitFor(waitTIme);
         }
+    }
+
+    public void StartWaitFor(float waitTime)
+    {
+        StopWait();
+
+        _wait = WaitFor(waitTime);
+        StartCoroutine(_wait);
+
+        Debug.Log("Start Wait");
+    }
+
+    private void StopWait()
+    {
+        if (_wait != null)
+        {
+            StopCoroutine(_wait);
+        }
+    }
+
+    private IEnumerator WaitFor(float waitTime)
+    {
+
+        _isStopping = true;
+        _isWait = true;
+
+        yield return new WaitForSeconds(waitTime);
+
+        _isStopping = false;
+        _isWait = false;
+
+        GoToNextPatrolingPoint();
     }
 
     #endregion
@@ -151,9 +196,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private void GoToNextPatrolingPoint()
     {
         _indexOfCurrentfPatrolingPoint = GetNextIndexOfPatroolingPoint();
-        _isStopping = false;
-        _isWait = false;
-
         Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint];
     }
 
@@ -176,30 +218,42 @@ public class Enemy : MonoBehaviour, ITakeDamage
     public void View()
     {
         RaycastHit2D raycastHit2D = Physics2D.Raycast(_transform.position, _transform.right * transform.localScale.x, _viewDistance, _characterMask);
+        bool isRaycastHitColliderExist = raycastHit2D.collider != null;
 
-        if (raycastHit2D.collider != null)
+        if (isRaycastHitColliderExist)
         {
-            if (raycastHit2D.collider.TryGetComponent(out PlayerController2d playerController2D))
+            bool isRaycastHitOfPlayer = raycastHit2D.collider.TryGetComponent(out PlayerController2d playerController2D);
+
+            if (isRaycastHitOfPlayer)
             {
-                _playerController2D = playerController2D;
-                Target = _playerController2D.transform;
-                EnableAgressiveState();
+                StopWait();
+                RunToPlayer(playerController2D);
             }
         }
 
-        if (_playerController2D != null)
+        if (_playerController2D != null && IsPlayerNotInViewDistance())
         {
-            float _distanceToPlayer = Vector2.Distance(_transform.position, _playerController2D.transform.position);
-            Debug.Log(_distanceToPlayer);
-
-            if (_distanceToPlayer > _viewDistance)
-            {
-                _playerController2D = null;
-                WaitAndGoToNextPoint();
-                EnablePatrolingState();
-            }
+            LoseAPlayer();
         }
+    }
 
+    private void RunToPlayer(PlayerController2d playerController2D)
+    {
+        _playerController2D = playerController2D;
+        Target = _playerController2D.transform;
+        EnableAgressiveState();
+    }   
+    private void LoseAPlayer()
+    {
+        _playerController2D = null;
+        WaitAndGoToNextPoint();
+        EnablePatrolingState();
+    }
+
+    private bool IsPlayerNotInViewDistance()
+    {
+        float distanceToPlayer = Vector2.Distance(_transform.position, _playerController2D.transform.position);
+        return distanceToPlayer > _viewDistance;
     }
 
     #endregion
@@ -227,6 +281,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.right * transform.localScale.x * _viewDistance);
+        Gizmos.DrawRay(transform.position, (_viewDistance - 2) * transform.localScale.x * transform.right);
+
+        Gizmos.DrawWireSphere(transform.position, _distanceToStopping);
     }
 }

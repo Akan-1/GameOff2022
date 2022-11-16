@@ -908,8 +908,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 3
+  m_Material: {fileID: 6200000, guid: 0d8beb7f4a8b0c24ab03735f2dfe1d3a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -956,22 +956,41 @@ MonoBehaviour:
   _damage: 1
   _speedAnimationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _distanceToStopping: 1
-  _agressiveSpeedMultiplier: 2
+  _agressiveAdditionalSpeed: 0.2
   _patrolingPoints:
   - {fileID: 2102910020}
   - {fileID: 402297355}
   - {fileID: 1398305961}
   _stayTimeOnPointBetween: {x: 0, y: 3}
-  _distanceToStartMoveToNextPoint: 0.6
   _characterMask:
     serializedVersion: 2
     m_Bits: 2048
-  _viewDistance: 2
+  _viewDistance: 4
+  _distanceToAttack: 2
+  _offsetToPlayer: {x: 0, y: 0}
 --- !u!61 &747306611
 BoxCollider2D:
   m_ObjectHideFlags: 0
