@@ -15,7 +15,7 @@ MonoBehaviour:
   _sprite: {fileID: -2820930097560456536, guid: 6d5f5084499f0b74795b73d970dc19f9,
     type: 3}
   _bulletPoolName: 0
-  _FirePoint: {x: 3, y: 0.2}
+  _divineFirePoint: {x: 3.5, y: 0.2}
   _maximumBulletsInMagazine: 32
   _bulletPerShot: 1
   _bulletsAviable: 64
@@ -23,4 +23,4 @@ MonoBehaviour:
   _scatter: 0.1
   _reloadTime: 2
   _secondsBeforeNextShot: 0.1
-  _bulletForceBetween: {x: 20, y: 25}
+  _bulletForceBetween: {x: 45, y: 60}
