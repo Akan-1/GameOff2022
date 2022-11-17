@@ -1,4 +1,5 @@
 ﻿using QFSW.MOP2;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,6 +13,15 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private WeaponInfo _weaponInfo;
     private CircleCollider2D _pickUpTrigger;
+
+    [Header("Audio")]
+    [SerializeField] private List<AudioClip> _shotSounds;
+    [SerializeField] private float _shotNoiseRadius;
+    [SerializeField] private NoiseMaker _noiseMaker;
+
+    [Header("Particles")]
+    [SerializeField] private ParticlesPoolNames _shotParticles;
+
     public WeaponInfo WeaponInfo => _weaponInfo;
     public Rigidbody2D Rigibody2D
     {
@@ -84,17 +94,19 @@ public class Weapon : MonoBehaviour
 
             if (ShotDelayTime <= 0)
             {
+                Vector2 playerDirection = playerController2D.transform.rotation * -Vector2.right;
+                Vector2 perpendiculaarPlayerDirection = Vector2.Perpendicular(playerDirection) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
+
                 for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
                 {
-                    Vector2 playerDirection = playerController2D.transform.rotation * -Vector2.right;
-                    Vector2 perpendiculaarPlayerDirection = Vector2.Perpendicular(playerDirection) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
-
                     GameObject bullet = CreateBullet();
-                    SetPositionToBullet(bullet, playerController2D.transform.position, playerDirection.x);
+                    SetPositionToBullet(bullet, playerController2D.GunHolder.transform.position, playerDirection.x);
                     AddForceToBullet(bullet, playerDirection, perpendiculaarPlayerDirection);
                 }
                 CurrentAmmoInMagazine--;
                 ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
+                CreateShotParticles(playerController2D.GunHolder.transform.position, playerDirection.x, playerDirection.x < 0);
+                _noiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, 1, _shotNoiseRadius);
             }
         }
         else
@@ -152,4 +164,19 @@ public class Weapon : MonoBehaviour
     {
         ShotDelayTime = 0;
     }
+
+    #region particles
+
+    private void CreateShotParticles(Vector3 startPosition, float playerDirectionX ,  bool mirror)
+    {
+        if ($"{_shotParticles}" != "")
+        {
+            float particlesNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * playerDirectionX;
+            float particlesNewYPosition = startPosition.y + WeaponInfo.OffsetFirePoint.y;
+            Vector3 newParticlesPosition = new Vector3(particlesNewXPosition, particlesNewYPosition, transform.position.z);
+            ParticleCreator.Create($"{_shotParticles}".Replace(" ", ""), newParticlesPosition, mirror);
+        }
+    }
+
+    #endregion
 }

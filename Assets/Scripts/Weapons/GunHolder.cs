@@ -122,5 +122,31 @@ public class GunHolder : MonoBehaviour
 
     #endregion
 
+    #region Noise
+
+/*    private void StartNoiseDisabler()
+    {
+        StopNoiseDisabler();
+
+        _noiseDisabler = NoiseDisabler();
+        StartCoroutine(_noiseDisabler);
+    }
+
+    private void StopNoiseDisabler()
+    {
+        if (_noiseDisabler != null)
+        {
+            StopCoroutine(_noiseDisabler);
+        }
+    }
+
+    private IEnumerator NoiseDisabler()
+    {
+        yield return new WaitForSeconds(_activeNoiseTime);
+        Noise.enabled = false;
+    }*/
+
+    #endregion
+
 
 }

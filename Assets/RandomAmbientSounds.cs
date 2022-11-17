@@ -20,7 +20,7 @@ public class RandomAmbientSounds : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timer);
-            AudioPlayer.TryPlayRandom(transform, _audioSource, _ambientSounds, volumeScater);
+            AudioPlayer.TryPlayRandom(_audioSource, _ambientSounds, volumeScater);
         }
     }
 }

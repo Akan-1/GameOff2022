@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  _weaponSprite: {fileID: 0}
+  _sprite: {fileID: 0}
+  _type: 1
+  _bulletPoolName: 0
+  _FirePoint: {x: 0, y: 0}
+  _maximumBulletsInMagazine: 0
+  _bulletPerShot: 0
+  _bulletsAviable: 0
   _fireRate: 4
   _scatter: 0.06
-  _bulletPrefab: {fileID: 2550605733867124238, guid: 131568cb9e68e0d448028345749a0972,
-    type: 3}
-  _bulletForceValueOne: 35
-  _bulletForceValueTwo: 35
-  _bulletQuantityPerShoot: 1
-  firePoint: {fileID: 0}
-  weaponBody: {fileID: 0}
-  _ammo: 12
+  _reloadTime: 0
+  _secondsBeforeNextShot: 0
+  _bulletForceBetween: {x: 0, y: 0}
