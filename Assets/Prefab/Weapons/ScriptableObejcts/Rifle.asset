@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
-  m_Name: M4
+  m_Name: Rifle
   m_EditorClassIdentifier: 
   _sprite: {fileID: -2820930097560456536, guid: 6d5f5084499f0b74795b73d970dc19f9,
     type: 3}
+  _type: 0
   _bulletPoolName: 0
-  _FirePoint: {x: 4, y: 0.2}
+  _FirePoint: {x: 1.95, y: 0.2}
   _maximumBulletsInMagazine: 32
   _bulletPerShot: 1
   _bulletsAviable: 64
   _fireRate: 15
   _scatter: 0.1
+  _shotNoiseRadius: 32
   _reloadTime: 2
   _secondsBeforeNextShot: 0.1
   _bulletForceBetween: {x: 45, y: 60}

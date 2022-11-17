@@ -1,4 +1,5 @@
 ﻿using QFSW.MOP2;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,6 +13,13 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private WeaponInfo _weaponInfo;
     private CircleCollider2D _pickUpTrigger;
+
+    [Header("Audio")]
+    [SerializeField] private List<AudioClip> _shotSounds;
+
+    [Header("Particles")]
+    [SerializeField] private ParticlesPoolNames _shotParticles;
+
     public WeaponInfo WeaponInfo => _weaponInfo;
     public Rigidbody2D Rigibody2D
     {
@@ -37,7 +45,6 @@ public class Weapon : MonoBehaviour
         get => _currentAmmoInMagazine;
         set => _currentAmmoInMagazine = value;
     }
-
     #endregion
 
     private void Awake()
@@ -62,7 +69,7 @@ public class Weapon : MonoBehaviour
     private void PickUpTo(PlayerController2d playerController2D)
     {
         bool playerHasntWeaapon = playerController2D.GunHolder.Weapon == null;
-        bool playerIsActive = playerController2D.enabled;
+        bool playerIsActive = playerController2D.IsActive;
 
         if (Input.GetMouseButtonDown(1) && playerHasntWeaapon && playerIsActive)
         {
@@ -84,17 +91,20 @@ public class Weapon : MonoBehaviour
 
             if (ShotDelayTime <= 0)
             {
+                Vector2 playerDirection = playerController2D.transform.rotation * -Vector2.right;
+                Vector2 perpendiculaarPlayerDirection = Vector2.Perpendicular(playerDirection) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
+
                 for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
                 {
-                    Vector2 playerDirection = playerController2D.transform.rotation * -Vector2.right;
-                    Vector2 perpendiculaarPlayerDirection = Vector2.Perpendicular(playerDirection) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
-
                     GameObject bullet = CreateBullet();
-                    SetPositionToBullet(bullet, playerController2D.transform.position, playerDirection.x);
+                    SetPositionToBullet(bullet, GunHolder.transform.position, playerDirection.x);
                     AddForceToBullet(bullet, playerDirection, perpendiculaarPlayerDirection);
                 }
                 CurrentAmmoInMagazine--;
                 ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
+                CreateShotParticles(GunHolder.transform.position, playerDirection.x, playerDirection.x < 0);
+                GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, 1, _weaponInfo.ShotNoiseRadius);
+                GunHolder.StartNoiseDisabler();
             }
         }
         else
@@ -152,4 +162,19 @@ public class Weapon : MonoBehaviour
     {
         ShotDelayTime = 0;
     }
+
+    #region particles
+
+    private void CreateShotParticles(Vector3 startPosition, float playerDirectionX ,  bool mirror)
+    {
+        if ($"{_shotParticles}" != "")
+        {
+            float particlesNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * playerDirectionX;
+            float particlesNewYPosition = startPosition.y + WeaponInfo.OffsetFirePoint.y;
+            Vector3 newParticlesPosition = new Vector3(particlesNewXPosition, particlesNewYPosition, transform.position.z);
+            ParticleCreator.Create($"{_shotParticles}".Replace(" ", ""), newParticlesPosition, mirror);
+        }
+    }
+
+    #endregion
 }

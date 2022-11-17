@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, ITakeDamage
 {
-    private enum States
+    public enum States
     {
         Patroling,
         Aggresive
     }
+
     private States _state;
     private Transform _transform;
     private float _animationCurveCurrentTime;
@@ -50,6 +51,10 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     private Rigidbody2D _rigibidy2D;
 
+    public Rigidbody2D Rigidbody2D => _rigibidy2D;
+    public States State => _state;
+    public bool IsCanMove => _isCanMove;
+
     public int Health
     {
         get => _health;
@@ -60,7 +65,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         }
     }
 
-    public Transform Target
+    public Vector2 Target
     {
         get;
         set;
@@ -75,23 +80,13 @@ public class Enemy : MonoBehaviour, ITakeDamage
         GoToNextPatrolingPoint();
     }
 
-    void Update()
-    {
-        if (_isCanMove)
-        {
-            MoveToTarget();
-        }
-
-        View();
-    }
-
     #region States
 
-    private void EnablePatrolingState()
+    public void EnablePatrolingState()
     {
         _state = States.Patroling;
     } 
-    private void EnableAgressiveState()
+    public void EnableAgressiveState()
     {
         _isStopping = false;
         _isWait = false;
@@ -107,31 +102,15 @@ public class Enemy : MonoBehaviour, ITakeDamage
         if (Target != null)
         {
             RotateToTarget();
-
            _rigibidy2D.velocity = GetMovementVector() * GetCurrentSpeed();
 
             if (_state == States.Patroling)
             {
-                if (GetDistanceToTarget() <= _distanceToStopping)
-                {
-                    WaitAndGoToNextPoint();
-                }
+                Patroling();
             }
             else
             {
-                if (GetDistanceToTarget() <= _distanceToAttack)
-                {
-                    _currentAtackTime += Time.deltaTime;
-                    _isInZoneAttack = true;
-
-                    if (_currentAtackTime >= _timeBetweenAtacks && !_isAttack)
-                    {
-                        Attack();
-                    }
-                } else
-                {
-                    _isInZoneAttack = false;
-                }
+                AggressiveToTarget();
             }
         } else
         {
@@ -139,18 +118,51 @@ public class Enemy : MonoBehaviour, ITakeDamage
         }
     }
 
-    private float GetDistanceToTarget()
+    public void Patroling()
     {
-        return Vector2.Distance(_transform.position, Target.position);
+        if (GetDistanceToTarget() <= _distanceToStopping)
+        {
+            WaitAndGoToNextPoint();
+        }
     }
 
-    private Vector2 GetMovementVector()
+    public void AggressiveToTarget()
     {
-        Vector2 toTargetVector = new Vector2(Target.position.x - _transform.position.x, _transform.position.y).normalized;
+        if (GetDistanceToTarget() <= _distanceToAttack)
+        {
+            if (_playerController2D != null)
+            {
+                _currentAtackTime += Time.deltaTime;
+                _isInZoneAttack = true;
+
+                if (_currentAtackTime >= _timeBetweenAtacks && !_isAttack)
+                {
+                    Attack();
+                }
+            } else
+            {
+                WaitAndGoToNextPoint();
+                EnablePatrolingState();
+            }
+        }
+        else
+        {
+            _isInZoneAttack = false;
+        }
+    }
+
+    private float GetDistanceToTarget()
+    {
+        return Vector2.Distance(_transform.position, Target);
+    }
+
+    public Vector2 GetMovementVector()
+    {
+        Vector2 toTargetVector = new Vector2(Target.x - _transform.position.x, _transform.position.y).normalized;
         return toTargetVector;
     }
 
-    private float GetCurrentSpeed()
+    public float GetCurrentSpeed()
     {
         float additionSpeed = _state == States.Aggresive ? _agressiveAdditionalSpeed : 0;
         bool isNeedStoping = _isStopping || _isInZoneAttack;
@@ -163,11 +175,11 @@ public class Enemy : MonoBehaviour, ITakeDamage
         return currentSpeed;
     }
 
-    private void RotateToTarget()
+    public void RotateToTarget()
     {
         if (Target != null)
         {
-            _transform.localScale = Target.position.x > _transform.position.x ? _startScale : new Vector3(-_startScale.x, _startScale.y, _startScale.z);
+            _transform.localScale = Target.x > _transform.position.x ? _startScale : new Vector3(-_startScale.x, _startScale.y, _startScale.z);
         }
     }
 
@@ -217,7 +229,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private void GoToNextPatrolingPoint()
     {
         _indexOfCurrentfPatrolingPoint = GetNextIndexOfPatroolingPoint();
-        Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint];
+        Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint].position;
     }
 
     private int GetNextIndexOfPatroolingPoint()
@@ -267,7 +279,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private void RunToPlayer(PlayerController2d playerController2D)
     {
         _playerController2D = playerController2D;
-        Target = _playerController2D.transform;
+        Target = _playerController2D.transform.position;
         EnableAgressiveState();
     }   
     private void LoseAPlayer()
