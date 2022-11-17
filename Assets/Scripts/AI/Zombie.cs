@@ -36,8 +36,9 @@ public class Zombie : Enemy, ISoundHearable
         }
     }
 
-    public void HearFrom(Transform target)
+    public void HearFrom(Vector2 position)
     {
-        Debug.Log($"hear sound from {target.name}");
+        EnableAgressiveState();
+        Target = position;
     }
 }

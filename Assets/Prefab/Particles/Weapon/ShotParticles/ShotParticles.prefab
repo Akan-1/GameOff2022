@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7197622625782126043}
   - component: {fileID: 3950370379275434054}
   - component: {fileID: 7551010077749097319}
+  - component: {fileID: -5993792607578303667}
   m_Layer: 0
   m_Name: ShotParticles
   m_TagString: Untagged
@@ -42,7 +43,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 0.05
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4811,3 +4812,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-5993792607578303667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8466720062356364940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf8fa26c122df5478ade1a388012a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolName: 0

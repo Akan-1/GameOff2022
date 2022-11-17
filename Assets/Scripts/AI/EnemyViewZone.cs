@@ -17,7 +17,7 @@ public class EnemyViewZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out PlayerController2d playerController2D))
         {
-            _enemy.Target = playerController2D.transform;
+            _enemy.Target = playerController2D.transform.position;
         }
     }
 
@@ -25,7 +25,7 @@ public class EnemyViewZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out PlayerController2d playerController2D))
         {
-            _enemy.Target = null;
+            _enemy.Target = Vector2.zero;
         }
     }
 }

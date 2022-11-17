@@ -807,9 +807,9 @@ GameObject:
   m_Component:
   - component: {fileID: 747306607}
   - component: {fileID: 747306606}
-  - component: {fileID: 747306610}
   - component: {fileID: 747306608}
   - component: {fileID: 747306611}
+  - component: {fileID: 747306609}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -902,7 +902,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &747306610
+--- !u!114 &747306609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 747306605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268b3376c9caac34ea2f2a9051e815a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 07b2e3a2e6a373a44bf95e3d71af8a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 0
@@ -963,7 +963,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _distanceToStopping: 0.3
+  _distanceToStopping: 0.5
   _agressiveAdditionalSpeed: 2
   _patrolingPoints:
   - {fileID: 989211778}
@@ -976,7 +976,7 @@ MonoBehaviour:
   _damageBetween: {x: 1, y: 1}
   _timeBetweenAtacks: 1
   _distanceToAttack: 1.72
-  _attackTime: 1
+  _attackTime: 0.5
 --- !u!61 &747306611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1357,7 +1357,7 @@ GameObject:
   - component: {fileID: 982269274}
   - component: {fileID: 982269273}
   m_Layer: 11
-  m_Name: GunHolder
+  m_Name: GunHolderThomas
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1373,7 +1373,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.74, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_Children: []
+  m_Children:
+  - {fileID: 1985534881}
   m_Father: {fileID: 1468369636}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1389,6 +1390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58051a363bf33764ca8fce1c71035175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeNoiseTime: 0.1
+  _noiseMaker: {fileID: 1985534882}
   _throwOutAngularVelocity: 245
   _throwForce: 3
 --- !u!212 &982269274
@@ -1471,6 +1474,67 @@ Transform:
   m_Father: {fileID: 1559904584}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1140027587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1140027588}
+  - component: {fileID: 1140027590}
+  - component: {fileID: 1140027589}
+  m_Layer: 13
+  m_Name: NoiseMaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1140027588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140027587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1239401225}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1140027589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140027587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a12b8ea58049d4a890a784488eec20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSourcePoolName: AudioSource
+--- !u!58 &1140027590
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140027587}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &1145436623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1239401225}
   - component: {fileID: 1239401226}
+  - component: {fileID: 1239401227}
   m_Layer: 13
   m_Name: WeaponCollider
   m_TagString: Untagged
@@ -1606,7 +1671,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1140027588}
   m_Father: {fileID: 2092938514593416240}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1636,6 +1702,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.422077, y: 1.8529984}
   m_EdgeRadius: 0
+--- !u!114 &1239401227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239401224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9d14cd75528b145ac3ba1e0a808066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSourcePoolName: AudioSource
+  _noiseMaker: {fileID: 1140027589}
+  _activeNoiseTime: 0.1
+  _minTimeBetweenAudio: 0.3
+  FallSounds:
+  - {fileID: 8300000, guid: cb68b3779863c9549817709a7dae515d, type: 3}
+  - {fileID: 8300000, guid: eb11e7208ca9fee4b84a0b3ba87c3335, type: 3}
+  - {fileID: 8300000, guid: ab7ba926fa6945c40911b8cdcbc5c5a8, type: 3}
+  _fallNoiseRadius: 12
+  DragSounds:
+  - {fileID: 8300000, guid: 4dde6c69db18d164f8416cc4474a2ea0, type: 3}
+  _dragNoiseRadius: 2
 --- !u!1 &1249511178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2832,7 +2922,7 @@ GameObject:
   - component: {fileID: 1930512798}
   - component: {fileID: 1930512797}
   m_Layer: 11
-  m_Name: GunHolder
+  m_Name: GunHolderAlice
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2848,7 +2938,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.74, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_Children: []
+  m_Children:
+  - {fileID: 2044338550}
   m_Father: {fileID: 193466140}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2864,6 +2955,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58051a363bf33764ca8fce1c71035175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeNoiseTime: 0.1
+  _noiseMaker: {fileID: 2044338548}
   _throwOutAngularVelocity: 245
   _throwForce: 3
 --- !u!212 &1930512798
@@ -2928,7 +3021,7 @@ GameObject:
   - component: {fileID: 1985534883}
   - component: {fileID: 1985534882}
   m_Layer: 0
-  m_Name: NoiseMaker
+  m_Name: NoiseMakerGunThomas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2941,12 +3034,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985534880}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.10744211, w: 0.99421144}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9201118, y: 0.85575604, z: 0}
   m_Children: []
-  m_Father: {fileID: 2092938514593416240}
-  m_RootOrder: 1
+  m_Father: {fileID: 982269272}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1985534882
 MonoBehaviour:
@@ -3007,6 +3100,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2044338547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044338550}
+  - component: {fileID: 2044338549}
+  - component: {fileID: 2044338548}
+  m_Layer: 11
+  m_Name: NoiseMakerGunAlice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2044338548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044338547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a12b8ea58049d4a890a784488eec20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSourcePoolName: AudioSource
+--- !u!58 &2044338549
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044338547}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!4 &2044338550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044338547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1930512796}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2092938514593416240
 Transform:
   m_ObjectHideFlags: 0
@@ -3019,7 +3173,6 @@ Transform:
   m_LocalScale: {x: 0.43872777, y: 0.4080416, z: 0.57607967}
   m_Children:
   - {fileID: 1239401225}
-  - {fileID: 1985534881}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 12.336}
@@ -3146,5 +3299,4 @@ MonoBehaviour:
   _weaponInfo: {fileID: 11400000, guid: bde344c0fd21f8d45ba23f8234a3399e, type: 2}
   _shotSounds:
   - {fileID: 8300000, guid: 0fe5f383e33e3fb41aa27fe02a5ea530, type: 3}
-  _noiseMaker: {fileID: 1985534882}
   _shotParticles: 0

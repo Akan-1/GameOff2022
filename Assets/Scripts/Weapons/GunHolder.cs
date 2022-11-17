@@ -10,6 +10,11 @@ public class GunHolder : MonoBehaviour
     private IEnumerator _reloadWeapon;
     private bool _isReloading;
 
+    [Header("Noise")]
+    [SerializeField] private float _activeNoiseTime = .1f;
+    [SerializeField] private NoiseMaker _noiseMaker;
+    private IEnumerator _noiseDisabler;
+
     [SerializeField] private float _throwOutAngularVelocity = 245;
     [SerializeField] private float _throwForce = 3;
     public Weapon Weapon
@@ -17,6 +22,7 @@ public class GunHolder : MonoBehaviour
         get;
         set;
     }
+    public NoiseMaker NoiseMaker => _noiseMaker;
     public bool IsCanThrowWeapon
     {
         get;
@@ -124,7 +130,7 @@ public class GunHolder : MonoBehaviour
 
     #region Noise
 
-/*    private void StartNoiseDisabler()
+    public void StartNoiseDisabler()
     {
         StopNoiseDisabler();
 
@@ -143,8 +149,8 @@ public class GunHolder : MonoBehaviour
     private IEnumerator NoiseDisabler()
     {
         yield return new WaitForSeconds(_activeNoiseTime);
-        Noise.enabled = false;
-    }*/
+        _noiseMaker.Noise.enabled = false;
+    }
 
     #endregion
 

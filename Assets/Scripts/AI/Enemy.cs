@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         }
     }
 
-    public Transform Target
+    public Vector2 Target
     {
         get;
         set;
@@ -130,12 +130,19 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         if (GetDistanceToTarget() <= _distanceToAttack)
         {
-            _currentAtackTime += Time.deltaTime;
-            _isInZoneAttack = true;
-
-            if (_currentAtackTime >= _timeBetweenAtacks && !_isAttack)
+            if (_playerController2D != null)
             {
-                Attack();
+                _currentAtackTime += Time.deltaTime;
+                _isInZoneAttack = true;
+
+                if (_currentAtackTime >= _timeBetweenAtacks && !_isAttack)
+                {
+                    Attack();
+                }
+            } else
+            {
+                WaitAndGoToNextPoint();
+                EnablePatrolingState();
             }
         }
         else
@@ -146,12 +153,12 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     private float GetDistanceToTarget()
     {
-        return Vector2.Distance(_transform.position, Target.position);
+        return Vector2.Distance(_transform.position, Target);
     }
 
     public Vector2 GetMovementVector()
     {
-        Vector2 toTargetVector = new Vector2(Target.position.x - _transform.position.x, _transform.position.y).normalized;
+        Vector2 toTargetVector = new Vector2(Target.x - _transform.position.x, _transform.position.y).normalized;
         return toTargetVector;
     }
 
@@ -172,7 +179,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         if (Target != null)
         {
-            _transform.localScale = Target.position.x > _transform.position.x ? _startScale : new Vector3(-_startScale.x, _startScale.y, _startScale.z);
+            _transform.localScale = Target.x > _transform.position.x ? _startScale : new Vector3(-_startScale.x, _startScale.y, _startScale.z);
         }
     }
 
@@ -222,7 +229,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private void GoToNextPatrolingPoint()
     {
         _indexOfCurrentfPatrolingPoint = GetNextIndexOfPatroolingPoint();
-        Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint];
+        Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint].position;
     }
 
     private int GetNextIndexOfPatroolingPoint()
@@ -272,7 +279,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private void RunToPlayer(PlayerController2d playerController2D)
     {
         _playerController2D = playerController2D;
-        Target = _playerController2D.transform;
+        Target = _playerController2D.transform.position;
         EnableAgressiveState();
     }   
     private void LoseAPlayer()

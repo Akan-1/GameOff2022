@@ -2,5 +2,5 @@
 
 public interface ISoundHearable
 {
-    void HearFrom(Transform target);
+    void HearFrom(Vector2 position);
 }

@@ -16,8 +16,6 @@ public class Weapon : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private List<AudioClip> _shotSounds;
-    [SerializeField] private float _shotNoiseRadius;
-    [SerializeField] private NoiseMaker _noiseMaker;
 
     [Header("Particles")]
     [SerializeField] private ParticlesPoolNames _shotParticles;
@@ -47,7 +45,6 @@ public class Weapon : MonoBehaviour
         get => _currentAmmoInMagazine;
         set => _currentAmmoInMagazine = value;
     }
-
     #endregion
 
     private void Awake()
@@ -72,7 +69,7 @@ public class Weapon : MonoBehaviour
     private void PickUpTo(PlayerController2d playerController2D)
     {
         bool playerHasntWeaapon = playerController2D.GunHolder.Weapon == null;
-        bool playerIsActive = playerController2D.enabled;
+        bool playerIsActive = playerController2D.IsActive;
 
         if (Input.GetMouseButtonDown(1) && playerHasntWeaapon && playerIsActive)
         {
@@ -100,13 +97,14 @@ public class Weapon : MonoBehaviour
                 for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
                 {
                     GameObject bullet = CreateBullet();
-                    SetPositionToBullet(bullet, playerController2D.GunHolder.transform.position, playerDirection.x);
+                    SetPositionToBullet(bullet, GunHolder.transform.position, playerDirection.x);
                     AddForceToBullet(bullet, playerDirection, perpendiculaarPlayerDirection);
                 }
                 CurrentAmmoInMagazine--;
                 ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
-                CreateShotParticles(playerController2D.GunHolder.transform.position, playerDirection.x, playerDirection.x < 0);
-                _noiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, 1, _shotNoiseRadius);
+                CreateShotParticles(GunHolder.transform.position, playerDirection.x, playerDirection.x < 0);
+                GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, 1, _weaponInfo.ShotNoiseRadius);
+                GunHolder.StartNoiseDisabler();
             }
         }
         else

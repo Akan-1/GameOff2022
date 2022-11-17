@@ -15,6 +15,7 @@ public class WeaponInfo : ScriptableObject
     [SerializeField] [Min(1)] private int _bulletsAviable;
     [SerializeField] [Min(1)] private float _fireRate = 1;
     [SerializeField] [Min(0)] private float _scatter;
+    [SerializeField] [Min(0)] private float _shotNoiseRadius;
     [SerializeField] [Min(0.01f)] private float _reloadTime;
     [SerializeField] [Min(.1f)] private float _secondsBeforeNextShot;
 
@@ -33,6 +34,7 @@ public class WeaponInfo : ScriptableObject
     public Vector2 BulletForceBetween => _bulletForceBetween;
     public float SecondsBeforeNextShot => _secondsBeforeNextShot;
     public float ReloadTime => _reloadTime;
+    public float ShotNoiseRadius => _shotNoiseRadius;
     public int MaximumBulletsInMagazine => _maximumBulletsInMagazine;
     public int BulletPerShot => _bulletPerShot;
     public int BulletsAviable => _bulletsAviable;

@@ -7,8 +7,6 @@ using UnityEngine;
 public class NoiseMaker : MonoBehaviour
 {
     [SerializeField] private string _audioSourcePoolName = "AudioSource";
-    private const float _activeNoiseTime = .1f;
-    private IEnumerator _noiseDisabler;
 
     public CircleCollider2D Noise
     {
@@ -27,7 +25,7 @@ public class NoiseMaker : MonoBehaviour
     {
         if (collision.TryGetComponent(out ISoundHearable ISoundHerable))
         {
-            ISoundHerable.HearFrom(transform);
+            ISoundHerable.HearFrom(transform.position);
         }
     }
 
@@ -39,6 +37,6 @@ public class NoiseMaker : MonoBehaviour
         AudioPlayer.TryPlayRandom(_audioSource, _audioClips, volumeScale);
         Noise.radius = noiseRadius;
         Noise.enabled = true;
-/*        StartNoiseDisabler();*/
     }
+
 }
