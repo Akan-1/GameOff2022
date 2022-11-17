@@ -29,7 +29,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         {
             _positionOfCurrentWall = value;
             _currentWallJumpCount = 0;
-            Debug.Log("Update");
         }
     }
 
@@ -95,7 +94,10 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         _wallHopDirection.Normalize();
         _wallJumpDirection.Normalize();
+    }
 
+    private void Start()
+    {
         TryAddCharacterToPossible();
     }
 
@@ -249,11 +251,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         if (hit)
         {
-
             _isTouchWall = true;
             float roundedPositionOfCurrentWall = (float)Math.Round(PositionOfCurrentWall.x, 2);
             float roundedPositionOfHit = (float)Math.Round(hit.point.x, 2);
-            Debug.Log($"rounded {roundedPositionOfCurrentWall}" );
 
             bool IsNewWallPosition = roundedPositionOfCurrentWall != roundedPositionOfHit;
 
@@ -285,6 +285,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void Squat()
     {
+        bool cantStand = !Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask);
+
         if (Input.GetKey(KeyCode.LeftShift) && _isGround)
         {
             //тут для анимашки местечко, делаем параметр анимашки трушным
@@ -292,7 +294,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _poseSquat.enabled = true;
             _canJump = false;
         }
-        else if (!Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask))
+        else if (cantStand)
         {
             //тут фолзим
             _poseStand.enabled = true;

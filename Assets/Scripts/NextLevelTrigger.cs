@@ -5,6 +5,9 @@ public class NextLevelTrigger : MonoBehaviour
 {
     [SerializeField] private int playersNeededToCompleteLevel;
 
+    [Tooltip("Can be null")]
+    [SerializeField] private FadeChanger _fadeChanger;
+
     private int currentPlayers;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,7 +19,13 @@ public class NextLevelTrigger : MonoBehaviour
 
             if( currentPlayers <= playersNeededToCompleteLevel)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                if (_fadeChanger != null)
+                {
+                    _fadeChanger.StartFadeInAndChangeScene(SceneLoader.GetNextSceneIndex());
+                } else
+                {
+                    SceneLoader.NextScene();
+                }
             }
         }
     }

@@ -160,7 +160,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
         _animationCurveCurrentTime = Mathf.Clamp(_animationCurveCurrentTime, 0, _speedAnimationCurve.keys[_speedAnimationCurve.length - 1].time);
 
         float currentSpeed = _speedAnimationCurve.Evaluate(_animationCurveCurrentTime) + (isNeedStoping ? 0 : additionSpeed);
-        Debug.Log(isNeedStoping);
         return currentSpeed;
     }
 
@@ -187,8 +186,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
         _wait = WaitFor(waitTime);
         StartCoroutine(_wait);
-
-        Debug.Log("Start Wait");
     }
 
     private void StopWait()

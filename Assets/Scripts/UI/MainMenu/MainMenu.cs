@@ -18,4 +18,9 @@ public class MainMenu : MonoBehaviour
         CloseAllMenus();
         menu.SetActive(true);
     }
+
+    public void LoadScene(int index)
+    {
+        SceneLoader.LoadByIndex(index);
+    }
 }

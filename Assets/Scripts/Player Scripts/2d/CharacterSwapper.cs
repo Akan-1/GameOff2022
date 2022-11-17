@@ -5,37 +5,33 @@ using UnityEngine;
 public class CharacterSwapper : MonoBehaviour
 {
     public static CharacterSwapper Instance;
-    private PlayerController2d character;
-    private bool _isLoadingSwap = true;
+    private PlayerController2d _character;
 
     [SerializeField] AudioSource _audioSource;
     [SerializeField] private AudioClip _swapSound;
     
     [Space]
-    private List<PlayerController2d> possibleCharacters = new List<PlayerController2d>();
-    [SerializeField] private int whichCharacter;
-
-    // Start is called before the first frame update
+    private List<PlayerController2d> _possibleCharacters = new List<PlayerController2d>();
+    [SerializeField] private int _whichCharacter;
 
     private void Awake()
     {
-        //if (Instance == null)
-        //{
-        //    Instance = this;
-        //    DontDestroyOnLoad(gameObject);
-        //    return;
-        //}
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            return;
+        }
 
         Destroy(this);
     }
 
     void Start()
     {
-        if (character == null && possibleCharacters.Count > 0)
+        if (_character == null && _possibleCharacters.Count > 0)
         {
-            character = possibleCharacters[0]; 
+            _character = _possibleCharacters[0]; 
         }
-        Swap();
     }
 
     // Update is called once per frame
@@ -43,76 +39,83 @@ public class CharacterSwapper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (whichCharacter == 0)
-            {
-                whichCharacter = possibleCharacters.Count - 1;
-            }
-            else
-            {
-                whichCharacter -= 1;
-            }
-            Swap();
+            SwapToPreviousCharacter();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (whichCharacter == possibleCharacters.Count - 1)
-            {
-                whichCharacter = 0;
-            }
-            else
-            {
-                whichCharacter += 1;
-            }
-            Swap();
+            SwapToNextCharacter();
+
         }
     }
 
-    public void ClearCharacters()
+    #region Swap
+
+    private void SwapToNextCharacter()
     {
-        possibleCharacters = new List<PlayerController2d>();
+        int indexOfNextCharacter = _whichCharacter += 1;
+        _whichCharacter = _whichCharacter < _possibleCharacters.Count ? indexOfNextCharacter : 0;
+        Swap();
     }
 
-    public void AddCharacter(PlayerController2d playerController2D)
+    private void SwapToPreviousCharacter()
     {
-        possibleCharacters.Add(playerController2D);
-
-        if (character == null)
-        {
-            Swap();
-        }
+        int indexOfPreviousCharacter = _whichCharacter -= 1;
+        int indexOfLastCharacter = _possibleCharacters.Count - 1;
+        _whichCharacter = _whichCharacter > -1 ? indexOfPreviousCharacter : indexOfLastCharacter;
+        Swap();
     }
 
     private void Swap()
     {
-        if (possibleCharacters.Count > 0)
+        if (_possibleCharacters.Count > 0)
         {
-            character = possibleCharacters[whichCharacter];
-            character.enabled = true;
-            character.IsActive = true;
-
-            for (int i = 0; i < possibleCharacters.Count; i++)
-            {
-                if (possibleCharacters[i] != character)
-                {
-                    if (possibleCharacters[i].Rigibody2D != null)
-                    {
-                        possibleCharacters[i].Rigibody2D.velocity = Vector2.zero;
-                    }
-
-                    possibleCharacters[i].enabled = false;
-                    possibleCharacters[i].IsActive = false;
-                }
-            }
-
-            if (_isLoadingSwap)
-            {
-                _isLoadingSwap = false;
-            }
-            else
-            {
-                _audioSource.PlayOneShot(_swapSound);
-            }
-
+            ActiveCharacter(_whichCharacter);
+            DisactiveNonCurrentCharacters();
+            _audioSource.PlayOneShot(_swapSound);
         }
     }
+
+    private void ActiveCharacter(int _characterIndex)
+    {
+        _character = _possibleCharacters[_characterIndex];
+        _character.enabled = true;
+        _character.IsActive = true;
+    }
+
+    private void DisactiveNonCurrentCharacters()
+    {
+        for (int i = 0; i < _possibleCharacters.Count; i++)
+        {
+            if (_possibleCharacters[i] != _character)
+            {
+                _possibleCharacters[i].Rigibody2D.velocity = Vector2.zero;
+                _possibleCharacters[i].enabled = false;
+                _possibleCharacters[i].IsActive = false;
+            }
+        }
+    }
+
+    #endregion
+
+    #region Clear/Add
+
+    public void ClearCharacters()
+    {
+        _possibleCharacters = new List<PlayerController2d>();
+    }
+
+    public void AddCharacter(PlayerController2d playerController2D)
+    {
+        _possibleCharacters.Add(playerController2D);
+
+        bool _isCurrentCharacterIsNull = _character == null;
+        bool _areHavePossibleCharacters = _possibleCharacters.Count > 0;
+
+        if (_isCurrentCharacterIsNull && _areHavePossibleCharacters)
+        {
+            ActiveCharacter(_whichCharacter);
+        }
+    }
+
+    #endregion
 }

@@ -1,34 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public static class SceneLoader
 {
-    public static SceneLoader Instance;
-    private void Start()
+    public static int GetNextSceneIndex()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            return;
-        }
-
-        Destroy(this);
+        return SceneManager.GetActiveScene().buildIndex + 1;
     }
-
-    public void LoadByIndex(int sceneIndex)
+    public static void LoadByIndex(int sceneIndex)
     {
         CharacterSwapper.Instance.ClearCharacters();
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public void LoadNext()
+    public static void NextScene()
     {
         CharacterSwapper.Instance.ClearCharacters();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneLoader.LoadByIndex(GetNextSceneIndex());
     }
 
-    public void Quit()
+    public static void Quit()
     {
         Application.Quit();
     }
