@@ -7,6 +7,7 @@ public class NoiseOnCollisionCreator : MonoBehaviour
     [SerializeField] private string _audioSourcePoolName = "AudioSource";
     [SerializeField] private NoiseMaker _noiseMaker;
     [SerializeField] private float _activeNoiseTime = .1f;
+    private Vector3 _currentPosition;
 
     [Header("Settings")]
     [SerializeField] private float _minTimeBetweenAudio;
@@ -16,21 +17,24 @@ public class NoiseOnCollisionCreator : MonoBehaviour
     [SerializeField] private List<AudioClip> FallSounds = new List<AudioClip>();
     [SerializeField] private float _fallNoiseRadius;
 
-    [Header("Drag")]
-    [SerializeField] private List<AudioClip> DragSounds = new List<AudioClip>();
-    [SerializeField] private float _dragNoiseRadius;
-    private Vector3 _currentPosition;
-
     private IEnumerator _noiseDisabler;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (_isCanPlayAudio)
         {
-            _noiseMaker.PlayRandomAudioWithCreateNoise(FallSounds, 1, _fallNoiseRadius);
-            _isCanPlayAudio = false;
-            Invoke(nameof(SetCanPlayAudioTrue), _activeNoiseTime);
-            StartNoiseDisabler();
+            if (_currentPosition.y != transform.position.y)
+            {
+                _noiseMaker.PlayRandomAudioWithCreateNoise(FallSounds, 1, _fallNoiseRadius);
+                _isCanPlayAudio = false;
+                Invoke(nameof(SetCanPlayAudioTrue), _activeNoiseTime);
+                StartNoiseDisabler();
+            }
+        }
+
+        if (_currentPosition != transform.position)
+        {
+            _currentPosition = transform.position;
         }
     }
 
