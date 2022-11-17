@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DeathScreen : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class DeathScreen : MonoBehaviour
     }
 
     [SerializeField] private GameObject _panelBar;
-    [SerializeField] private Text _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     [TextArea(3, 10)]
     [SerializeField] private string[] _TomasPhrasesArr;
@@ -40,6 +41,7 @@ public class DeathScreen : MonoBehaviour
 
     private void ShowBar()
     {
+        _text.text = "";
         _playerIsDead = true;
         _panelBar.SetActive(true);
         StartCoroutine(TextCoroutine());
