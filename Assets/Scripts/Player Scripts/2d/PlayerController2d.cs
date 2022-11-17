@@ -188,8 +188,13 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
         }
 
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Physics2D.IgnoreLayerCollision(11, 15, true);
+            Invoke("IgnoreLayerOff", 0.5f);
+        }
 
-        if (Input.GetButton("Jump") && _isGround && _canJump)
+        if (Input.GetButtonDown("Jump") && _isGround && _canJump)
         {
             Jump();
         }
@@ -243,6 +248,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, _jumpForce);
     }
+
+    private void IgnoreLayerOff() => Physics2D.IgnoreLayerCollision(11, 15, false);
 
     private void CheckSurroundings()
     {

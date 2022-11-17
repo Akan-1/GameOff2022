@@ -219,7 +219,7 @@ MonoBehaviour:
   _groudCheck: {fileID: 2736078074153653666}
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 33024
   _groundCheckRadius: 0.54
   _health: 2
   _speed: 10
