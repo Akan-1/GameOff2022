@@ -176,11 +176,13 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _movementInputDirection = 0;
             _isWallSliding = true;
             _canJump = true;
+            _anim.SetBool("IsWallStick",true);
         }
         else
         {
             _isWallSliding = false;
             _canJump = false;
+            _anim.SetBool("IsWallStick", false);
         }
     }
 
@@ -268,6 +270,15 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private void CheckSurroundings()
     {
         _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
+
+        if (!_isGround)
+        {
+            _anim.SetBool("IsFall", true);
+        } else
+        {
+            _anim.SetBool("IsFall", false);
+        }
+
         RaycastHit2D hit = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
 
         if (hit)
@@ -345,12 +356,21 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
     }
 
-    #endregion
-
     public void StopWalkAninmation()
     {
         _anim.SetBool("IsWalk", false);
     }
+
+    public void EnableShotAnimationBool()
+    {
+        _anim.SetBool("IsShot", true);
+    }    
+    
+    public void DisableShotAnimationBool()
+    {
+        _anim.SetBool("IsShot", false);
+    }
+    #endregion
 
     private void OnDrawGizmos()
     {

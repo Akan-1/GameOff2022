@@ -91,7 +91,7 @@ public class Weapon : MonoBehaviour
 
             if (ShotDelayTime <= 0)
             {
-
+                playerController2D.EnableShotAnimationBool();
                 for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
                 {
                     GameObject bullet = CreateBullet();
@@ -101,8 +101,8 @@ public class Weapon : MonoBehaviour
                 }
                 CurrentAmmoInMagazine--;
                 ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
+                
                 playerController2D.Rigibody2D.AddForce(-Mathf.Lerp(playerController2D.transform.localScale.x, -1, 1) * transform.right, ForceMode2D.Impulse);
-
                 CreateNoise();
             }
         }
@@ -170,11 +170,11 @@ public class Weapon : MonoBehaviour
 
     #region particles
 
-    private void CreateShotParticles(Vector3 startPosition, Vector3 plyerLocalScle)
+    private void CreateShotParticles(Vector3 startPosition, Vector3 plyerLocalScale)
     {
         if ($"{_shotParticles}" != "")
         {
-            float particlesNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * plyerLocalScle.x > 0 ? 1 : -1;
+            float particlesNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * (plyerLocalScale.x > 0 ? -1 : 1);
             float particlesNewYPosition = startPosition.y + WeaponInfo.OffsetFirePoint.y;
             Vector3 newParticlesPosition = new Vector3(particlesNewXPosition, particlesNewYPosition, transform.position.z);
             ParticleCreator.Create($"{_shotParticles}".Replace(" ", ""), newParticlesPosition);

@@ -125,6 +125,18 @@ TextureImporter:
   - first:
       213: 1136830105508105763
     second: Thomas_40
+  - first:
+      213: 4074719315858945343
+    second: Thomas_41
+  - first:
+      213: -5055025943705936837
+    second: Thomas_42
+  - first:
+      213: 4176069351361503301
+    second: Thomas_43
+  - first:
+      213: -4240367869898546993
+    second: Thomas_44
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1066,6 +1078,90 @@ TextureImporter:
       bones: []
       spriteID: 32ec7c035f4d6cf00800000000000000
       internalID: 1136830105508105763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thomas_41
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 192
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f35f13501af4c8830800000000000000
+      internalID: 4074719315858945343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thomas_42
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c1607dfa0f8d9b0800000000000000
+      internalID: -5055025943705936837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thomas_43
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5406c4503f064f930800000000000000
+      internalID: 4176069351361503301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thomas_44
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 159
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0a7b583ef2725c0800000000000000
+      internalID: -4240367869898546993
       vertices: []
       indices: 
       edges: []
