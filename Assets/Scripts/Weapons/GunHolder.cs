@@ -7,6 +7,7 @@ public class GunHolder : MonoBehaviour
 {
     private PlayerController2d _playerController2D;
     private SpriteRenderer _spriteRenderer;
+    private Vector3 _startLocalPosition;
     private IEnumerator _reloadWeapon;
     private bool _isReloading;
 
@@ -33,6 +34,7 @@ public class GunHolder : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerController2D = transform.parent.GetComponent<PlayerController2d>();
+        _startLocalPosition = transform.localPosition;
     }
 
     private void Update()
@@ -124,6 +126,17 @@ public class GunHolder : MonoBehaviour
         }
 
         _isReloading = false;
+    }
+
+    #endregion
+
+    #region Recoil
+
+    public void AddRecoil(float recoil)
+    {
+        float recoilX = Random.Range(0, recoil);
+        float recoilY = Random.Range(0, recoil);
+        transform.localPosition = _startLocalPosition - new Vector3(recoilX, recoilY, transform.localPosition.z);
     }
 
     #endregion

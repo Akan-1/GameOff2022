@@ -102,9 +102,9 @@ public class Weapon : MonoBehaviour
                 }
                 CurrentAmmoInMagazine--;
                 ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
+                GunHolder.AddRecoil(_weaponInfo.RecoilStrength);
                 CreateShotParticles(GunHolder.transform.position, playerDirection.x, playerDirection.x < 0);
-                GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, 1, _weaponInfo.ShotNoiseRadius);
-                GunHolder.StartNoiseDisabler();
+                CreateNoise();
             }
         }
         else
@@ -161,6 +161,12 @@ public class Weapon : MonoBehaviour
     public void ResetShotDelayTime()
     {
         ShotDelayTime = 0;
+    }
+
+    public void CreateNoise()
+    {
+        GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, 1, _weaponInfo.ShotNoiseRadius);
+        GunHolder.StartNoiseDisabler();
     }
 
     #region particles

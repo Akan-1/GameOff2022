@@ -23,6 +23,7 @@ MonoBehaviour:
   _fireRate: 15
   _scatter: 0.1
   _shotNoiseRadius: 32
+  _recoilStrength: 0.05
   _reloadTime: 2
   _secondsBeforeNextShot: 0.1
   _bulletForceBetween: {x: 45, y: 60}
