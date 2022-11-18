@@ -91,19 +91,18 @@ public class Weapon : MonoBehaviour
 
             if (ShotDelayTime <= 0)
             {
-                Vector2 playerDirection = playerController2D.transform.rotation * -Vector2.right;
-                Vector2 perpendiculaarPlayerDirection = Vector2.Perpendicular(playerDirection) * Random.Range(-WeaponInfo.Scatter, WeaponInfo.Scatter);
 
                 for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
                 {
                     GameObject bullet = CreateBullet();
-                    SetPositionToBullet(bullet, GunHolder.transform.position, playerDirection.x);
-                    AddForceToBullet(bullet, playerDirection, perpendiculaarPlayerDirection);
+                    SetPositionToBullet(bullet, GunHolder.transform.position, playerController2D.transform.localScale.x > 0);
+                    CreateShotParticles(GunHolder.transform.position, playerController2D.transform.localScale);
+                    AddForceToBullet(bullet, playerController2D.transform.localScale);
                 }
                 CurrentAmmoInMagazine--;
                 ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
-                GunHolder.AddRecoil(_weaponInfo.RecoilStrength);
-                CreateShotParticles(GunHolder.transform.position, playerDirection.x, playerDirection.x < 0);
+                playerController2D.Rigibody2D.AddForce(-Mathf.Lerp(playerController2D.transform.localScale.x, -1, 1) * transform.right, ForceMode2D.Impulse);
+
                 CreateNoise();
             }
         }
@@ -118,18 +117,18 @@ public class Weapon : MonoBehaviour
         return MasterObjectPooler.Instance.GetObject($"{WeaponInfo.BulletPoolName}");
     }
 
-    private void SetPositionToBullet(GameObject bullet, Vector3 startPosition, float playerDirectionX)
+    private void SetPositionToBullet(GameObject bullet, Vector3 startPosition, bool mirror)
     {
-        float bulletNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * playerDirectionX;
+        float bulletNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * (mirror ? -1 : 1) ;
         float bulletNewYPosition = startPosition.y + WeaponInfo.OffsetFirePoint.y;
         bullet.transform.position = new Vector3(bulletNewXPosition, bulletNewYPosition, transform.position.z);
     }
 
-    private void AddForceToBullet(GameObject bullet, Vector2 playerDirection, Vector2 perpendicularPlayerDirection)
+    private void AddForceToBullet(GameObject bullet, Vector3 playerScale)
     {
         Rigidbody2D bulletRigibody = bullet.GetComponent<Rigidbody2D>();
         float bulletForce = Random.Range(WeaponInfo.BulletForceBetween.x, WeaponInfo.BulletForceBetween.y);
-        bulletRigibody.velocity = (playerDirection + perpendicularPlayerDirection) * bulletForce;
+        bulletRigibody.velocity = new Vector2((playerScale.x > 0 ? -1 : 1), Random.Range(-_weaponInfo.Scatter, _weaponInfo.Scatter)) * bulletForce;
     }
 
     #endregion
@@ -171,14 +170,14 @@ public class Weapon : MonoBehaviour
 
     #region particles
 
-    private void CreateShotParticles(Vector3 startPosition, float playerDirectionX ,  bool mirror)
+    private void CreateShotParticles(Vector3 startPosition, Vector3 plyerLocalScle)
     {
         if ($"{_shotParticles}" != "")
         {
-            float particlesNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * playerDirectionX;
+            float particlesNewXPosition = startPosition.x + WeaponInfo.OffsetFirePoint.x * plyerLocalScle.x > 0 ? 1 : -1;
             float particlesNewYPosition = startPosition.y + WeaponInfo.OffsetFirePoint.y;
             Vector3 newParticlesPosition = new Vector3(particlesNewXPosition, particlesNewYPosition, transform.position.z);
-            ParticleCreator.Create($"{_shotParticles}".Replace(" ", ""), newParticlesPosition, mirror);
+            ParticleCreator.Create($"{_shotParticles}".Replace(" ", ""), newParticlesPosition);
         }
     }
 

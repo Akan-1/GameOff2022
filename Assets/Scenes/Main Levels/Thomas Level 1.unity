@@ -128,6 +128,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1844826311}
     m_Modifications:
+    - target: {fileID: 2194720033611990510, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990510, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990510, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09
+      objectReference: {fileID: 0}
     - target: {fileID: 2736078075215490439, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: m_Name
@@ -192,7 +207,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 265a72ca860b2534fa5c414aecc2387f, type: 3}
 --- !u!4 &48680924 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2602107509949351860, guid: 265a72ca860b2534fa5c414aecc2387f,
+  m_CorrespondingSourceObject: {fileID: 2194720033611990510, guid: 265a72ca860b2534fa5c414aecc2387f,
     type: 3}
   m_PrefabInstance: {fileID: 48680923}
   m_PrefabAsset: {fileID: 0}
@@ -4904,8 +4919,6 @@ MonoBehaviour:
   FallSounds:
   - {fileID: 8300000, guid: 4efaf0582fb73c74580391c477674a0f, type: 3}
   _fallNoiseRadius: 2
-  DragSounds: []
-  _dragNoiseRadius: 0
 --- !u!1 &1870768317
 GameObject:
   m_ObjectHideFlags: 0

@@ -63,7 +63,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [Space]
     [Header("Weapon Config")]
     [SerializeField] private GunHolder _gunHolder;
-    public Transform firePointPlayer;
 
     [Space]
     [Header("Squat Config")]
@@ -72,6 +71,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _topCheckRadius;
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
+
+    [Header("Animations")]
+    [SerializeField] private string _idleWithRiffleAnimation = "ThomasIdleWithRifle";
     public Rigidbody2D Rigibody2D
     {
         get;
@@ -88,8 +90,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         Rigibody2D = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        
-        if(_canSquat)
+        _anim.SetFloat("Speed", _speed);
+
+        if (_canSquat)
             _topCheckRadius = _topCheck.GetComponent<CircleCollider2D>().radius;
 
         _wallHopDirection.Normalize();
@@ -101,17 +104,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         TryAddCharacterToPossible();
     }
 
-    private void TryAddCharacterToPossible()
-    {
-        try
-        {
-            CharacterSwapper.Instance.AddCharacter(this);
-        }
-        catch (Exception e)
-        {
-            throw new Exception("Possible characters not found, please start game from main menu");
-        }
-    }
 
     void Update()
     {
@@ -119,7 +111,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         {
             CheckMovement();
             CheckMovementDirection();
-            UpdateAnimation();
             CheckSurroundings();
             WallSlide();
             CanJump();
@@ -132,6 +123,18 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private void FixedUpdate()
     {
         ApllyMovement();
+    }
+
+    private void TryAddCharacterToPossible()
+    {
+        try
+        {
+            CharacterSwapper.Instance.AddCharacter(this);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Possible characters not found, please start game from main menu");
+        }
     }
 
     public void TakeDamage(int damage)
@@ -186,6 +189,17 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         if (!_isWallSliding)
         {
             _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
+            if (_movementInputDirection != 0)
+            {
+                _anim.SetBool("IsWalk", true);
+            } else
+            {
+                _anim.SetBool("IsWalk", false);
+            }
+        }
+        else
+        {
+            _anim.SetBool("IsWalk", false);
         }
 
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
@@ -275,18 +289,14 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     }
 
-    private void UpdateAnimation() // здесь находится вся анимация
-    {
-
-    }
-
     private void Flip() // поворот игрока (влево, вправо)
     {
         if (!_isWallSliding)
         {
             _facingDirection *= -1;
             _isFacingRight = !_isFacingRight;
-            transform.Rotate(0, 180, 0);
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+/*            transform.Rotate(0, 180, 0);*/
         }      
     }
 
@@ -308,6 +318,38 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _poseSquat.enabled = false;
             _canJump = true;
         }
+    }
+
+    #region Animations
+
+    public void UpdateWeaponAnimation()
+    {
+        if (GunHolder.Weapon != null)
+        {
+            switch (GunHolder.Weapon.WeaponInfo.Type)
+            {
+                case WeaponTypes.Pistol:
+                    break;
+                case WeaponTypes.Rifle:
+                    _anim.Play(_idleWithRiffleAnimation);
+                    _anim.SetBool("IsHasRifle", true);
+                    break;
+                case WeaponTypes.Shotgun:
+                    break;
+
+            }
+        }
+        else
+        {
+            _anim.SetBool("IsHasRifle", false);
+        }
+    }
+
+    #endregion
+
+    public void StopWalkAninmation()
+    {
+        _anim.SetBool("IsWalk", false);
     }
 
     private void OnDrawGizmos()

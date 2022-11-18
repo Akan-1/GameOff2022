@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   _type: 0
   _bulletPoolName: 0
-  _FirePoint: {x: 1.95, y: 0.2}
+  _FirePoint: {x: 1.5, y: 0.15}
   _maximumBulletsInMagazine: 32
   _bulletPerShot: 1
   _bulletsAviable: 64

@@ -88,6 +88,7 @@ public class CharacterSwapper : MonoBehaviour
         {
             if (_possibleCharacters[i] != _character)
             {
+                _possibleCharacters[i].StopWalkAninmation();
                 _possibleCharacters[i].Rigibody2D.velocity = Vector2.zero;
                 _possibleCharacters[i].enabled = false;
                 _possibleCharacters[i].IsActive = false;
