@@ -31,10 +31,17 @@ public class NoiseMaker : MonoBehaviour
 
     public void PlayRandomAudioWithCreateNoise(List<AudioClip> _audioClips, float volumeScale, float noiseRadius)
     {
-        AudioSource _audioSource = MasterObjectPooler.Instance.GetObjectComponent<AudioSource>(_audioSourcePoolName);
-        _audioSource.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
+        if (MasterObjectPooler.Instance != null)
+        {
+            AudioSource _audioSource = MasterObjectPooler.Instance.GetObjectComponent<AudioSource>(_audioSourcePoolName);
+            _audioSource.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
 
-        AudioPlayer.TryPlayRandom(_audioSource, _audioClips, volumeScale);
+            AudioPlayer.TryPlayRandom(_audioSource, _audioClips, volumeScale);
+        } else
+        {
+            Debug.LogWarning("PoolManager doesn't exist. Audio will not be play. Please add MasterObjectPool script and add pool of audioSource");
+        }
+
         Noise.radius = noiseRadius;
         Noise.enabled = true;
     }
