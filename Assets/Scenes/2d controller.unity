@@ -3348,15 +3348,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tomas
       objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990505, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990505, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990505, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2194720033611990507, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: _wallHopForce
-      value: 2.5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2194720033611990507, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: _fallAnimation
       value: ThomasFall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990507, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: _jumpAnimation
+      value: ThomasJump
       objectReference: {fileID: 0}
     - target: {fileID: 2194720033611990510, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
@@ -3416,7 +3436,7 @@ PrefabInstance:
     - target: {fileID: 2194720033927972137, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.131
+      value: -0.0785
       objectReference: {fileID: 0}
     - target: {fileID: 2194720035441341010, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
@@ -3441,12 +3461,42 @@ PrefabInstance:
     - target: {fileID: 2194720035441341010, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.031
+      value: 0.0359
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720035441341010, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720035441341010, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720035441341010, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720035441341010, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720035441341010, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2194720035441341021, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: m_Name
       value: GunHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532277396379470817, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 7532277396379470817, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}

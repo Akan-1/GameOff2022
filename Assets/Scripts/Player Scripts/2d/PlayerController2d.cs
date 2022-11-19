@@ -73,7 +73,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private Collider2D _poseSquat;
 
     [Header("Animations")]
+    [SerializeField] private string _idleAnimation = "ThomasIdle";
     [SerializeField] private string _idleWithRiffleAnimation = "ThomasIdleWithRifle";
+    [SerializeField] private string _jumpAnimation = "JumpAnimation";
     [SerializeField] private string _fallAnimation = "ThomasFall";
     public Rigidbody2D Rigibody2D
     {
@@ -263,6 +265,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void Jump()
     {
+        _anim.Play(_jumpAnimation);
         Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, _jumpForce);
     }
 
@@ -272,7 +275,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
 
-        if (!_isGround)
+        if (!_isWallSliding && !_isGround)
         {
             _anim.SetBool("IsFall", true);
         } else
@@ -353,6 +356,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
         else
         {
+            _anim.Play(_idleAnimation);
             _anim.SetBool("IsHasRifle", false);
         }
     }
