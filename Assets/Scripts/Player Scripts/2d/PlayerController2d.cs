@@ -74,6 +74,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     [Header("Animations")]
     [SerializeField] private string _idleWithRiffleAnimation = "ThomasIdleWithRifle";
+    [SerializeField] private string _fallAnimation = "ThomasFall";
     public Rigidbody2D Rigibody2D
     {
         get;
@@ -176,7 +177,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _movementInputDirection = 0;
             _isWallSliding = true;
             _canJump = true;
-            _anim.SetBool("IsWallStick",true);
+            _anim.SetBool("IsWallStick", true);
         }
         else
         {

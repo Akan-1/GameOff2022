@@ -3353,6 +3353,11 @@ PrefabInstance:
       propertyPath: _wallHopForce
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990507, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: _fallAnimation
+      value: ThomasFall
+      objectReference: {fileID: 0}
     - target: {fileID: 2194720033611990510, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: m_RootOrder
