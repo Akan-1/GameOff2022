@@ -31,6 +31,11 @@ public class GunHolder : MonoBehaviour
         {
             _weapon = value;
             _playerController2D.UpdateWeaponAnimation();
+
+            if (value == null)
+            {
+                _isReloading = false;
+            }
         }
     }
     public NoiseMaker NoiseMaker => _noiseMaker;

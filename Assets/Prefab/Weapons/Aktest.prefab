@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2092938514442183198}
   - component: {fileID: 2092938514442183199}
   - component: {fileID: 2092938514442183196}
-  - component: {fileID: 2092938514442183185}
   - component: {fileID: 2092938514442183184}
   m_Layer: 0
   m_Name: Aktest
@@ -101,7 +100,7 @@ BoxCollider2D:
   m_Offset: {x: 0.62504214, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.6456398, y: 0.58839184}
     oldSize: {x: 7.72, y: 2.12}
     newSize: {x: 7.72, y: 2.12}
     adaptiveTilingThreshold: 0.5
@@ -111,19 +110,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.237825, y: 2.12}
   m_EdgeRadius: 0
---- !u!114 &2092938514442183185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092938514442183197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0986671e7de24794aa84aff192f6fe33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponInfo: {fileID: 11400000, guid: a62f2389e2b0262469e393fe7cc1b189, type: 2}
 --- !u!50 &2092938514442183184
 Rigidbody2D:
   serializedVersion: 4

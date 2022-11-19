@@ -130,13 +130,22 @@ TextureImporter:
     second: Thomas_41
   - first:
       213: -5055025943705936837
-    second: Thomas_42
+    second: ThomasHandFore
   - first:
       213: 4176069351361503301
     second: Thomas_43
   - first:
       213: -4240367869898546993
     second: Thomas_44
+  - first:
+      213: 1556853768793296469
+    second: ThomasHandBack
+  - first:
+      213: 6518572780901510062
+    second: ThomasHandBackWeapon
+  - first:
+      213: 147584517270815033
+    second: ThomasHandForeWeapon
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1141,6 +1150,90 @@ TextureImporter:
       bones: []
       spriteID: 1848db5520302e1a0800000000000000
       internalID: -6781854780303244159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ThomasHandFore
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 205
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c1607dfa0f8d9b0800000000000000
+      internalID: -5055025943705936837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ThomasHandBack
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 205
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55e0720114e0b9510800000000000000
+      internalID: 1556853768793296469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ThomasHandBackWeapon
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 189
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eab2a28486f967a50800000000000000
+      internalID: 6518572780901510062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ThomasHandForeWeapon
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 189
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 931464626535c0200800000000000000
+      internalID: 147584517270815033
       vertices: []
       indices: 
       edges: []

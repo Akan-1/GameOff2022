@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController2d : MonoBehaviour, ITakeDamage
@@ -8,6 +9,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _pushOffWallSound;
+    [SerializeField] private NoiseMaker _noiseMaker;
 
     private int _facingDirection = 1;
 
@@ -18,6 +20,10 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private bool _isTouchWall;
     private bool _isWallSliding;
     private bool _canJump;
+
+    [Header("Audio")]
+    [SerializeField] private List<AudioClip> _stepSounds = new List<AudioClip>();
+    [SerializeField] private float _stepNoiseRadius = 0.2f;
 
     // не изменяемые переменные типа float
     private float _movementInputDirection; // хранит значение при нажатии клавиш (A, D)
@@ -30,6 +36,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _positionOfCurrentWall = value;
             _currentWallJumpCount = 0;
         }
+    }
+
+    public bool IsCanShoot
+    {
+        get;
+        private set;
     }
 
     // изменяемые переменные типа float
@@ -75,7 +87,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [Header("Animations")]
     [SerializeField] private string _idleAnimation = "ThomasIdle";
     [SerializeField] private string _idleWithRiffleAnimation = "ThomasIdleWithRifle";
-    [SerializeField] private string _jumpAnimation = "JumpAnimation";
     [SerializeField] private string _fallAnimation = "ThomasFall";
     public Rigidbody2D Rigibody2D
     {
@@ -265,7 +276,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void Jump()
     {
-        _anim.Play(_jumpAnimation);
         Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, _jumpForce);
     }
 
@@ -274,6 +284,14 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private void CheckSurroundings()
     {
         _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
+
+        if (!_isGround)
+        {
+            IsCanShoot = false;
+        } else
+        {
+            IsCanShoot = true;
+        }
 
         if (!_isWallSliding && !_isGround)
         {
@@ -344,12 +362,13 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             switch (GunHolder.Weapon.WeaponInfo.Type)
             {
                 case WeaponTypes.Pistol:
+                    _anim.SetBool("IsHasPistol", true);
                     break;
                 case WeaponTypes.Rifle:
-                    _anim.Play(_idleWithRiffleAnimation);
                     _anim.SetBool("IsHasRifle", true);
                     break;
                 case WeaponTypes.Shotgun:
+                    _anim.SetBool("IsHasShotgun", true);
                     break;
 
             }
@@ -358,6 +377,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         {
             _anim.Play(_idleAnimation);
             _anim.SetBool("IsHasRifle", false);
+            _anim.SetBool("IsHasPistol", false);
+            _anim.SetBool("IsHasShotgun", false);
         }
     }
 
@@ -385,4 +406,18 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(_wallCheck.position, _wallCheckRadius);
     }
+    #region Audio
+
+    public void PlayStepSound()
+    {
+        _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, 1, _stepNoiseRadius);
+        Invoke(nameof(DisableNoise), .1f);
+    }
+
+    public void DisableNoise()
+    {
+        _noiseMaker.Noise.enabled = false;
+    }
+
+    #endregion
 }
