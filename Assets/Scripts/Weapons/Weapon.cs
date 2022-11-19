@@ -85,30 +85,33 @@ public class Weapon : MonoBehaviour
 
     public void ShotFrom(PlayerController2d playerController2D)
     {
-        if (CurrentAmmoInMagazine > 0)
+        if (playerController2D.IsCanShoot)
         {
-            ShotDelayTime -= Time.deltaTime;
-
-            if (ShotDelayTime <= 0)
+            if (CurrentAmmoInMagazine > 0)
             {
-                playerController2D.EnableShotAnimationBool();
-                for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
+                ShotDelayTime -= Time.deltaTime;
+
+                if (ShotDelayTime <= 0)
                 {
-                    GameObject bullet = CreateBullet();
-                    SetPositionToBullet(bullet, GunHolder.transform.position, playerController2D.transform.localScale.x > 0);
-                    CreateShotParticles(GunHolder.transform.position, playerController2D.transform.localScale);
-                    AddForceToBullet(bullet, playerController2D.transform.localScale);
+                    playerController2D.EnableShotAnimationBool();
+                    for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
+                    {
+                        GameObject bullet = CreateBullet();
+                        SetPositionToBullet(bullet, GunHolder.transform.position, playerController2D.transform.localScale.x > 0);
+                        CreateShotParticles(GunHolder.transform.position, playerController2D.transform.localScale);
+                        AddForceToBullet(bullet, playerController2D.transform.localScale);
+                    }
+                    CurrentAmmoInMagazine--;
+                    ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
+
+                    playerController2D.Rigibody2D.AddForce(-Mathf.Lerp(playerController2D.transform.localScale.x, -1, 1) * transform.right, ForceMode2D.Impulse);
+                    CreateNoise();
                 }
-                CurrentAmmoInMagazine--;
-                ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
-                
-                playerController2D.Rigibody2D.AddForce(-Mathf.Lerp(playerController2D.transform.localScale.x, -1, 1) * transform.right, ForceMode2D.Impulse);
-                CreateNoise();
             }
-        }
-        else
-        {
-            GunHolder.ReloadWeaponAfter(WeaponInfo.ReloadTime);
+            else
+            {
+                GunHolder.ReloadWeaponAfter(WeaponInfo.ReloadTime);
+            }
         }
     }
 
@@ -168,7 +171,7 @@ public class Weapon : MonoBehaviour
         GunHolder.StartNoiseDisabler();
     }
 
-    #region particles
+    #region Particles
 
     private void CreateShotParticles(Vector3 startPosition, Vector3 plyerLocalScale)
     {

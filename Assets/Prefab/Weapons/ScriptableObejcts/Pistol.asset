@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
+  _sprite: {fileID: -2820930097560456536, guid: 6d5f5084499f0b74795b73d970dc19f9,
+    type: 3}
   _type: 1
   _bulletPoolName: 0
-  _FirePoint: {x: 0, y: 0}
-  _maximumBulletsInMagazine: 0
-  _bulletPerShot: 0
-  _bulletsAviable: 0
+  _FirePoint: {x: 1.2, y: 0.1}
+  _maximumBulletsInMagazine: 16
+  _bulletPerShot: 1
+  _bulletsAviable: 8
   _fireRate: 4
   _scatter: 0.06
-  _reloadTime: 0
-  _secondsBeforeNextShot: 0
-  _bulletForceBetween: {x: 0, y: 0}
+  _shotNoiseRadius: 0
+  _recoilStrength: 0
+  _reloadTime: 2
+  _secondsBeforeNextShot: 0.3
+  _bulletForceBetween: {x: 25, y: 30}
