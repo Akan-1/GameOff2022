@@ -411,6 +411,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     public void PlayStepSound()
     {
         _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, 1, _stepNoiseRadius);
+        Invoke(nameof(DisableNoise), .1f);
+    }
+
+    public void DisableNoise()
+    {
+        _noiseMaker.Noise.enabled = false;
     }
 
     #endregion
