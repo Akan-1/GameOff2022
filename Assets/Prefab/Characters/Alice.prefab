@@ -465,7 +465,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 5634829330410110239}
   _pushOffWallSound: {fileID: 8300000, guid: 8ecac8cf3d2430f4895971e6e3c38ba5, type: 3}
+  _noiseMaker: {fileID: 0}
   _canSquat: 1
+  _stepSounds: []
+  _stepNoiseRadius: 0.2
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
@@ -494,6 +497,9 @@ MonoBehaviour:
   _topCheckRadius: 1
   _poseStand: {fileID: 5634829330410110233}
   _poseSquat: {fileID: 5634829330410110236}
+  _idleAnimation: ThomasIdle
+  _idleWithRiffleAnimation: ThomasIdleWithRifle
+  _fallAnimation: ThomasFall
 --- !u!114 &5602429195294773991
 MonoBehaviour:
   m_ObjectHideFlags: 0
