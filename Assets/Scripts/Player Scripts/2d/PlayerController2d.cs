@@ -20,7 +20,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private bool _isTouchWall;
     private bool _isWallSliding;
     private bool _canJump;
-    private bool _canMove;
 
     [Header("Audio")]
     [SerializeField] private List<AudioClip> _stepSounds = new List<AudioClip>();
@@ -72,24 +71,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [Space]
     [SerializeField] private Vector2 _wallHopDirection;
     [SerializeField] private Vector2 _wallJumpDirection;
-    [SerializeField] private Vector2 _ledgePosBot;
-    [SerializeField] private Vector2 _ledgePos1;
-    [SerializeField] private Vector2 _ledgePos2;
-
-    [Space]
-    [Header("LedgeClimb Config")]
-    [SerializeField] private Transform _ledgeClimbCheck;
-
-    [SerializeField] private float _ledgeRadius;
-    [SerializeField] private float _ledgeClimbXOffset1 = 0f;
-    [SerializeField] private float _ledgeClimbXOffset2 = 0f;
-    [SerializeField] private float _ledgeClimbYOffset1 = 0f;
-    [SerializeField] private float _ledgeClimbYOffset2 = 0f;
-
-    private bool _isTouchingLedge;
-    private bool _canClimbLedge = false;
-    private bool _ledgeDetected;
-    
 
     [Space]
     [Header("Weapon Config")]
@@ -143,22 +124,11 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         if (IsActive)
         {
-            if (Input.GetMouseButton(0))
-            {
-                if (Time.time >= nextTimeOfFire)
-                {
-                    currentWeapon.Shoot();
-                    nextTimeOfFire = Time.time + 1 / currentWeapon.fireRate;
-                }
-            }
-        }
-        CheckMovement();
-        CheckMovementDirection();
-        UpdateAnimation();
-        CheckSurroundings();
-        WallSlide();
-        CanJump();
-        CheckLedgeClimb();
+            CheckMovement();
+            CheckMovementDirection();
+            CheckSurroundings();
+            WallSlide();
+            CanJump();
 
             if (_canSquat)
                 Squat();
@@ -233,7 +203,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void CheckMovement()
     {
-        if (!_isWallSliding || !_canMove)
+        if (!_isWallSliding)
         {
             _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
             if (_movementInputDirection != 0)
@@ -275,6 +245,18 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
                 Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
                 Rigibody2D.AddForce(forceToAdd, ForceMode2D.Impulse);
                 _isWallSliding = false;
+                _movementInputDirection = -_facingDirection;
+            }
+
+            if ((_isWallSliding || PositionOfCurrentWall != null) && _movementInputDirection != 0)
+            {
+                Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallSpeed);
+                Rigibody2D.AddForce(forceToAdd, ForceMode2D.Impulse);
+                _isWallSliding = false;
+                /**/
+            }
+
+            _anim.Play(_wallJumpAnimation);
         }
         _currentWallJumpCount++;
     }
@@ -302,53 +284,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     }
 
     private void IgnoreLayerOff() => Physics2D.IgnoreLayerCollision(11, 15, false);
-    private void CheckLedgeClimb() //зацеп за края
-    {
-        if(_ledgeDetected && !_canClimbLedge)
-        {
-            _canClimbLedge = true;
-
-            if (_isFacingRight)
-            {
-                _ledgePos1 = new Vector2(Mathf.Floor(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset1, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset1);
-                _ledgePos1 = new Vector2(Mathf.Floor(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset2, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset2);
-            }
-            else
-            {
-                _ledgePos2 = new Vector2(Mathf.Ceil(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset1, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset1);
-                _ledgePos2 = new Vector2(Mathf.Ceil(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset2, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset2);
-            }
-
-            _canMove = true;
-
-            if (_canClimbLedge)
-            {
-                transform.position = _ledgePos1; // стартовая позиция
-            }
-        }
-    }
-
-    private void FinishedLedgeClimb() // вызывается через ivent и перемещает игрока на конечную позицию
-    {
-        _canClimbLedge = false;
-        transform.position = _ledgePos2; // конечная позиция
-        _canMove = true;
-    }
 
     private void CheckSurroundings()
     {
         _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
 
         RaycastHit2D hit = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
-        _isTouchWall = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
-        _isTouchingLedge = Physics2D.Raycast(_ledgeClimbCheck.position, transform.right, _ledgeRadius, _whatIsGround);
-
-        if (_isTouchWall && !_isTouchingLedge && !_ledgeDetected)
-        {
-            _ledgeDetected = true;
-            _ledgePosBot = _wallCheck.position;
-        }
-    }
 
         if (hit)
         {
