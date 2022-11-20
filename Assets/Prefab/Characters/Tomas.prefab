@@ -308,10 +308,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 2194720033611990508}
   _pushOffWallSound: {fileID: 8300000, guid: bb1f6e81042d9624d9c950eafc956e32, type: 3}
-  _noiseMaker: {fileID: 0}
+  _noiseMaker: {fileID: 7080992101996450483}
   _canSquat: 0
-  _stepSounds: []
-  _stepNoiseRadius: 2
+  _stepSounds:
+  - {fileID: 8300000, guid: f5996f2754aecea438c1e29abec44e0d, type: 3}
+  _stepNoiseRadius: 0.2
   _groudCheck: {fileID: 2194720034700246512}
   _whatIsGround:
     serializedVersion: 2
@@ -325,7 +326,7 @@ MonoBehaviour:
     m_Bits: 512
   _wallCheck: {fileID: 2194720033927972137}
   _wallCheckRadius: 0.5
-  _wallHopForce: 1
+  _wallHopForce: 8
   _wallJumpForce: 20
   _wallSlideSpeed: 0
   _wallSpeed: 10
