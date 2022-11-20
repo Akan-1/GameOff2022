@@ -95,7 +95,7 @@ Transform:
   m_GameObject: {fileID: 2194720033611990485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.42, y: -2.63, z: 0}
-  m_LocalScale: {x: 8.689949, y: 8.689949, z: 0}
+  m_LocalScale: {x: 8.689949, y: 8.689949, z: 1}
   m_Children:
   - {fileID: 2194720034700246512}
   - {fileID: 2194720033927972137}
@@ -341,8 +341,8 @@ MonoBehaviour:
   _poseStand: {fileID: 0}
   _poseSquat: {fileID: 0}
   _idleAnimation: ThomasIdle
-  _idleWithRiffleAnimation: ThomasIdleWithRifle
-  _jumpAnimation: JumpAnimation
+  _jumpAnimation: ThomasJump
+  _wallJumpAnimation: ThomasJump
   _fallAnimation: ThomasFall
 --- !u!114 &4768330213443906417
 MonoBehaviour:
@@ -652,27 +652,27 @@ PrefabInstance:
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.03
+      value: 0.028
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.03
+      value: 0.028
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.03
+      value: 0.028
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.071
+      value: 0.0486
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.058
+      value: 0.0396
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
