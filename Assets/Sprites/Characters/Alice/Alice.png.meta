@@ -1,151 +1,109 @@
 fileFormatVersion: 2
-guid: 74e49213c40bd1747a0411f060b5f388
+guid: 148b8aa1e9a8483499682d13aa3d5888
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3086323347992444537
-    second: Thomas_0
+      213: 9049539159198059528
+    second: Alice_0
   - first:
-      213: 5532951430170191860
-    second: Thomas_1
+      213: 8519099831857675943
+    second: Alice_1
   - first:
-      213: 8828361577684113665
-    second: Thomas_2
+      213: -881956747276830140
+    second: Alice_2
   - first:
-      213: 7408569027212424925
-    second: Thomas_3
+      213: 2647380151519193639
+    second: AliceHandFore
   - first:
-      213: 3121388508388668050
-    second: Thomas_4
+      213: 5529598911401279410
+    second: Alice_4
   - first:
-      213: 6506347401165688457
-    second: Thomas_5
+      213: -2743740531255203221
+    second: Alice_5
   - first:
-      213: -2526995092200475112
-    second: Thomas_6
+      213: -3211131025791180194
+    second: Alice_6
   - first:
-      213: 532184294117557361
-    second: Thomas_7
+      213: -3364726032821471829
+    second: Alice_7
   - first:
-      213: -2283675886218975515
-    second: Thomas_8
+      213: -2844999168789061734
+    second: Alice_8
   - first:
-      213: -5397596704167287313
-    second: Thomas_9
+      213: -7703507992030252907
+    second: AliceHandBack
   - first:
-      213: -658936049041552021
-    second: Thomas_10
+      213: -1545258028212519440
+    second: Alice_10
   - first:
-      213: -4550694382675148727
-    second: Thomas_11
+      213: 9075154401410993804
+    second: Alice_11
   - first:
-      213: 3898660559130468069
-    second: Thomas_12
+      213: -5852723443643680550
+    second: Alice_12
   - first:
-      213: -3100600435312565143
-    second: Thomas_13
+      213: 3771353285742518412
+    second: AliceHandWeaponFore
   - first:
-      213: -6917112668550405339
-    second: Thomas_14
+      213: 6404245511032333340
+    second: AliceHandWeaponBack
   - first:
-      213: -6781854780303244159
-    second: Thomas_15
+      213: 2876385701799392026
+    second: Alice_15
   - first:
-      213: -2413433317734534453
-    second: Thomas_16
+      213: -3171871204515375022
+    second: Alice_16
   - first:
-      213: 5469974296844869573
-    second: Thomas_17
+      213: 6946174770221383259
+    second: Alice_17
   - first:
-      213: 5153594506077822167
-    second: Thomas_19
+      213: -3085778636667047018
+    second: Alice_18
   - first:
-      213: -7918595674649309378
-    second: Thomas_20
+      213: -3485909104982057905
+    second: Alice_19
   - first:
-      213: 749414852322501817
-    second: Thomas_21
+      213: -4114004733917612656
+    second: Alice_20
   - first:
-      213: 2194283434262492235
-    second: Thomas_22
+      213: -5760454866627263957
+    second: Alice_21
   - first:
-      213: -8512282242612770344
-    second: Thomas_23
+      213: -5573148647716919040
+    second: Alice_22
   - first:
-      213: 5891794855979307620
-    second: Thomas_24
+      213: -3586190065023791113
+    second: Alice_23
   - first:
-      213: -5994680120085274228
-    second: Thomas_25
+      213: -8022605691277989891
+    second: Alice_24
   - first:
-      213: 6899505612579560876
-    second: Thomas_26
+      213: -3440674255426987447
+    second: Alice_25
   - first:
-      213: 7941118639848590281
-    second: Thomas_27
+      213: 5627608705452169180
+    second: Alice_26
   - first:
-      213: -5618610603753275469
-    second: Thomas_28
+      213: 7982865547375420697
+    second: Alice_27
   - first:
-      213: 2995158776067742120
-    second: Thomas_29
+      213: -1014673463735045762
+    second: Alice_28
   - first:
-      213: 3055533405241157382
-    second: Thomas_30
+      213: -4819882195214953135
+    second: Alice_29
   - first:
-      213: 6055272419920522411
-    second: Thomas_31
+      213: 3440995475194854766
+    second: Alice_30
   - first:
-      213: -190964867110479910
-    second: Thomas_32
+      213: -5585725493325718596
+    second: Alice_31
   - first:
-      213: -5818960183838071849
-    second: Thomas_33
+      213: -3106864147457418292
+    second: Alice_32
   - first:
-      213: -24139212588708374
-    second: Thomas_34
-  - first:
-      213: 4157428575422665577
-    second: Thomas_35
-  - first:
-      213: -6149806342672877360
-    second: Thomas_36
-  - first:
-      213: -1646053044871514295
-    second: Thomas_37
-  - first:
-      213: -1848552473314504509
-    second: Thomas_18
-  - first:
-      213: -5082923893801065824
-    second: Thomas_38
-  - first:
-      213: -2890294137047731568
-    second: Thomas_39
-  - first:
-      213: 1136830105508105763
-    second: Thomas_40
-  - first:
-      213: 4074719315858945343
-    second: Thomas_41
-  - first:
-      213: -5055025943705936837
-    second: ThomasHandFore
-  - first:
-      213: 4176069351361503301
-    second: Thomas_43
-  - first:
-      213: -4240367869898546993
-    second: Thomas_44
-  - first:
-      213: 1556853768793296469
-    second: ThomasHandBack
-  - first:
-      213: 6518572780901510062
-    second: ThomasHandBackWeapon
-  - first:
-      213: 147584517270815033
-    second: ThomasHandForeWeapon
+      213: -1671838883893168253
+    second: Alice_33
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -191,7 +149,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -231,7 +189,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Thomas_0
+      name: Alice_0
       rect:
         serializedVersion: 2
         x: 0
@@ -245,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97e7513abb2d4da20800000000000000
-      internalID: 3086323347992444537
+      spriteID: 80cccf43beb669d70800000000000000
+      internalID: 9049539159198059528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_1
+      name: Alice_1
       rect:
         serializedVersion: 2
         x: 64
@@ -266,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f7a8cac20ef8cc40800000000000000
-      internalID: 5532951430170191860
+      spriteID: 7ae77f3392ce93670800000000000000
+      internalID: 8519099831857675943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_2
+      name: Alice_2
       rect:
         serializedVersion: 2
         x: 128
@@ -287,14 +245,161 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 109919a8414a48a70800000000000000
-      internalID: 8828361577684113665
+      spriteID: 44a3e4bd209a2c3f0800000000000000
+      internalID: -881956747276830140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_3
+      name: AliceHandFore
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72aa8bca8326db420800000000000000
+      internalID: 2647380151519193639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bfb570b9e41dbc40800000000000000
+      internalID: 5529598911401279410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6a21b616864ce9d0800000000000000
+      internalID: -2743740531255203221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e522b786855cf63d0800000000000000
+      internalID: -3211131025791180194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba5ba2f00871e41d0800000000000000
+      internalID: -3364726032821471829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9fdb0654588488d0800000000000000
+      internalID: -2844999168789061734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AliceHandBack
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59077a2db44a71590800000000000000
+      internalID: -7703507992030252907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_10
       rect:
         serializedVersion: 2
         x: 192
@@ -308,14 +413,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd635f8274680d660800000000000000
-      internalID: 7408569027212424925
+      spriteID: 0fd721ea2042e8ae0800000000000000
+      internalID: -1545258028212519440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_4
+      name: Alice_11
       rect:
         serializedVersion: 2
         x: 256
@@ -329,14 +434,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2923e708f46615b20800000000000000
-      internalID: 3121388508388668050
+      spriteID: c8ecce988dc61fd70800000000000000
+      internalID: 9075154401410993804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_5
+      name: Alice_12
       rect:
         serializedVersion: 2
         x: 320
@@ -350,500 +455,59 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98e44cf3d703b4a50800000000000000
-      internalID: 6506347401165688457
+      spriteID: ad8740d7903f6cea0800000000000000
+      internalID: -5852723443643680550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_6
+      name: AliceHandWeaponFore
       rect:
         serializedVersion: 2
-        x: 384
+        x: 752
         y: 192
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8163c3c2a5f4eecd0800000000000000
-      internalID: -2526995092200475112
+      spriteID: c806f27f4d9865430800000000000000
+      internalID: 3771353285742518412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_7
+      name: AliceHandWeaponBack
       rect:
         serializedVersion: 2
-        x: 448
+        x: 736
         y: 192
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1744bedbbc2b26700800000000000000
-      internalID: 532184294117557361
+      spriteID: c14e8737c5370e850800000000000000
+      internalID: 6404245511032333340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_16
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc237573f23c18ed0800000000000000
-      internalID: -2413433317734534453
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_17
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5cf94fd44a049eb40800000000000000
-      internalID: 5469974296844869573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_19
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7dc5c2bf5ee358740800000000000000
-      internalID: 5153594506077822167
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_20
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3f459c303f7b1290800000000000000
-      internalID: -7918595674649309378
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_21
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b4a51e66d4766a00800000000000000
-      internalID: 749414852322501817
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_22
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 96
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b447dbb5829a37e10800000000000000
-      internalID: 2194283434262492235
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_23
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d9433d766c4ed980800000000000000
-      internalID: -8512282242612770344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_24
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 462de18943cd3c150800000000000000
-      internalID: 5891794855979307620
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_25
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c81a834213e9ecca0800000000000000
-      internalID: -5994680120085274228
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_26
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cad5e9bacc7ffbf50800000000000000
-      internalID: 6899505612579560876
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_27
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9cb886f3455843e60800000000000000
-      internalID: 7941118639848590281
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_28
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3bffa00bc6fa602b0800000000000000
-      internalID: -5618610603753275469
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_29
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 32
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a9596da901f09920800000000000000
-      internalID: 2995158776067742120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_30
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6072db2717f676a20800000000000000
-      internalID: 3055533405241157382
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_31
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bac25970f26a80450800000000000000
-      internalID: 6055272419920522411
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_32
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ad7dc43177e895df0800000000000000
-      internalID: -190964867110479910
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_33
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7d3a0300b86ee3fa0800000000000000
-      internalID: -5818960183838071849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_34
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aed0e78938d3aaff0800000000000000
-      internalID: -24139212588708374
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_35
+      name: Alice_15
       rect:
         serializedVersion: 2
         x: 320
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9635029234722b930800000000000000
-      internalID: 4157428575422665577
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_36
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d8f983e6bf77aaa0800000000000000
-      internalID: -6149806342672877360
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_37
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 0
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 947bbf21a7b0829e0800000000000000
-      internalID: -1646053044871514295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_18
-      rect:
-        serializedVersion: 2
-        x: 128
         y: 160
         width: 64
         height: 32
@@ -854,18 +518,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c05b6fc15f9856e0800000000000000
-      internalID: -1848552473314504509
+      spriteID: a13f3c85e89fae720800000000000000
+      internalID: 2876385701799392026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_38
+      name: Alice_16
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
+        x: 384
+        y: 160
         width: 64
         height: 32
       alignment: 9
@@ -875,18 +539,60 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a264a926a3d579b0800000000000000
-      internalID: -5082923893801065824
+      spriteID: 258129dd1ff3bf3d0800000000000000
+      internalID: -3171871204515375022
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_39
+      name: Alice_17
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5e73dea625c56060800000000000000
+      internalID: 6946174770221383259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_18
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 160
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 693b8f9ddac1d25d0800000000000000
+      internalID: -3085778636667047018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_19
       rect:
         serializedVersion: 2
         x: 576
-        y: 0
+        y: 159
         width: 64
         height: 32
       alignment: 9
@@ -896,17 +602,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09230e8bbcc93e7d0800000000000000
-      internalID: -2890294137047731568
+      spriteID: f4c9e3e53209f9fc0800000000000000
+      internalID: -3485909104982057905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_40
+      name: Alice_20
       rect:
         serializedVersion: 2
-        x: 512
+        x: 384
         y: 192
         width: 64
         height: 32
@@ -917,17 +623,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32ec7c035f4d6cf00800000000000000
-      internalID: 1136830105508105763
+      spriteID: 095b09ecd7e18e6c0800000000000000
+      internalID: -4114004733917612656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_41
+      name: Alice_21
       rect:
         serializedVersion: 2
-        x: 576
+        x: 448
         y: 192
         width: 64
         height: 32
@@ -938,14 +644,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f35f13501af4c8830800000000000000
-      internalID: 4074719315858945343
+      spriteID: b22030aa1d0ce00b0800000000000000
+      internalID: -5760454866627263957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_43
+      name: Alice_22
       rect:
         serializedVersion: 2
         x: 0
@@ -959,14 +665,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5406c4503f064f930800000000000000
-      internalID: 4176069351361503301
+      spriteID: 009626c25d238a2b0800000000000000
+      internalID: -5573148647716919040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_44
+      name: Alice_23
       rect:
         serializedVersion: 2
         x: 64
@@ -980,18 +686,207 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc0a7b583ef2725c0800000000000000
-      internalID: -4240367869898546993
+      spriteID: 7ffc835e22b4b3ec0800000000000000
+      internalID: -3586190065023791113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thomas_11
+      name: Alice_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df7295e11aaf9a090800000000000000
+      internalID: -8022605691277989891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_25
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94a51718ef44040d0800000000000000
+      internalID: -3440674255426987447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd75f5f1d48491e40800000000000000
+      internalID: 5627608705452169180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_27
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91524099be5d8ce60800000000000000
+      internalID: 7982865547375420697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e71be075cd72be1f0800000000000000
+      internalID: -1014673463735045762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_29
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1559bf62ea65c1db0800000000000000
+      internalID: -4819882195214953135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_30
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6d37bc472fd0cf20800000000000000
+      internalID: 3440995475194854766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_31
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb1a7d12448b72b0800000000000000
+      internalID: -5585725493325718596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_32
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb576dc48332e4d0800000000000000
+      internalID: -3106864147457418292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_33
       rect:
         serializedVersion: 2
         x: 320
-        y: 160
+        y: 128
         width: 64
         height: 32
       alignment: 9
@@ -1001,176 +896,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 940484fc19fa8d0c0800000000000000
-      internalID: -4550694382675148727
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_12
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ee1cce5f13da1630800000000000000
-      internalID: 3898660559130468069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_13
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 964e5cee45478f4d0800000000000000
-      internalID: -3100600435312565143
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_14
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 523e2b72daa7100a0800000000000000
-      internalID: -6917112668550405339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thomas_15
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 160
-        width: 64
-        height: 32
-      alignment: 9
-      pivot: {x: 0.75, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1848db5520302e1a0800000000000000
-      internalID: -6781854780303244159
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThomasHandFore
-      rect:
-        serializedVersion: 2
-        x: 752
-        y: 205
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3c1607dfa0f8d9b0800000000000000
-      internalID: -5055025943705936837
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThomasHandBack
-      rect:
-        serializedVersion: 2
-        x: 736
-        y: 205
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 55e0720114e0b9510800000000000000
-      internalID: 1556853768793296469
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThomasHandBackWeapon
-      rect:
-        serializedVersion: 2
-        x: 736
-        y: 189
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eab2a28486f967a50800000000000000
-      internalID: 6518572780901510062
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThomasHandForeWeapon
-      rect:
-        serializedVersion: 2
-        x: 752
-        y: 189
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 931464626535c0200800000000000000
-      internalID: 147584517270815033
+      spriteID: 387bcd3946f6cc8e0800000000000000
+      internalID: -1671838883893168253
       vertices: []
       indices: 
       edges: []

@@ -86,7 +86,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     [Header("Animations")]
     [SerializeField] private string _idleAnimation = "ThomasIdle";
-    [SerializeField] private string _idleWithRiffleAnimation = "ThomasIdleWithRifle";
+    [SerializeField] private string _jumpAnimation = "ThomasJump";
+    [SerializeField] private string _wallJumpAnimation = "ThomasWallJump";
     [SerializeField] private string _fallAnimation = "ThomasFall";
     public Rigidbody2D Rigibody2D
     {
@@ -254,6 +255,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
                 _isWallSliding = false;
                 /**/
             }
+
+            _anim.Play(_wallJumpAnimation);
         }
         _currentWallJumpCount++;
     }
@@ -276,6 +279,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void Jump()
     {
+        _anim.Play(_jumpAnimation);
         Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, _jumpForce);
     }
 
@@ -285,29 +289,15 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
 
-        if (!_isGround)
-        {
-            IsCanShoot = false;
-        } else
-        {
-            IsCanShoot = true;
-        }
-
-        if (!_isWallSliding && !_isGround)
-        {
-            _anim.SetBool("IsFall", true);
-        } else
-        {
-            _anim.SetBool("IsFall", false);
-        }
-
         RaycastHit2D hit = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
 
         if (hit)
         {
             _isTouchWall = true;
-            float roundedPositionOfCurrentWall = (float)Math.Round(PositionOfCurrentWall.x, 2);
-            float roundedPositionOfHit = (float)Math.Round(hit.point.x, 2);
+            float roundedPositionOfCurrentWall = (float)Math.Round(PositionOfCurrentWall.x, 0);
+            float roundedPositionOfHit = (float)Math.Round(hit.point.x, 0);
+
+            Debug.Log(roundedPositionOfHit);
 
             bool IsNewWallPosition = roundedPositionOfCurrentWall != roundedPositionOfHit;
 
@@ -318,6 +308,25 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         } else
         {
             _isTouchWall = false;
+        }
+
+        if (!_isGround)
+        {
+            IsCanShoot = false;
+        }
+        else
+        {
+            IsCanShoot = true;
+        }
+
+        if (!_isWallSliding && !_isGround)
+        {
+/*            _anim.Play(_fallAnimation);*/
+            _anim.SetBool("IsFall", true);
+        }
+        else
+        {
+            _anim.SetBool("IsFall", false);
         }
 
     }
