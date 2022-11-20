@@ -319,7 +319,7 @@ MonoBehaviour:
     m_Bits: 256
   _groundCheckRadius: 0.23
   _health: 2
-  _speed: 4.5
+  _speed: 5
   _jumpForce: 10
   _wallMask:
     serializedVersion: 2

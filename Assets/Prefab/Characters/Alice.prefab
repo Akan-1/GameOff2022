@@ -567,7 +567,7 @@ MonoBehaviour:
     m_Bits: 512
   _wallCheck: {fileID: 5634829330461363437}
   _wallCheckRadius: 0.6
-  _wallHopForce: 15
+  _wallHopForce: 20
   _wallJumpForce: 50
   _wallSlideSpeed: 0
   _wallSpeed: 10
