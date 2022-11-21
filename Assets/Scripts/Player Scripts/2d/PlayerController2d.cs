@@ -102,23 +102,48 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _topCheckRadius;
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
+    private bool _isStand;
 
     [Header("Animations")]
     [SerializeField] private string _idleAnimation = "ThomasIdle";
     [SerializeField] private string _jumpAnimation = "ThomasJump";
     [SerializeField] private string _wallJumpAnimation = "ThomasWallJump";
     [SerializeField] private string _fallAnimation = "ThomasFall";
+    [SerializeField] private string _squatAnimation = "AliceSquat";
     public Rigidbody2D Rigibody2D
     {
         get;
         set;
+    }
+    public GunHolder GunHolder => _gunHolder;
+    public bool IsStand
+    {
+        get => _isStand;
+        private set
+        {
+            if (value)
+            {
+                _anim.Play(_squatAnimation);
+                _anim.SetBool("IsSquat", true);
+                _poseStand.enabled = false;
+                _poseSquat.enabled = true;
+                _canJump = false;
+            }
+            else
+            {
+                _anim.Play(_idleAnimation);
+                _anim.SetBool("IsSquat", false);
+                _poseStand.enabled = true;
+                _poseSquat.enabled = false;
+                _canJump = true;
+            }
+        }
     }
     public bool IsActive
     {
         get;
         set;
     }
-    public GunHolder GunHolder => _gunHolder;
     #endregion
 
     void Awake()
@@ -251,8 +276,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
         else if(Input.GetButton("Jump") && _isWallSliding && !_isGround)
         {
-            _audioSource.PlayOneShot(_pushOffWallSound);
-            JumpOnWall();
+            _anim.Play(_wallJumpAnimation);
+/*            JumpOnWall();*/
         }
     }
 
@@ -260,6 +285,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         if (_currentWallJumpCount < _maximumWallJumpCount)
         {
+
             if (_isWallSliding && _movementInputDirection == 0)
             {
                 Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
@@ -277,6 +303,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             }
 
             _anim.Play(_wallJumpAnimation);
+            _audioSource.PlayOneShot(_pushOffWallSound);
         }
         _currentWallJumpCount++;
     }
@@ -406,21 +433,20 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void Squat()
     {
-        bool cantStand = !Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask);
+        bool canStand = Input.GetKeyDown(KeyCode.LeftShift) && _isGround;
+        bool cantStand = Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask) || Input.GetKeyUp(KeyCode.LeftShift);
 
-        if (Input.GetKey(KeyCode.LeftShift) && _isGround)
+        if (canStand)
         {
-            //тут для анимашки местечко, делаем параметр анимашки трушным
-            _poseStand.enabled = false;
-            _poseSquat.enabled = true;
-            _canJump = false;
+            if (!IsStand)
+            {
+                IsStand = true;
+            }
         }
-        else if (cantStand)
+
+        if (cantStand)
         {
-            //тут фолзим
-            _poseStand.enabled = true;
-            _poseSquat.enabled = false;
-            _canJump = true;
+            IsStand = false;
         }
     }
 
