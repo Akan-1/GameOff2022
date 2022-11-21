@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795af937ca98e7c46b183111ccb1c5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressureIndex: 3
+  _index: 0
   _isNeedHeavyBox: 0
   _unPressed: {fileID: 170749685}
   _onPressed: {fileID: 170749688}
@@ -4004,7 +4004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795af937ca98e7c46b183111ccb1c5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressureIndex: 1
+  _index: 0
   _isNeedHeavyBox: 0
   _unPressed: {fileID: 1424709722}
   _onPressed: {fileID: 1424709721}

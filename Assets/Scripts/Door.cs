@@ -26,8 +26,6 @@ public class Door : MonoBehaviour
 
     private void TryOpenDoor(PressurePlate plate)
     {
-        plate.PressureIndex = 1;
-
         if (plate.PressureIndex == doorIndex)
         {
             boxCollider.isTrigger = true;
