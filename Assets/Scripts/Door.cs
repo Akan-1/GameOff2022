@@ -26,7 +26,9 @@ public class Door : MonoBehaviour
 
     private void TryOpenDoor(PressurePlate plate)
     {
-        if (plate.pressureIndex == doorIndex)
+        plate.PressureIndex = 1;
+
+        if (plate.PressureIndex == doorIndex)
         {
             boxCollider.isTrigger = true;
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 48, 86, 100);

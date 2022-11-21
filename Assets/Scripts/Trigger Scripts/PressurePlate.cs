@@ -7,7 +7,13 @@ public class PressurePlate : MonoBehaviour
 {
     private Animator animator;
 
-    public int pressureIndex;
+    [SerializeField] private int _index;
+
+    public int PressureIndex
+    {
+        get;
+        private set;
+    }
     [Space]
     [SerializeField] private bool _isNeedHeavyBox;
     [Space]
@@ -16,6 +22,11 @@ public class PressurePlate : MonoBehaviour
 
     public static Action<PressurePlate> onPressed;
     public static Action onLeaved;
+
+    private void Start()
+    {
+        PressureIndex = _index;
+    }
 
     private void Awake()
     {
