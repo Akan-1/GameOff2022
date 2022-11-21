@@ -5,6 +5,8 @@ using TMPro;
 
 public class DeathScreen : MonoBehaviour
 {
+    public static DeathScreen instance;
+
     private void OnEnable()
     {
         GameObjectsManager.onShownBar += ShowBar;
@@ -29,6 +31,18 @@ public class DeathScreen : MonoBehaviour
     private string sign;
 
     private bool _playerIsDead = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            return;
+        }
+
+        Destroy(this);
+    }
 
     private void Update()
     {

@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2572684725928416093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6155791419906058105}
+  - component: {fileID: 889864019025447037}
+  m_Layer: 0
+  m_Name: LedgeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6155791419906058105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572684725928416093}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.067, y: 0.086, z: -1.9162439}
+  m_LocalScale: {x: 0.117357075, y: 0.117357075, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5634829330410110237}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &889864019025447037
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572684725928416093}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &2804687076409586550
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +391,7 @@ Transform:
   - {fileID: 9006417684278089738}
   - {fileID: 7470657494641097641}
   - {fileID: 3089643005219570172}
+  - {fileID: 6155791419906058105}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -557,7 +605,7 @@ MonoBehaviour:
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 33024
   _groundCheckRadius: 0.28
   _health: 1
   _speed: 6.5
@@ -574,10 +622,19 @@ MonoBehaviour:
   _maximumWallJumpCount: 1
   _wallHopDirection: {x: 1, y: 0.5}
   _wallJumpDirection: {x: 1, y: 2}
+  _ledgePosBot: {x: 0, y: 0}
+  _ledgePos1: {x: 0, y: 0}
+  _ledgePos2: {x: 0, y: 0}
+  _ledgeClimbCheck: {fileID: 6155791419906058105}
+  _ledgeRadius: 0.6
+  _ledgeClimbXOffset1: 0.3
+  _ledgeClimbXOffset2: 0
+  _ledgeClimbYOffset1: 0.5
+  _ledgeClimbYOffset2: 2
   _gunHolder: {fileID: 2404292368294241389}
   _roofMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   _topCheck: {fileID: 5634829329943817301}
   _topCheckRadius: 1
   _poseStand: {fileID: 3277016618979534768}
@@ -736,12 +793,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efc7f701b7869f64db9a669a958867f4, type: 3}
---- !u!4 &2404292368294241388 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1211803465570447844}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2404292368294241389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3570496883198891401, guid: efc7f701b7869f64db9a669a958867f4,
@@ -754,3 +805,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58051a363bf33764ca8fce1c71035175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2404292368294241388 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1211803465570447844}
+  m_PrefabAsset: {fileID: 0}

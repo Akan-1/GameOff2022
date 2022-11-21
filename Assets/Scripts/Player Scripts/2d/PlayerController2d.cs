@@ -120,6 +120,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     }
     public GunHolder GunHolder => _gunHolder;
     #endregion
+
     void Awake()
     {
         Rigibody2D = GetComponent<Rigidbody2D>();
@@ -128,7 +129,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         if (_canSquat)
             _topCheckRadius = _topCheck.GetComponent<CircleCollider2D>().radius;
-
         _wallHopDirection.Normalize();
         _wallJumpDirection.Normalize();
     }
@@ -324,7 +324,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
     }
 
-    private void FinishedLedgeClimb() // вызывается через ivent и перемещает игрока на конечную позицию
+    public void FinishedLedgeClimb() // вызывается через ivent и перемещает игрока на конечную позицию
     {
         _canClimbLedge = false;
         transform.position = _ledgePos2; // конечная позиция

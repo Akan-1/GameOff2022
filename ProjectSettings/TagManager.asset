@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - Tomas
   - Alice
+  - Box
+  - HeavyBox
   layers:
   - Default
   - TransparentFX
