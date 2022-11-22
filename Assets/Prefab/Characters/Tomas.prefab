@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 7532277396379470817}
   - component: {fileID: 2990075443274458643}
   - component: {fileID: 3343404505330199788}
+  - component: {fileID: 6936135229910919392}
   m_Layer: 11
   m_Name: Tomas
   m_TagString: Tomas
@@ -367,7 +368,7 @@ MonoBehaviour:
     m_Bits: 33024
   _groundCheckRadius: 0.23
   _health: 2
-  _speed: 5
+  _defaultSpeed: 0
   _jumpForce: 10
   _wallMask:
     serializedVersion: 2
@@ -382,24 +383,16 @@ MonoBehaviour:
   _wallHopDirection: {x: 1, y: 0.5}
   _wallJumpDirection: {x: 1, y: 2}
   _ledgePosBot: {x: 0, y: 0}
-  _ledgePos1: {x: 0, y: 0}
-  _ledgePos2: {x: 0, y: 0}
+  _ledgeStartPosition: {x: 0, y: 0}
+  _ledgeEndPosition: {x: 0, y: 0}
   _ledgeClimbCheck: {fileID: 94695904378845291}
   _ledgeRadius: 0.3
-  _ledgeClimbXOffset1: 0.3
-  _ledgeClimbXOffset2: 0
-  _ledgeClimbYOffset1: 0.5
-  _ledgeClimbYOffset2: 2
+  _ledgeClimbForce: 8
+  _climbReloadTime: 0.5
   _gunHolder: {fileID: 2194720035441341011}
-  _roofMask:
-    serializedVersion: 2
-    m_Bits: 0
-  _topCheck: {fileID: 0}
-  _topCheckRadius: 0
-  _poseStand: {fileID: 0}
-  _poseSquat: {fileID: 0}
   _idleAnimation: ThomasIdle
   _jumpAnimation: ThomasJump
+  _climbAnimation: ThomasClimb
   _wallJumpAnimation: ThomasJump
   _fallAnimation: ThomasFall
 --- !u!114 &4768330213443906417
@@ -466,6 +459,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSourcePoolName: AudioSource
+--- !u!114 &6936135229910919392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2194720033611990485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc71d57abb06444392b75ed43e6d944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2194720033927972136
 GameObject:
   m_ObjectHideFlags: 0

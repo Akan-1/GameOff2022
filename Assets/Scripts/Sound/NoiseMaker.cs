@@ -14,7 +14,7 @@ public class NoiseMaker : MonoBehaviour
         set;
     }
 
-    private void Awake()
+    private void Start()
     {
         Noise = GetComponent<CircleCollider2D>();
         Noise.isTrigger = true;
