@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  _sprite: {fileID: -2820930097560456536, guid: 6d5f5084499f0b74795b73d970dc19f9,
-    type: 3}
+  _sprite: {fileID: 4556875247267356194, guid: f7e0510a838214e489e00144bf8a716b, type: 3}
   _type: 0
   _bulletPoolName: 0
   _FirePoint: {x: 1.2, y: 0.05}

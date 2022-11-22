@@ -58,6 +58,11 @@ public class Weapon : MonoBehaviour
 
     #region PickUp
 
+    private void Start()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = _weaponInfo.Sprite;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out PlayerController2d playerController2D))

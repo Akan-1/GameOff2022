@@ -29,7 +29,7 @@ public class Door : MonoBehaviour
         if (plate.PressureIndex == doorIndex)
         {
             boxCollider.isTrigger = true;
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 48, 86, 100);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
         }
     }
 

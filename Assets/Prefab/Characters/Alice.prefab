@@ -605,7 +605,7 @@ MonoBehaviour:
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 33024
+    m_Bits: 768
   _groundCheckRadius: 0.28
   _health: 1
   _speed: 6.5
@@ -634,7 +634,7 @@ MonoBehaviour:
   _gunHolder: {fileID: 2404292368294241389}
   _roofMask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4096
   _topCheck: {fileID: 5634829329943817301}
   _topCheckRadius: 1
   _poseStand: {fileID: 3277016618979534768}
@@ -643,6 +643,7 @@ MonoBehaviour:
   _jumpAnimation: AliceJump
   _wallJumpAnimation: AliceWallJump
   _fallAnimation: AliceFall
+  _squatAnimation: AliceSquat
 --- !u!114 &5602429195294773991
 MonoBehaviour:
   m_ObjectHideFlags: 0
