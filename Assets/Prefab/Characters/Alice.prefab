@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6155791419906058105}
-  - component: {fileID: 889864019025447037}
   m_Layer: 0
   m_Name: LedgeCheck
   m_TagString: Untagged
@@ -31,22 +30,6 @@ Transform:
   m_Father: {fileID: 5634829330410110237}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &889864019025447037
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2572684725928416093}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &2804687076409586550
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +346,7 @@ GameObject:
   - component: {fileID: 5634829330410110239}
   - component: {fileID: 5634829330410110230}
   - component: {fileID: 5634829330410110232}
+  - component: {fileID: 535623535142546310}
   - component: {fileID: 5602429195294773991}
   - component: {fileID: 3277016618979534768}
   - component: {fileID: 2728185459852032522}
@@ -608,7 +592,7 @@ MonoBehaviour:
     m_Bits: 768
   _groundCheckRadius: 0.28
   _health: 1
-  _speed: 6.5
+  _defaultSpeed: 7
   _jumpForce: 13
   _wallMask:
     serializedVersion: 2
@@ -623,26 +607,38 @@ MonoBehaviour:
   _wallHopDirection: {x: 1, y: 0.5}
   _wallJumpDirection: {x: 1, y: 2}
   _ledgePosBot: {x: 0, y: 0}
-  _ledgePos1: {x: 0, y: 0}
-  _ledgePos2: {x: 0, y: 0}
+  _ledgeStartPosition: {x: 0, y: 0}
+  _ledgeEndPosition: {x: 0, y: 0}
   _ledgeClimbCheck: {fileID: 6155791419906058105}
-  _ledgeRadius: 0.6
-  _ledgeClimbXOffset1: 0.3
-  _ledgeClimbXOffset2: 0
-  _ledgeClimbYOffset1: 0.5
-  _ledgeClimbYOffset2: 2
+  _ledgeRadius: 0.32
+  _ledgeClimbForce: 8
+  _climbReloadTime: 0.5
   _gunHolder: {fileID: 2404292368294241389}
-  _roofMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  _topCheck: {fileID: 5634829329943817301}
-  _topCheckRadius: 1
-  _poseStand: {fileID: 3277016618979534768}
-  _poseSquat: {fileID: 2728185459852032522}
   _idleAnimation: AliceIdle
   _jumpAnimation: AliceJump
+  _climbAnimation: AliceClimb
   _wallJumpAnimation: AliceWallJump
   _fallAnimation: AliceFall
+--- !u!114 &535623535142546310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634829330410110231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d173b3fa53c00864fa9fde0f1b44f525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roofMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _topCheck: {fileID: 5634829329943817301}
+  _topCheckRadius: 0.2
+  _poseStand: {fileID: 3277016618979534768}
+  _poseSquat: {fileID: 2728185459852032522}
+  _squatSpeed: 5
   _squatAnimation: AliceSquat
 --- !u!114 &5602429195294773991
 MonoBehaviour:
@@ -794,6 +790,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efc7f701b7869f64db9a669a958867f4, type: 3}
+--- !u!4 &2404292368294241388 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1211803465570447844}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2404292368294241389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3570496883198891401, guid: efc7f701b7869f64db9a669a958867f4,
@@ -806,9 +808,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58051a363bf33764ca8fce1c71035175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2404292368294241388 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1211803465570447844}
-  m_PrefabAsset: {fileID: 0}

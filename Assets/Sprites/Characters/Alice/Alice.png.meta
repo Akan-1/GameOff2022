@@ -128,6 +128,21 @@ TextureImporter:
   - first:
       213: -7644211303695040518
     second: Alice_41
+  - first:
+      213: 4255271840453281915
+    second: Alice_42
+  - first:
+      213: 359105371106853596
+    second: AliceClimbHandFore
+  - first:
+      213: -8435936045095462413
+    second: AliceClimbHandBack
+  - first:
+      213: 2364008675815347703
+    second: Alice_45
+  - first:
+      213: 2277769269125639023
+    second: Alice_46
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1090,6 +1105,111 @@ TextureImporter:
       bones: []
       spriteID: aff3b3fe15e4ae590800000000000000
       internalID: -7644211303695040518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_42
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b78c0f88133cd0b30800000000000000
+      internalID: 4255271840453281915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AliceClimbHandFore
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 178
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd242c1be6ccbf400800000000000000
+      internalID: 359105371106853596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AliceClimbHandBack
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 178
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f9db2cccd88dea80800000000000000
+      internalID: -8435936045095462413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_45
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f55ae79d55aec020800000000000000
+      internalID: 2364008675815347703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alice_46
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 65
+        width: 64
+        height: 32
+      alignment: 9
+      pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6be88605134c9f10800000000000000
+      internalID: 2277769269125639023
       vertices: []
       indices: 
       edges: []

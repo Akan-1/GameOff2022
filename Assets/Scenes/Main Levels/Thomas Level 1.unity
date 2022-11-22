@@ -128,6 +128,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1844826311}
     m_Modifications:
+    - target: {fileID: 2194720033611990507, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: _poseSquat
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194720033611990507, guid: 265a72ca860b2534fa5c414aecc2387f,
+        type: 3}
+      propertyPath: _defaultSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2194720033611990510, guid: 265a72ca860b2534fa5c414aecc2387f,
         type: 3}
       propertyPath: m_RootOrder

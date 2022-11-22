@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,34 +17,16 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     // переменные Bool
     private bool _isFacingRight;
     [SerializeField] private bool _canSquat;
-    private bool _isGround;
+    private bool _isOnGround;
     private bool _isTouchWall;
     private bool _isWallSliding;
-    private bool _canJump;
     private bool _canMove;
 
     [Header("Audio")]
     [SerializeField] private List<AudioClip> _stepSounds = new List<AudioClip>();
     [SerializeField] private float _stepNoiseRadius = 0.2f;
 
-    // не изменяемые переменные типа float
-    private float _movementInputDirection; // хранит значение при нажатии клавиш (A, D)
-
-    public Vector2 PositionOfCurrentWall
-    {
-        get => _positionOfCurrentWall;
-        private set
-        {
-            _positionOfCurrentWall = value;
-            _currentWallJumpCount = 0;
-        }
-    }
-
-    public bool IsCanShoot
-    {
-        get;
-        private set;
-    }
+    private float _movementInputDirection;
 
     // изменяемые переменные типа float
     #region Configurations
@@ -53,7 +36,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private float _groundCheckRadius;
     [SerializeField] private int _health = 1;
-    [SerializeField] private float _speed;
+    [SerializeField] private float _defaultSpeed;
     [SerializeField] private float _jumpForce;
 
     
@@ -74,18 +57,18 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private Vector2 _wallJumpDirection;
 
     [SerializeField] private Vector2 _ledgePosBot;
-    [SerializeField] private Vector2 _ledgePos1;
-    [SerializeField] private Vector2 _ledgePos2;
+    [SerializeField] private Vector2 _ledgeStartPosition;
+    [SerializeField] private Vector2 _ledgeEndPosition;
 
     [Space]
     [Header("LedgeClimb Config")]
     [SerializeField] private Transform _ledgeClimbCheck;
-
     [SerializeField] private float _ledgeRadius;
-    [SerializeField] private float _ledgeClimbXOffset1 = 0f;
-    [SerializeField] private float _ledgeClimbXOffset2 = 0f;
-    [SerializeField] private float _ledgeClimbYOffset1 = 0f;
-    [SerializeField] private float _ledgeClimbYOffset2 = 0f;
+    [SerializeField] private float _ledgeClimbForce = 8;
+    [SerializeField] private float _climbReloadTime = 0.5f;
+    private IEnumerator _climbReload;
+
+    private bool _isClimbReload;
 
     private bool _isTouchingLedge;
     private bool _canClimbLedge = false;
@@ -95,48 +78,30 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [Header("Weapon Config")]
     [SerializeField] private GunHolder _gunHolder;
 
-    [Space]
-    [Header("Squat Config")]
-    [SerializeField] private LayerMask _roofMask;
-    [SerializeField] private Transform _topCheck;
-    [SerializeField] private float _topCheckRadius;
-    [SerializeField] private Collider2D _poseStand;
-    [SerializeField] private Collider2D _poseSquat;
-    private bool _isStand;
-
     [Header("Animations")]
     [SerializeField] private string _idleAnimation = "ThomasIdle";
     [SerializeField] private string _jumpAnimation = "ThomasJump";
+    [SerializeField] private string _climbAnimation = "ThomasClimb";
     [SerializeField] private string _wallJumpAnimation = "ThomasWallJump";
     [SerializeField] private string _fallAnimation = "ThomasFall";
-    [SerializeField] private string _squatAnimation = "AliceSquat";
     public Rigidbody2D Rigibody2D
     {
         get;
         set;
     }
     public GunHolder GunHolder => _gunHolder;
-    public bool IsStand
+    public Animator Animator
     {
-        get => _isStand;
+        get => _anim;
+        set => _anim = value;
+    }
+    public Vector2 PositionOfCurrentWall
+    {
+        get => _positionOfCurrentWall;
         private set
         {
-            if (value)
-            {
-                _anim.Play(_squatAnimation);
-                _anim.SetBool("IsSquat", true);
-                _poseStand.enabled = false;
-                _poseSquat.enabled = true;
-                _canJump = false;
-            }
-            else
-            {
-                _anim.Play(_idleAnimation);
-                _anim.SetBool("IsSquat", false);
-                _poseStand.enabled = true;
-                _poseSquat.enabled = false;
-                _canJump = true;
-            }
+            _positionOfCurrentWall = value;
+            _currentWallJumpCount = 0;
         }
     }
     public bool IsActive
@@ -144,16 +109,35 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get;
         set;
     }
+    public float Speed
+    {
+        get;
+        set;
+    }
+    public float DefaultSpeed => _defaultSpeed;
+    public bool IsCanShoot
+    {
+        get;
+        private set;
+    }
+    public bool IsOnGround => _isOnGround;
+    public bool IsCanJump
+    {
+        get;
+        set;
+    }
+    public bool IsCanFlip
+    {
+        get;
+        set;
+    } = true;
     #endregion
 
     void Awake()
     {
         Rigibody2D = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        _anim.SetFloat("Speed", _speed);
-
-        if (_canSquat)
-            _topCheckRadius = _topCheck.GetComponent<CircleCollider2D>().radius;
+        Speed = _defaultSpeed;
         _wallHopDirection.Normalize();
         _wallJumpDirection.Normalize();
     }
@@ -174,9 +158,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             WallSlide();
             CanJump();
             CheckLedgeClimb();
-
-            if (_canSquat)
-                Squat();
         }
     }
 
@@ -203,45 +184,48 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         GameObjectsManager.CheckLifeAmount(_health, gameObject);
     }
 
-    private void CheckMovementDirection() // Проверяет поворот игрока (влево, вправо)
+    private void CheckMovementDirection()
     {
-        if(_isFacingRight && _movementInputDirection < 0)
+        if (IsCanFlip)
         {
-            Flip();
-        }
-        else if (!_isFacingRight && _movementInputDirection > 0)
-        {
-            Flip();
+            if (_isFacingRight && _movementInputDirection < 0)
+            {
+                Flip();
+            }
+            else if (!_isFacingRight && _movementInputDirection > 0)
+            {
+                Flip();
+            }
         }
     }
 
     private void CanJump()
     {
-        if(_isGround == true)
+        if(_isOnGround == true)
         {
-            _canJump = true;
+            IsCanJump = true;
             _currentWallJumpCount = 0;
         }
         else
         {
-            _canJump = false;
+            IsCanJump = false;
         }
     }
 
     private void WallSlide() 
     {
         bool isHasWallJumps = _currentWallJumpCount < _maximumWallJumpCount;
-        if (PositionOfCurrentWall != null && _isTouchWall && !_isGround && Rigibody2D.velocity.y < 0 && isHasWallJumps)
+        if (PositionOfCurrentWall != null && _isTouchWall && !_isOnGround && Rigibody2D.velocity.y < 0 && isHasWallJumps)
         {
             _movementInputDirection = 0;
             _isWallSliding = true;
-            _canJump = true;
+            IsCanJump = true;
             _anim.SetBool("IsWallStick", true);
         }
         else
         {
             _isWallSliding = false;
-            _canJump = false;
+            IsCanJump = false;
             _anim.SetBool("IsWallStick", false);
         }
     }
@@ -270,11 +254,11 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             Invoke("IgnoreLayerOff", 0.5f);
         }
 
-        if (Input.GetButtonDown("Jump") && _isGround && _canJump)
+        if (Input.GetButtonDown("Jump") && _isOnGround && IsCanJump)
         {
             Jump();
         }
-        else if(Input.GetButton("Jump") && _isWallSliding && !_isGround)
+        else if(Input.GetButton("Jump") && _isWallSliding && !_isOnGround && !_anim.GetBool("IsClimb"))
         {
             _anim.Play(_wallJumpAnimation);
 /*            JumpOnWall();*/
@@ -311,9 +295,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void ApllyMovement()
     {
-        if (!_isWallSliding)
+        if (!_isWallSliding && !_canMove)
         {
-            Rigibody2D.velocity = new Vector2(_movementInputDirection * _speed, Rigibody2D.velocity.y); // придаёт движение
+            Rigibody2D.velocity = new Vector2(_movementInputDirection * Speed, Rigibody2D.velocity.y); // придаёт движение
         }
 
         if (_isWallSliding)
@@ -325,39 +309,46 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
     }
 
-    private void CheckLedgeClimb() //зацеп за края
+    #region Climb
+    private void CheckLedgeClimb()
     {
-        if (_ledgeDetected && !_canClimbLedge)
+        if (_ledgeDetected)
         {
-            _canClimbLedge = true;
-
-            if (_isFacingRight)
+            if (!_canClimbLedge && !_isClimbReload)
             {
-                _ledgePos1 = new Vector2(Mathf.Floor(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset1, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset1);
-                _ledgePos1 = new Vector2(Mathf.Floor(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset2, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset2);
-            }
-            else
-            {
-                _ledgePos2 = new Vector2(Mathf.Ceil(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset1, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset1);
-                _ledgePos2 = new Vector2(Mathf.Ceil(_ledgePosBot.x + _wallCheckRadius) - _ledgeClimbXOffset2, Mathf.Floor(_ledgePosBot.y) + _ledgeClimbYOffset2);
-            }
+                _canClimbLedge = true;
+                _isClimbReload = true;
+                _ledgeDetected = false;
 
-            _canMove = true;
+                _anim.SetBool("IsClimb", true);
+                _anim.Play(_climbAnimation);
 
-            if (_canClimbLedge)
-            {
-                transform.position = _ledgePos1; // стартовая позиция
+                if (_climbReload == null)
+                {
+                    _climbReload = ClimbReload();
+                    StartCoroutine(_climbReload);
+                }
             }
         }
     }
 
-    public void FinishedLedgeClimb() // вызывается через ivent и перемещает игрока на конечную позицию
+    private IEnumerator ClimbReload()
     {
-        _canClimbLedge = false;
-        transform.position = _ledgePos2; // конечная позиция
-        _canMove = true;
+        yield return new WaitForSeconds(_climbReloadTime);
+        _isClimbReload = false;
+        _climbReload = null;
     }
 
+
+    public void FinishLedgeClimb()
+    {
+        Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, 0);
+        Rigibody2D.AddForce(Vector2.up * _ledgeClimbForce, ForceMode2D.Impulse);
+        _anim.SetBool("IsClimb", false);
+        _canClimbLedge = false;
+    }
+
+    #endregion
     private void Jump()
     {
         _anim.Play(_jumpAnimation);
@@ -368,7 +359,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void CheckSurroundings()
     {
-        _isGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
+        _isOnGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
 
         RaycastHit2D hit = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
 
@@ -377,8 +368,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _isTouchWall = true;
             float roundedPositionOfCurrentWall = (float)Math.Round(PositionOfCurrentWall.x, 0);
             float roundedPositionOfHit = (float)Math.Round(hit.point.x, 0);
-
-            Debug.Log(roundedPositionOfHit);
 
             bool IsNewWallPosition = roundedPositionOfCurrentWall != roundedPositionOfHit;
 
@@ -391,7 +380,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _isTouchWall = false;
         }
 
-        if (!_isGround)
+        if (!_isOnGround)
         {
             IsCanShoot = false;
         }
@@ -400,9 +389,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             IsCanShoot = true;
         }
 
-        if (!_isWallSliding && !_isGround)
+        if (!_isWallSliding && !_isOnGround)
         {
-/*            _anim.Play(_fallAnimation);*/
             _anim.SetBool("IsFall", true);
         }
         else
@@ -410,14 +398,17 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _anim.SetBool("IsFall", false);
         }
 
-        _isTouchingLedge = Physics2D.Raycast(_ledgeClimbCheck.position, transform.right, _ledgeRadius, _whatIsGround);
-
-        if (_isTouchWall && !_isTouchingLedge && !_ledgeDetected)
+        if (!_isClimbReload && !_isOnGround)
         {
-            _ledgeDetected = true;
-            _ledgePosBot = _wallCheck.position;
-        }
+            bool _isTouchingLedge = Physics2D.OverlapCircle(_ledgeClimbCheck.transform.position, _ledgeRadius, _whatIsGround);
 
+            if (_isTouchingLedge && !_ledgeDetected)
+            {
+                Debug.Log(_isTouchingLedge);
+                _ledgeDetected = true;
+                _ledgePosBot = _wallCheck.position;
+            }
+        }
     }
 
     private void Flip() // поворот игрока (влево, вправо)
@@ -427,27 +418,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _facingDirection *= -1;
             _isFacingRight = !_isFacingRight;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-/*            transform.Rotate(0, 180, 0);*/
         }      
-    }
-
-    private void Squat()
-    {
-        bool canStand = Input.GetKeyDown(KeyCode.LeftShift) && _isGround;
-        bool cantStand = Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask) || Input.GetKeyUp(KeyCode.LeftShift);
-
-        if (canStand)
-        {
-            if (!IsStand)
-            {
-                IsStand = true;
-            }
-        }
-
-        if (cantStand)
-        {
-            IsStand = false;
-        }
     }
 
     #region Animations
@@ -479,6 +450,11 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
     }
 
+    public void PlayIdleAnimation()
+    {
+        _anim.Play(_idleAnimation);
+    }
+
     public void StopWalkAninmation()
     {
         _anim.SetBool("IsWalk", false);
@@ -502,19 +478,19 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(_wallCheck.position, _wallCheckRadius);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(_ledgeClimbCheck.position, _ledgeRadius);
+        Invoke(nameof(DisableNoise), .1f);
     }
-    #region Audio
 
     public void PlayStepSound()
     {
         _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, 1, _stepNoiseRadius);
-        Invoke(nameof(DisableNoise), .1f);
     }
 
     public void DisableNoise()
     {
         _noiseMaker.Noise.enabled = false;
     }
-
-    #endregion
 }
