@@ -1,52 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
     private Animator animator;
 
-    [SerializeField] private int _index;
-
-    public int PressureIndex
-    {
-        get;
-        private set;
-    }
     [Space]
     [SerializeField] private bool _isNeedHeavyBox;
-    [Space]
-    [SerializeField] private Collider2D _unPressed;
-    [SerializeField] private Collider2D _onPressed;
 
-    public static Action<PressurePlate> onPressed;
-    public static Action onLeaved;
-
-    private void Start()
-    {
-        PressureIndex = _index;
-    }
+    [SerializeField] private UnityEvent _onPressed;
+    [SerializeField] private UnityEvent _onLeaved;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    public void ShowPressedCollider()
-    {
-        _unPressed.enabled = false;
-        _onPressed.enabled = true;
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!_isNeedHeavyBox)
         {
-            if (collision.gameObject.CompareTag("Box") || collision.gameObject.CompareTag("HeavyBox") || collision.gameObject.CompareTag("Tomas") || collision.gameObject.CompareTag("Alice"))
+            bool isCharacter = collision.collider.TryGetComponent(out PlayerController2d playerController2D);
+            bool isHeavyBox = collision.collider.TryGetComponent(out HeavyProp heavyProp);
+
+            if (collision.gameObject.CompareTag("Box") || heavyProp || isCharacter)
             {
                 animator.SetBool("ButtonPressed", true);
-                onPressed?.Invoke(this);
+                _onPressed.Invoke();
             }
         }    
         else if (_isNeedHeavyBox)
@@ -54,7 +35,7 @@ public class PressurePlate : MonoBehaviour
             if (collision.gameObject.CompareTag("HeavyBox"))
             {
                 animator.SetBool("ButtonPressed", true);
-                onPressed?.Invoke(this);
+                _onPressed.Invoke();
             }
         }
     }
@@ -62,8 +43,7 @@ public class PressurePlate : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         animator.SetBool("ButtonPressed", false);
-        _unPressed.enabled = true;
-        onLeaved?.Invoke();
+        _onLeaved.Invoke();
         Debug.Log("Leave");
     }
 

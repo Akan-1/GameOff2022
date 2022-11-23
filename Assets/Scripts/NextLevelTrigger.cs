@@ -14,10 +14,10 @@ public class NextLevelTrigger : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent(out PlayerController2d player))
         {
-            
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            currentPlayers++;
+            player.IsActive = false;
 
-            if(currentPlayers >= playersNeededToCompleteLevel)
+            if (currentPlayers >= playersNeededToCompleteLevel)
             {
                 if (_fadeChanger != null)
                 {
@@ -27,7 +27,6 @@ public class NextLevelTrigger : MonoBehaviour
                     SceneLoader.NextScene();
                 }
             }
-            currentPlayers++;  
         }
     }
 

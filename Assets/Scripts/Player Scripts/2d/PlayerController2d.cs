@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController2d : MonoBehaviour, ITakeDamage
 {
     private Animator _anim;
-    private Vector2 _positionOfCurrentWall;
+    private float _xPositionOfCurrentWall;
 
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _pushOffWallSound;
@@ -20,7 +20,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private bool _isOnGround;
     private bool _isTouchWall;
     private bool _isWallSliding;
-    private bool _canMove;
+    private bool _cantMove;
 
     [Header("Audio")]
     [SerializeField] private List<AudioClip> _stepSounds = new List<AudioClip>();
@@ -39,21 +39,18 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _defaultSpeed;
     [SerializeField] private float _jumpForce;
 
-    
+
     [Space]
     [Header("Checking wall Config")]
     [SerializeField] private LayerMask _wallMask;
     [SerializeField] private Transform _wallCheck;
     [SerializeField] private float _wallCheckRadius;
-    [SerializeField] private float _wallHopForce;
-    [SerializeField] private float _wallJumpForce;
+    [SerializeField] [Min(1)] private float _wallJumpStrength;
     [SerializeField] private float _wallSlideSpeed;
     [SerializeField] private float _wallSpeed;
-    [SerializeField] private int _maximumWallJumpCount;
-    private int _currentWallJumpCount;
+    private float _xPreviousWallPosition;
 
     [Space]
-    [SerializeField] private Vector2 _wallHopDirection;
     [SerializeField] private Vector2 _wallJumpDirection;
 
     [SerializeField] private Vector2 _ledgePosBot;
@@ -62,6 +59,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     [Space]
     [Header("LedgeClimb Config")]
+    [SerializeField] private LayerMask _climbLayer;
     [SerializeField] private Transform _ledgeClimbCheck;
     [SerializeField] private float _ledgeRadius;
     [SerializeField] private float _ledgeClimbForce = 8;
@@ -72,7 +70,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private bool _isTouchingLedge;
     private bool _canClimbLedge = false;
-    private bool _ledgeDetected;    
+    private bool _ledgeDetected;
 
     [Space]
     [Header("Weapon Config")]
@@ -95,13 +93,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get => _anim;
         set => _anim = value;
     }
-    public Vector2 PositionOfCurrentWall
+    public float XPositionOfCurrentWall
     {
-        get => _positionOfCurrentWall;
+        get => _xPositionOfCurrentWall;
         private set
         {
-            _positionOfCurrentWall = value;
-            _currentWallJumpCount = 0;
+            _xPositionOfCurrentWall = value;
         }
     }
     public bool IsActive
@@ -120,7 +117,21 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get;
         private set;
     }
-    public bool IsOnGround => _isOnGround;
+    public bool IsOnGround
+    {
+        get => _isOnGround;
+        set
+        {
+            _isOnGround = value;
+
+            if (value)
+            {
+                _xPreviousWallPosition = -999f;
+            }
+
+
+        }
+    }
     public bool IsCanJump
     {
         get;
@@ -138,8 +149,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         Rigibody2D = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         Speed = _defaultSpeed;
-        _wallHopDirection.Normalize();
-        _wallJumpDirection.Normalize();
+        _anim.SetFloat("Speed", Speed);
     }
 
     private void Start()
@@ -201,10 +211,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void CanJump()
     {
-        if(_isOnGround == true)
+        if (IsOnGround == true)
         {
             IsCanJump = true;
-            _currentWallJumpCount = 0;
         }
         else
         {
@@ -212,12 +221,10 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
     }
 
-    private void WallSlide() 
+    private void WallSlide()
     {
-        bool isHasWallJumps = _currentWallJumpCount < _maximumWallJumpCount;
-        if (PositionOfCurrentWall != null && _isTouchWall && !_isOnGround && Rigibody2D.velocity.y < 0 && isHasWallJumps)
+        if (XPositionOfCurrentWall != _xPreviousWallPosition && _isTouchWall && !IsOnGround && Rigibody2D.velocity.y < 0)
         {
-            _movementInputDirection = 0;
             _isWallSliding = true;
             IsCanJump = true;
             _anim.SetBool("IsWallStick", true);
@@ -232,16 +239,24 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void CheckMovement()
     {
-        if (!_isWallSliding || !_canMove)
+        if (!_isWallSliding)
         {
-            _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
-            if (_movementInputDirection != 0)
+            if (!_cantMove)
             {
-                _anim.SetBool("IsWalk", true);
+                _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
+                if (_movementInputDirection != 0)
+                {
+                    _anim.SetBool("IsWalk", true);
+                }
+                else
+                {
+                    _anim.SetBool("IsWalk", false);
+                }
             } else
             {
-                _anim.SetBool("IsWalk", false);
+                Rigibody2D.velocity = Vector2.zero;
             }
+
         }
         else
         {
@@ -254,48 +269,35 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             Invoke("IgnoreLayerOff", 0.5f);
         }
 
-        if (Input.GetButtonDown("Jump") && _isOnGround && IsCanJump)
+        if (Input.GetButtonDown("Jump") && IsOnGround && IsCanJump)
         {
             Jump();
         }
-        else if(Input.GetButton("Jump") && _isWallSliding && !_isOnGround && !_anim.GetBool("IsClimb"))
+        else if (Input.GetButton("Jump") && _isWallSliding && !IsOnGround && !_anim.GetBool("IsClimb"))
         {
             _anim.Play(_wallJumpAnimation);
-/*            JumpOnWall();*/
         }
     }
 
     private void JumpOnWall()
     {
-        if (_currentWallJumpCount < _maximumWallJumpCount)
+        if (_isWallSliding)
         {
-
-            if (_isWallSliding && _movementInputDirection == 0)
-            {
-                Vector2 forceToAdd = new Vector2(_wallHopDirection.x * _wallHopForce * _facingDirection, _wallHopDirection.y * _wallHopForce);
-                Rigibody2D.AddForce(forceToAdd, ForceMode2D.Impulse);
-                _isWallSliding = false;
-                _movementInputDirection = -_facingDirection;
-            }
-
-            if ((_isWallSliding || PositionOfCurrentWall != null) && _movementInputDirection != 0)
-            {
-                Vector2 forceToAdd = new Vector2(_wallJumpDirection.x * _wallJumpForce * _movementInputDirection, _wallJumpDirection.y * _wallSpeed);
-                Rigibody2D.AddForce(forceToAdd, ForceMode2D.Impulse);
-                _isWallSliding = false;
-                /**/
-            }
-
-            _anim.Play(_wallJumpAnimation);
-            _audioSource.PlayOneShot(_pushOffWallSound);
+            Vector2 wallJumpVector = _wallJumpDirection * _wallJumpStrength;
+            _xPreviousWallPosition = _xPositionOfCurrentWall;
+            Rigibody2D.AddForce(wallJumpVector, ForceMode2D.Impulse);
+            _isWallSliding = false;
+            _movementInputDirection = -_facingDirection;
         }
-        _currentWallJumpCount++;
+
+        _anim.Play(_wallJumpAnimation);
+        _audioSource.PlayOneShot(_pushOffWallSound);
     }
 
 
     private void ApllyMovement()
     {
-        if (!_isWallSliding && !_canMove)
+        if (!_isWallSliding)
         {
             Rigibody2D.velocity = new Vector2(_movementInputDirection * Speed, Rigibody2D.velocity.y); // придаёт движение
         }
@@ -316,6 +318,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         {
             if (!_canClimbLedge && !_isClimbReload)
             {
+                Rigibody2D.gravityScale = 0;
+                _cantMove = true;
                 _canClimbLedge = true;
                 _isClimbReload = true;
                 _ledgeDetected = false;
@@ -342,6 +346,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     public void FinishLedgeClimb()
     {
+        _cantMove = false;
+        Rigibody2D.gravityScale = 3;
         Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, 0);
         Rigibody2D.AddForce(Vector2.up * _ledgeClimbForce, ForceMode2D.Impulse);
         _anim.SetBool("IsClimb", false);
@@ -359,28 +365,29 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void CheckSurroundings()
     {
-        _isOnGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
+        IsOnGround = Physics2D.OverlapCircle(_groudCheck.position, _groundCheckRadius, _whatIsGround);
 
         RaycastHit2D hit = Physics2D.Raycast(_wallCheck.position, transform.right, _wallCheckRadius, _wallMask);
 
         if (hit)
         {
             _isTouchWall = true;
-            float roundedPositionOfCurrentWall = (float)Math.Round(PositionOfCurrentWall.x, 0);
-            float roundedPositionOfHit = (float)Math.Round(hit.point.x, 0);
+            int roundedXPositionOfHit = Mathf.FloorToInt(hit.point.x);
 
-            bool IsNewWallPosition = roundedPositionOfCurrentWall != roundedPositionOfHit;
+            bool IsNewWallPosition = XPositionOfCurrentWall != roundedXPositionOfHit;
 
             if (IsNewWallPosition)
             {
-                PositionOfCurrentWall = hit.point;
+                XPositionOfCurrentWall = roundedXPositionOfHit;
             }
+
+            Debug.Log($"current wall position:{XPositionOfCurrentWall}. Previous {_xPreviousWallPosition}");
         } else
         {
             _isTouchWall = false;
         }
 
-        if (!_isOnGround)
+        if (!IsOnGround)
         {
             IsCanShoot = false;
         }
@@ -389,7 +396,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             IsCanShoot = true;
         }
 
-        if (!_isWallSliding && !_isOnGround)
+        if (!_isWallSliding && !IsOnGround)
         {
             _anim.SetBool("IsFall", true);
         }
@@ -398,9 +405,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             _anim.SetBool("IsFall", false);
         }
 
-        if (!_isClimbReload && !_isOnGround)
+        if (!_isClimbReload && !IsOnGround)
         {
-            bool _isTouchingLedge = Physics2D.OverlapCircle(_ledgeClimbCheck.transform.position, _ledgeRadius, _whatIsGround);
+            bool _isTouchingLedge = Physics2D.OverlapCircle(_ledgeClimbCheck.transform.position, _ledgeRadius, _climbLayer);
 
             if (_isTouchingLedge && !_ledgeDetected)
             {

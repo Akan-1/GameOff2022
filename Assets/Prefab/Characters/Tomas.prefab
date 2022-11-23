@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 94695904378845291}
-  - component: {fileID: 5808261298333176240}
   m_Layer: 11
   m_Name: LedgeCheck
   m_TagString: Untagged
@@ -31,22 +30,6 @@ Transform:
   m_Father: {fileID: 2194720033611990510}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &5808261298333176240
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775891066666932650}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.05
 --- !u!1 &2038777085902271418
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,34 +349,34 @@ MonoBehaviour:
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 33024
-  _groundCheckRadius: 0.23
+  _groundCheckRadius: 0.1
   _health: 2
-  _defaultSpeed: 7
+  _defaultSpeed: 4
   _jumpForce: 10
   _wallMask:
     serializedVersion: 2
     m_Bits: 512
   _wallCheck: {fileID: 2194720033927972137}
-  _wallCheckRadius: 0.5
-  _wallHopForce: 8
-  _wallJumpForce: 20
+  _wallCheckRadius: 0.6
+  _wallJumpStrength: 6
   _wallSlideSpeed: 0
   _wallSpeed: 10
-  _maximumWallJumpCount: 1
-  _wallHopDirection: {x: 1, y: 0.5}
   _wallJumpDirection: {x: 1, y: 2}
   _ledgePosBot: {x: 0, y: 0}
   _ledgeStartPosition: {x: 0, y: 0}
   _ledgeEndPosition: {x: 0, y: 0}
+  _climbLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _ledgeClimbCheck: {fileID: 94695904378845291}
-  _ledgeRadius: 0.3
-  _ledgeClimbForce: 8
-  _climbReloadTime: 0.5
+  _ledgeRadius: 0.18
+  _ledgeClimbForce: 13
+  _climbReloadTime: 1
   _gunHolder: {fileID: 2194720035441341011}
   _idleAnimation: ThomasIdle
   _jumpAnimation: ThomasJump
   _climbAnimation: ThomasClimb
-  _wallJumpAnimation: ThomasJump
+  _wallJumpAnimation: ThomasWallJump
   _fallAnimation: ThomasFall
 --- !u!114 &4768330213443906417
 MonoBehaviour:
@@ -471,6 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc71d57abb06444392b75ed43e6d944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _allowableChangePlayerVelocityY: 0
+  _allowableChangeTransformAngularVelocity: 0
 --- !u!1 &2194720033927972136
 GameObject:
   m_ObjectHideFlags: 0

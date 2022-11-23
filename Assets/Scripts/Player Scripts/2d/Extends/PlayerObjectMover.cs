@@ -5,24 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController2d))]
 public class PlayerObjectMover : MonoBehaviour
 {
-    private PlayerController2d playerController2D;
+    [SerializeField] private float _allowableChangePlayerVelocityY;
+    [SerializeField] private float _allowableChangeTransformAngularVelocity;
+    public PlayerController2d PlayerController2D
+    {
+        get;
+        private set;
+    }
+
+    public float AllowableChangePlayerVelocityY => _allowableChangePlayerVelocityY;
+    public float AllowableChangeTransformAngularVelocity => _allowableChangeTransformAngularVelocity;
+
+
 
     private void Start()
     {
-        playerController2D = GetComponent<PlayerController2d>();
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.TryGetComponent(out HeavyProp hevyProp))
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                hevyProp.ConnectToPlayerController(playerController2D);
-            } else if (Input.GetKeyUp(KeyCode.F))
-            {
-                hevyProp.Unconnect();
-            }
-        }
+        PlayerController2D = GetComponent<PlayerController2d>();
     }
 }

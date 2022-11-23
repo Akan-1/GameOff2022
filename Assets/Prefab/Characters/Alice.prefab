@@ -589,8 +589,8 @@ MonoBehaviour:
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 768
-  _groundCheckRadius: 0.28
+    m_Bits: 33536
+  _groundCheckRadius: 0.22
   _health: 1
   _defaultSpeed: 7
   _jumpForce: 13
@@ -599,19 +599,19 @@ MonoBehaviour:
     m_Bits: 512
   _wallCheck: {fileID: 5634829330461363437}
   _wallCheckRadius: 0.6
-  _wallHopForce: 20
-  _wallJumpForce: 50
+  _wallJumpStrength: 9
   _wallSlideSpeed: 0
   _wallSpeed: 10
-  _maximumWallJumpCount: 1
-  _wallHopDirection: {x: 1, y: 0.5}
   _wallJumpDirection: {x: 1, y: 2}
   _ledgePosBot: {x: 0, y: 0}
   _ledgeStartPosition: {x: 0, y: 0}
   _ledgeEndPosition: {x: 0, y: 0}
+  _climbLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _ledgeClimbCheck: {fileID: 6155791419906058105}
-  _ledgeRadius: 0.32
-  _ledgeClimbForce: 8
+  _ledgeRadius: 0.14
+  _ledgeClimbForce: 12
   _climbReloadTime: 0.5
   _gunHolder: {fileID: 2404292368294241389}
   _idleAnimation: AliceIdle
