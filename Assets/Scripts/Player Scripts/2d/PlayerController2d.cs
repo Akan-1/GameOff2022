@@ -40,6 +40,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private int _health = 1;
     [SerializeField] private float _defaultSpeed;
     [SerializeField] private float _jumpForce;
+    private float _speed;
     private bool _isCanMove = true;
 
 
@@ -115,8 +116,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     }
     public float Speed
     {
-        get;
-        set;
+        get => _speed;
+        set
+        {
+            _speed = value;
+            _anim.SetFloat("Speed", Speed);
+        }
     }
     public float DefaultSpeed => _defaultSpeed;
     public bool IsCanShoot
@@ -156,7 +161,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         Rigibody2D = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         Speed = _defaultSpeed;
-        _anim.SetFloat("Speed", Speed);
+
 
     }
 

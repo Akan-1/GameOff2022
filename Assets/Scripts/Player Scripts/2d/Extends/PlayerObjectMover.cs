@@ -22,4 +22,14 @@ public class PlayerObjectMover : MonoBehaviour
     {
         PlayerController2D = GetComponent<PlayerController2d>();
     }
+
+    public void EnableDragAnimation()
+    {
+        PlayerController2D.Animator.SetBool("IsDragHeavyProp", true);
+    }
+
+    public void DisableDragAnimation()
+    {
+        PlayerController2D.Animator.SetBool("IsDragHeavyProp", false);
+    }
 }

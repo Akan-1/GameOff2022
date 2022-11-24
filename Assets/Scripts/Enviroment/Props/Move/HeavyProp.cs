@@ -64,6 +64,7 @@ public class HeavyProp : MonoBehaviour
 
             playerController.IsCanFlip = false;
             playerController.Speed = _playerSpeedOnDrag;
+            _playerObjectMover.EnableDragAnimation();
 
 
             MovePlayerToCapturePosition();
@@ -95,6 +96,8 @@ public class HeavyProp : MonoBehaviour
 
             playerController.IsCanFlip = true;
             playerController.Speed = playerController.DefaultSpeed;
+            _playerObjectMover.DisableDragAnimation();
+            playerController.PlayIdleAnimation();
 
             _isFollow = false;
             _isCanConnect = true;
