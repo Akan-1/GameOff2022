@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using QFSW.MOP2;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerController2d))]
@@ -14,8 +15,14 @@ public class PlayerSayer : MonoBehaviour
     [SerializeField] private List<string> _texts;
     private string _currentText;
     private float _scaleCurrentTime;
+    private bool _isSaying;
     private IEnumerator _scaleChange;
     private IEnumerator _addChar;
+
+    [Header("Audio")]
+    [SerializeField] private string _audioSourcePoolName = "AudioSource";
+    [SerializeField] private float _mumblingVolume = 1;
+    [SerializeField] private List<AudioClip> _mumblingSounds = new List<AudioClip>();
 
     public PlayerController2d PlayerController2D
     {
@@ -41,6 +48,7 @@ public class PlayerSayer : MonoBehaviour
     #region Say
     public void SayFew(List<string> texts)
     {
+        _isSaying = true;
         _texts = texts;
         _currentText = texts[0];
 
@@ -70,6 +78,7 @@ public class PlayerSayer : MonoBehaviour
             {
                 PlayerController2D.UnlockMovement();
                 StartScaleChange(false);
+                _isSaying = false;
             }
         }
 
@@ -85,7 +94,7 @@ public class PlayerSayer : MonoBehaviour
     {
         bool isPrinting = _addChar != null;
 
-        if (_currentText != _text.text)
+        if (_currentText != _text.text && _isSaying)
         {
             if (isPrinting)
             {
@@ -94,6 +103,7 @@ public class PlayerSayer : MonoBehaviour
                 _text.text = _currentText;
             } else
             {
+                PlayMumblingSound();
                 _text.text = "";
                 _addChar = AddChar();
                 StartCoroutine(_addChar);
@@ -147,6 +157,16 @@ public class PlayerSayer : MonoBehaviour
         _scaleCurrentTime = Mathf.Clamp(_scaleCurrentTime, 0, _textSclale.keys[_textSclale.length - 1].time);
         float newScale = _textSclale.Evaluate(_scaleCurrentTime);
         _text.transform.localScale = new Vector3(newScale * Mathf.Clamp(PlayerController2D.transform.localScale.x, -1, 1), newScale, newScale);
+    }
+
+    #endregion
+
+    #region Audio
+
+    private void PlayMumblingSound()
+    {
+        AudioSource audioSource = PlayerController2D.AudioSource;
+        AudioPlayer.TryPlayRandom(audioSource, _mumblingSounds, _mumblingVolume);
     }
 
     #endregion

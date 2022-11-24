@@ -26,6 +26,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [Header("Audio")]
     [SerializeField] private List<AudioClip> _stepSounds = new List<AudioClip>();
     [SerializeField] private float _stepNoiseRadius = 0.2f;
+    [SerializeField] private float _stepSoundVolume = .5f;
 
     private float _movementInputDirection;
 
@@ -94,6 +95,10 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         get => _anim;
         set => _anim = value;
+    }
+    public AudioSource AudioSource
+    {
+        get => _audioSource;
     }
     public float XPositionOfCurrentWall
     {
@@ -272,7 +277,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
                 }
             } else
             {
-                Rigibody2D.velocity = Vector2.zero;
+                Rigibody2D.velocity = new Vector2(0, Rigibody2D.velocity.y);
             }
 
         }
@@ -337,6 +342,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             if (!_canClimbLedge && !_isClimbReload)
             {
                 Rigibody2D.gravityScale = 0;
+                Rigibody2D.velocity = Vector2.zero;
                 _cantMove = true;
                 _canClimbLedge = true;
                 _isClimbReload = true;
@@ -513,7 +519,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     public void PlayStepSound()
     {
-        _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, 1, _stepNoiseRadius);
+        _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, _stepSoundVolume, _stepNoiseRadius);
     }
 
     public void DisableNoise()

@@ -10,9 +10,14 @@ public class Lamp : MonoBehaviour
     [SerializeField] private AnimationCurve _lightIntencity;
     [SerializeField] private Vector2 _startChangeIntencityTimeBetween;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] [Range(0, 1f)] private float _volumeScaler = 1;
+
     private void Start()
     {
         float time = Random.Range(_startChangeIntencityTimeBetween.x, _startChangeIntencityTimeBetween.y);
+        _audioSource.volume = _lightIntencity.Evaluate(_currentTime) * _volumeScaler;
         Invoke(nameof(StartChangeIntencity), time);
     }
 
@@ -26,6 +31,7 @@ public class Lamp : MonoBehaviour
         while (true)
         {
             _lightSource.intensity = _lightIntencity.Evaluate(_currentTime);
+            _audioSource.volume = _lightIntencity.Evaluate(_currentTime) * _volumeScaler;
 
             yield return new WaitForSeconds(Time.deltaTime);
 

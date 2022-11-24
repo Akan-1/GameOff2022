@@ -15,6 +15,7 @@ public class NoiseOnCollisionCreator : MonoBehaviour
 
     [Header("Fall")]
     [SerializeField] private List<AudioClip> FallSounds = new List<AudioClip>();
+    [SerializeField] private float _fallSoundVoluve = .5f;
     [SerializeField] private float _fallNoiseRadius;
 
     private IEnumerator _noiseDisabler;
@@ -25,7 +26,7 @@ public class NoiseOnCollisionCreator : MonoBehaviour
         {
             if (_currentPosition.y != transform.position.y)
             {
-                _noiseMaker.PlayRandomAudioWithCreateNoise(FallSounds, 1, _fallNoiseRadius);
+                _noiseMaker.PlayRandomAudioWithCreateNoise(FallSounds, _fallSoundVoluve, _fallNoiseRadius);
                 _isCanPlayAudio = false;
                 Invoke(nameof(SetCanPlayAudioTrue), _activeNoiseTime);
                 StartNoiseDisabler();

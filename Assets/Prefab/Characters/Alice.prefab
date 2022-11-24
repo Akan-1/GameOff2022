@@ -580,9 +580,9 @@ GameObject:
   - component: {fileID: 5634829330410110232}
   - component: {fileID: 535623535142546310}
   - component: {fileID: 5602429195294773991}
+  - component: {fileID: 4300201073541381260}
   - component: {fileID: 3277016618979534768}
   - component: {fileID: 2728185459852032522}
-  - component: {fileID: 4300201073541381260}
   m_Layer: 11
   m_Name: Alice
   m_TagString: Alice
@@ -893,38 +893,6 @@ MonoBehaviour:
   FallSounds:
   - {fileID: 8300000, guid: 8f201476460b22541b707301a441e017, type: 3}
   _fallNoiseRadius: 2
---- !u!70 &3277016618979534768
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5634829330410110231}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.01}
-  m_Size: {x: 0.09, y: 0.3}
-  m_Direction: 0
---- !u!70 &2728185459852032522
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5634829330410110231}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.076390974}
-  m_Size: {x: 0.09, y: 0.16721822}
-  m_Direction: 0
 --- !u!114 &4300201073541381260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,6 +932,44 @@ MonoBehaviour:
     m_RotationOrder: 4
   _randomTimeBetweenChar: {x: 0.01, y: 0.05}
   _texts: []
+  _audioSourcePoolName: AudioSource
+  _mumblingSounds:
+  - {fileID: 8300000, guid: 3651ada599823d247b7a92075a331b4d, type: 3}
+  - {fileID: 8300000, guid: 18872ebf66e21c14fabdbcd7bceb46fb, type: 3}
+  - {fileID: 8300000, guid: beeba44ee192cd14b8b6275446536b29, type: 3}
+  - {fileID: 8300000, guid: 47daf30734df57c4091927231c8a492b, type: 3}
+--- !u!70 &3277016618979534768
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634829330410110231}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.01}
+  m_Size: {x: 0.09, y: 0.3}
+  m_Direction: 0
+--- !u!70 &2728185459852032522
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634829330410110231}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.076390974}
+  m_Size: {x: 0.09, y: 0.16721822}
+  m_Direction: 0
 --- !u!1 &5634829330461363434
 GameObject:
   m_ObjectHideFlags: 0

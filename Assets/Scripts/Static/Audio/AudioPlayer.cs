@@ -9,7 +9,9 @@ public class AudioPlayer : MonoBehaviour
         try
         {
             AudioClip audioClip = audioClips[Random.Range(0, audioClips.Count)];
-            audioSource.PlayOneShot(audioClip, volumeScale);
+            audioSource.clip = audioClip;
+            audioSource.volume = volumeScale;
+            audioSource.Play();
         }
         catch (System.Exception e)
         {

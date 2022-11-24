@@ -497,6 +497,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   _randomTimeBetweenChar: {x: 0.01, y: 0.05}
   _texts: []
+  _audioSourcePoolName: AudioSource
+  _mumblingSounds:
+  - {fileID: 8300000, guid: d38fe0dea8a185a45bbf290a296890cb, type: 3}
+  - {fileID: 8300000, guid: 056e9f8c1d3bf9c448d4e88625418bc9, type: 3}
+  - {fileID: 8300000, guid: 6dfab7426aa45a9419222c178d451aaa, type: 3}
+  - {fileID: 8300000, guid: 5a1e928aa4f356e47813b92312d4847d, type: 3}
 --- !u!1 &2194720033927972136
 GameObject:
   m_ObjectHideFlags: 0

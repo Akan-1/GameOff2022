@@ -29,12 +29,14 @@ public class NoiseMaker : MonoBehaviour
         }
     }
 
-    public void PlayRandomAudioWithCreateNoise(List<AudioClip> _audioClips, float volumeScale, float noiseRadius)
+    public void PlayRandomAudioWithCreateNoise(List<AudioClip> _audioClips, float volumeScale, float noiseRadius, float audioSourceRadius = 13)
     {
         if (MasterObjectPooler.Instance != null)
         {
             AudioSource _audioSource = MasterObjectPooler.Instance.GetObjectComponent<AudioSource>(_audioSourcePoolName);
             _audioSource.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
+            _audioSource.minDistance = 0;
+            _audioSource.maxDistance = audioSourceRadius;
 
             AudioPlayer.TryPlayRandom(_audioSource, _audioClips, volumeScale);
         } else
