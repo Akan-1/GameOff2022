@@ -6,6 +6,7 @@ public class CharacterSwapper : MonoBehaviour
 {
     public static CharacterSwapper Instance;
     private PlayerController2d _character;
+    private CameraFollow _cameraFollow;
 
     [SerializeField] AudioSource _audioSource;
     [SerializeField] private AudioClip _swapSound;
@@ -14,8 +15,19 @@ public class CharacterSwapper : MonoBehaviour
     private List<PlayerController2d> _possibleCharacters = new List<PlayerController2d>();
     [SerializeField] private int _whichCharacter;
 
+    public PlayerController2d CurrentPlayerController2D
+    {
+        get => _character;
+        set
+        {
+            _character = value;
+            _cameraFollow.StartFollowTo(CurrentPlayerController2D.transform);
+        }
+    }
+
     private void Awake()
     {
+        _cameraFollow = Camera.main.GetComponent<CameraFollow>();
         if (Instance == null)
         {
             Instance = this;
@@ -28,9 +40,10 @@ public class CharacterSwapper : MonoBehaviour
 
     void Start()
     {
-        if (_character == null && _possibleCharacters.Count > 0)
+
+        if (_possibleCharacters.Count > 0)
         {
-            _character = _possibleCharacters[0]; 
+            ActiveCharacter(0);
         }
     }
 
@@ -77,16 +90,16 @@ public class CharacterSwapper : MonoBehaviour
 
     private void ActiveCharacter(int _characterIndex)
     {
-        _character = _possibleCharacters[_characterIndex];
-        _character.enabled = true;
-        _character.IsActive = true;
+        CurrentPlayerController2D = _possibleCharacters[_characterIndex];
+        CurrentPlayerController2D.enabled = true;
+        CurrentPlayerController2D.IsActive = true;
     }
 
     private void DisactiveNonCurrentCharacters()
     {
         for (int i = 0; i < _possibleCharacters.Count; i++)
         {
-            if (_possibleCharacters[i] != _character)
+            if (_possibleCharacters[i] != CurrentPlayerController2D)
             {
                 _possibleCharacters[i].StopWalkAninmation();
                 _possibleCharacters[i].Rigibody2D.velocity = Vector2.zero;
@@ -109,7 +122,7 @@ public class CharacterSwapper : MonoBehaviour
     {
         _possibleCharacters.Add(playerController2D);
 
-        bool _isCurrentCharacterIsNull = _character == null;
+        bool _isCurrentCharacterIsNull = CurrentPlayerController2D == null;
         bool _areHavePossibleCharacters = _possibleCharacters.Count > 0;
 
         if (_isCurrentCharacterIsNull && _areHavePossibleCharacters)

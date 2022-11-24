@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController2d : MonoBehaviour, ITakeDamage
@@ -38,6 +39,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private int _health = 1;
     [SerializeField] private float _defaultSpeed;
     [SerializeField] private float _jumpForce;
+    private bool _isCanMove = true;
 
 
     [Space]
@@ -150,6 +152,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _anim = GetComponent<Animator>();
         Speed = _defaultSpeed;
         _anim.SetFloat("Speed", Speed);
+
     }
 
     private void Start()
@@ -174,6 +177,21 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private void FixedUpdate()
     {
         ApllyMovement();
+    }
+
+    public void LockMovement()
+    {
+        _cantMove = true;
+        _movementInputDirection = 0;
+
+        _anim.SetBool("IsWalk", false);
+        PlayIdleAnimation();
+
+    }
+
+    public void UnlockMovement()
+    {
+        _cantMove = false;
     }
 
     private void TryAddCharacterToPossible()
@@ -283,7 +301,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         if (_isWallSliding)
         {
-            Vector2 wallJumpVector = _wallJumpDirection * _wallJumpStrength;
+            Vector2 wallJumpVector = new Vector2((_wallJumpDirection.x * (transform.localScale.x > 0 ? -1 : 1) - transform.position.x), _wallJumpDirection.y) * _wallJumpStrength;   
             _xPreviousWallPosition = _xPositionOfCurrentWall;
             Rigibody2D.AddForce(wallJumpVector, ForceMode2D.Impulse);
             _isWallSliding = false;
@@ -488,7 +506,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(_ledgeClimbCheck.position, _ledgeRadius);
-        Invoke(nameof(DisableNoise), .1f);
+
+        Gizmos.color = Color.gray;
+        Gizmos.DrawSphere(new Vector2(transform.position.x - (_wallJumpDirection.x * (transform.localScale.x > 0 ? -1 : 1)), transform.position.y + _wallJumpDirection.y) * _wallJumpStrength, .4f);
     }
 
     public void PlayStepSound()
