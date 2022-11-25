@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6233375747837003509}
-  - component: {fileID: 6233375747837003515}
   - component: {fileID: 6233375747837003514}
+  - component: {fileID: 4075532706659633337}
   m_Layer: 13
   m_Name: WeaponCollider
   m_TagString: Untagged
@@ -33,24 +33,6 @@ Transform:
   m_Father: {fileID: 6233375748546576897}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6233375747837003515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6233375747837003508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9d14cd75528b145ac3ba1e0a808066, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioSourcePoolName: AudioSource
-  _noiseMaker: {fileID: 6233375749357208984}
-  _activeNoiseTime: 0.1
-  _minTimeBetweenAudio: 0
-  FallSounds: []
-  _fallNoiseRadius: 0
 --- !u!61 &6233375747837003514
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -77,6 +59,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.12546773, y: 0.08191667}
   m_EdgeRadius: 0
+--- !u!114 &4075532706659633337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233375747837003508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9f52d0435882442a5e9f233b9e5a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _noiseMaker: {fileID: 2561586242852342540}
+  _activeNoiseTime: 0.1
+  _soundVolume: 0.125
+  _noiseRadius: 0.2
+  _minTimeBetweenAudio: 0.3
+  _audioSourcePoolName: AudioSource
+  _fallSounds:
+  - {fileID: 8300000, guid: cb68b3779863c9549817709a7dae515d, type: 3}
 --- !u!1 &6233375748546576899
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6233375749357208987}
   - component: {fileID: 6233375749357208985}
-  - component: {fileID: 6233375749357208984}
+  - component: {fileID: 2561586242852342540}
   m_Layer: 13
   m_Name: NoiseMaker
   m_TagString: Untagged
@@ -264,7 +266,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6233375749357208984
+--- !u!114 &2561586242852342540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

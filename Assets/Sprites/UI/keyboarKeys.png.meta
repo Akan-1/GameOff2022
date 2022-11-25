@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: -4829524793810205049
     second: Shift
+  - first:
+      213: -2973386793160989186
+    second: KeyMouse1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -170,7 +173,7 @@ TextureImporter:
         width: 20
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -178,6 +181,27 @@ TextureImporter:
       bones: []
       spriteID: 7864007b9c41afcb0800000000000000
       internalID: -4829524793810205049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KeyMouse1
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 2
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef52dcd17786cb6d0800000000000000
+      internalID: -2973386793160989186
       vertices: []
       indices: 
       edges: []

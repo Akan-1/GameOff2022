@@ -48,4 +48,9 @@ public class NoiseMaker : MonoBehaviour
         Noise.enabled = true;
     }
 
+    public void PlayRandomAudioWithCreateNoiseOnAudioSource(AudioSource _audioSource, List<AudioClip> _audioClips, float volumeScale, float noiseRadius, float audioSourceRadius = 13)
+    {
+        AudioPlayer.TryPlayRandom(_audioSource, _audioClips, volumeScale);
+    }
+
 }
