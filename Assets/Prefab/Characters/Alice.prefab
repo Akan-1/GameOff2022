@@ -574,7 +574,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5634829330410110237}
   - component: {fileID: 5634829330410110234}
-  - component: {fileID: 5634829330410110235}
   - component: {fileID: 5634829330410110239}
   - component: {fileID: 5634829330410110230}
   - component: {fileID: 5634829330410110232}
@@ -583,6 +582,7 @@ GameObject:
   - component: {fileID: 4300201073541381260}
   - component: {fileID: 3277016618979534768}
   - component: {fileID: 2728185459852032522}
+  - component: {fileID: 246062818944759476}
   m_Layer: 11
   m_Name: Alice
   m_TagString: Alice
@@ -664,27 +664,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &5634829330410110235
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5634829330410110231}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 6200000, guid: 0d8beb7f4a8b0c24ab03735f2dfe1d3a, type: 2}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!82 &5634829330410110239
 AudioSource:
   m_ObjectHideFlags: 0
@@ -820,6 +799,7 @@ MonoBehaviour:
   _stepSounds:
   - {fileID: 8300000, guid: 2fde2eb8d1302a3479481c1e04293875, type: 3}
   _stepNoiseRadius: 0.2
+  _stepSoundVolume: 0.5
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
@@ -827,16 +807,16 @@ MonoBehaviour:
   _groundCheckRadius: 0.22
   _health: 1
   _defaultSpeed: 7
-  _jumpForce: 13
+  _jumpForce: 11
   _wallMask:
     serializedVersion: 2
     m_Bits: 512
   _wallCheck: {fileID: 5634829330461363437}
   _wallCheckRadius: 0.6
-  _wallJumpStrength: 9
+  _wallJumpStrength: 1.3
   _wallSlideSpeed: 0
   _wallSpeed: 10
-  _wallJumpDirection: {x: 1, y: 2}
+  _wallJumpDirection: {x: 0, y: 2.7}
   _ledgePosBot: {x: 0, y: 0}
   _ledgeStartPosition: {x: 0, y: 0}
   _ledgeEndPosition: {x: 0, y: 0}
@@ -844,8 +824,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 262144
   _ledgeClimbCheck: {fileID: 6155791419906058105}
-  _ledgeRadius: 0.14
-  _ledgeClimbForce: 12
+  _ledgeRadius: 0.21
+  _ledgeClimbForce: 3
   _climbReloadTime: 0.5
   _gunHolder: {fileID: 2404292368294241389}
   _idleAnimation: AliceIdle
@@ -892,6 +872,7 @@ MonoBehaviour:
   _minTimeBetweenAudio: 0.3
   FallSounds:
   - {fileID: 8300000, guid: 8f201476460b22541b707301a441e017, type: 3}
+  _fallSoundVoluve: 0.5
   _fallNoiseRadius: 2
 --- !u!114 &4300201073541381260
 MonoBehaviour:
@@ -933,6 +914,7 @@ MonoBehaviour:
   _randomTimeBetweenChar: {x: 0.01, y: 0.05}
   _texts: []
   _audioSourcePoolName: AudioSource
+  _mumblingVolume: 1
   _mumblingSounds:
   - {fileID: 8300000, guid: 3651ada599823d247b7a92075a331b4d, type: 3}
   - {fileID: 8300000, guid: 18872ebf66e21c14fabdbcd7bceb46fb, type: 3}
@@ -970,6 +952,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.076390974}
   m_Size: {x: 0.09, y: 0.16721822}
   m_Direction: 0
+--- !u!50 &246062818944759476
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5634829330410110231}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.2
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 3
+  m_Material: {fileID: 6200000, guid: 0d8beb7f4a8b0c24ab03735f2dfe1d3a, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &5634829330461363434
 GameObject:
   m_ObjectHideFlags: 0

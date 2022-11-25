@@ -43,8 +43,7 @@ public class PressurePlate : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         animator.SetBool("ButtonPressed", false);
-        _onLeaved.Invoke();
-        Debug.Log("Leave");
+        _onLeaved?.Invoke();
     }
 
 }

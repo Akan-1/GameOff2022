@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using QFSW.MOP2;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerController2d))]
 public class PlayerSayer : MonoBehaviour
@@ -16,13 +17,24 @@ public class PlayerSayer : MonoBehaviour
     private string _currentText;
     private float _scaleCurrentTime;
     private bool _isSaying;
-    private IEnumerator _scaleChange;
+    private IEnumerator _scaleChange; 
     private IEnumerator _addChar;
 
     [Header("Audio")]
     [SerializeField] private string _audioSourcePoolName = "AudioSource";
     [SerializeField] private float _mumblingVolume = 1;
     [SerializeField] private List<AudioClip> _mumblingSounds = new List<AudioClip>();
+
+    public UnityEvent OnStartSay
+    {
+        get;
+        set;
+    }
+    public UnityEvent OnEndSay
+    {
+        get;
+        set;
+    }
 
     public PlayerController2d PlayerController2D
     {
@@ -55,6 +67,10 @@ public class PlayerSayer : MonoBehaviour
         StartScaleChange(true);
         NextText();
 
+
+        OnStartSay?.Invoke();
+        OnStartSay?.RemoveAllListeners();
+
         PlayerController2D.LockMovement();
 
     }
@@ -78,6 +94,8 @@ public class PlayerSayer : MonoBehaviour
             {
                 PlayerController2D.UnlockMovement();
                 StartScaleChange(false);
+                OnEndSay.Invoke();
+                OnEndSay.RemoveAllListeners();
                 _isSaying = false;
             }
         }

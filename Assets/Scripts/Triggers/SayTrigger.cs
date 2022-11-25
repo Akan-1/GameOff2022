@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class SayTrigger : MonoBehaviour
@@ -9,6 +10,11 @@ public class SayTrigger : MonoBehaviour
 
     [SerializeField] private List<string> _texts = new List<string>();
     private bool _isActiveted;
+
+    [Header("AdditionalActivities")]
+    [SerializeField] private UnityEvent _onStartSay;
+    [SerializeField] private UnityEvent _onEndSay;
+
 
     private void Awake()
     {
@@ -24,7 +30,11 @@ public class SayTrigger : MonoBehaviour
             if (!_isActiveted)
             {
                 _boxCollider.enabled = false;
+
+                playerSayer.OnStartSay = _onStartSay;
+                playerSayer.OnEndSay = _onEndSay;
                 playerSayer.SayFew(_texts);
+
                 _isActiveted = true;
             }
 
