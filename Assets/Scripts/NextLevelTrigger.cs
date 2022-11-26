@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class NextLevelTrigger : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class NextLevelTrigger : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent(out PlayerController2d player))
         {
-            currentPlayers++;
+            
             player.IsActive = false;
 
             if (currentPlayers >= playersNeededToCompleteLevel)
@@ -27,6 +26,7 @@ public class NextLevelTrigger : MonoBehaviour
                     SceneLoader.NextScene();
                 }
             }
+            currentPlayers++;
         }
     }
 
