@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 public class Door : MonoBehaviour
 {
     BoxCollider2D boxCollider;
@@ -22,5 +19,4 @@ public class Door : MonoBehaviour
         boxCollider.isTrigger = false;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 100, 100);
     }
-
 }

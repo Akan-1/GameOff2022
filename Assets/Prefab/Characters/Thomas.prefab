@@ -354,7 +354,7 @@ MonoBehaviour:
     m_Bits: 295168
   _groundCheckRadius: 0.1
   _health: 2
-  _defaultSpeed: 4
+  _defaultSpeed: 5
   _jumpForce: 10
   _wallMask:
     serializedVersion: 2
@@ -393,14 +393,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9d14cd75528b145ac3ba1e0a808066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSourcePoolName: AudioSource
   _noiseMaker: {fileID: 7080992101996450483}
   _activeNoiseTime: 0.1
+  _soundVolume: 0.5
+  _noiseRadius: 0
   _minTimeBetweenAudio: 0.3
-  FallSounds:
-  - {fileID: 8300000, guid: 8f201476460b22541b707301a441e017, type: 3}
-  _fallSoundVoluve: 0.5
-  _fallNoiseRadius: 2
 --- !u!70 &7532277396379470817
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

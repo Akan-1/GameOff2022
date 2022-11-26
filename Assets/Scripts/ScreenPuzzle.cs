@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScreenPuzzle : MonoBehaviour
 {
@@ -18,11 +16,11 @@ public class ScreenPuzzle : MonoBehaviour
 
     private void OnEnable()
     {
-        Lever.onResultingTag += ChooseNeededSprite;
+        _lever.onResultingTag += ChooseNeededSprite;
     }
     private void OnDisable()
     {
-        Lever.onResultingTag -= ChooseNeededSprite;
+        _lever.onResultingTag -= ChooseNeededSprite;
     }
 
     private void Start()
@@ -38,7 +36,7 @@ public class ScreenPuzzle : MonoBehaviour
         {
             case "Tomas":
                 
-                if (_lever.LeverActivated)
+                if (_lever.LeverPosition)
                     currentSprite.sprite = _activatedIconThomas;
                 else
                     currentSprite.sprite = _inactivatedIconThomas;
@@ -46,9 +44,9 @@ public class ScreenPuzzle : MonoBehaviour
 
             case "Alice":
                 
-                if (_lever.LeverActivated)
+                if (_lever.LeverPosition)
                     currentSprite.sprite = _activatedIconAlice;
-                else if(!_lever.LeverActivated)
+                else if(!_lever.LeverPosition) 
                     currentSprite.sprite = _inactivatedIconAlice;
                 break;
         }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class Lever : MonoBehaviour
@@ -8,28 +6,27 @@ public class Lever : MonoBehaviour
     [SerializeField] private bool _IsActivated = false;
     bool _IsActive = false;
 
-    public static Action<string> onResultingTag;
-    
+    [SerializeField] private AudioSource _clickSound;
+
+    [SerializeField] private ScreenUnlockConfig _screenUnlockConfig;
+
+    public Action<string> onResultingTag;
+
     public string ObjectTag
     {
         get;
-        set;    
+        private set;
     }
 
-    public bool LeverActivated
+    public bool LeverPosition
     {
         get;
-        set;
-    }
-
-    private void Start()
-    {
-        LeverActivated = _IsActivated;
+        private set;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.TryGetComponent(out PlayerController2d player))
+        if (collision.gameObject.TryGetComponent(out PlayerController2d player))
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -44,7 +41,11 @@ public class Lever : MonoBehaviour
                     _IsActive = false;
                 }
                 SendInfoAboutPress(player.gameObject.tag);
+                _screenUnlockConfig.CheckMatchInfo();
+                _clickSound.Play();
+                LeverPosition = _IsActivated;
             }
+
         }
     }
 
@@ -52,6 +53,5 @@ public class Lever : MonoBehaviour
     {
         ObjectTag = tag;
         onResultingTag?.Invoke(tag);
-        Debug.Log("Method working");
     }
 }
