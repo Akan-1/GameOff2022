@@ -1,24 +1,21 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class Lever : MonoBehaviour
 {
-    [SerializeField] private bool _IsActivated = false;
-    bool _IsActive = false;
 
     [SerializeField] private AudioSource _clickSound;
 
-    [SerializeField] private ScreenUnlockConfig _screenUnlockConfig;
+    [SerializeField] private UnityEvent _onClick;
 
-    public Action<string> onResultingTag;
-
-    public string ObjectTag
+    public string CharacterTag
     {
         get;
         private set;
     }
 
-    public bool LeverPosition
+    public bool IsActive
     {
         get;
         private set;
@@ -30,28 +27,21 @@ public class Lever : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (!_IsActive)
+                if (!IsActive)
                 {
-                    _IsActivated = true;
-                    _IsActive = true;
+                    IsActive = true;
                 }
                 else
                 {
-                    _IsActivated = false;
-                    _IsActive = false;
+                    IsActive = false;
                 }
-                SendInfoAboutPress(player.gameObject.tag);
-                _screenUnlockConfig.CheckMatchInfo();
+
+                CharacterTag = player.tag;
                 _clickSound.Play();
-                LeverPosition = _IsActivated;
+                _onClick?.Invoke();
             }
 
+            Debug.Log(player.name);
         }
-    }
-
-    private void SendInfoAboutPress(string tag)
-    {
-        ObjectTag = tag;
-        onResultingTag?.Invoke(tag);
     }
 }

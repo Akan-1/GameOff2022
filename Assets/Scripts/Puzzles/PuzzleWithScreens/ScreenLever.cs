@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ScreenPuzzle : MonoBehaviour
+public class ScreenLever : MonoBehaviour
 {
     [SerializeField] private Lever _lever;
 
@@ -14,40 +14,32 @@ public class ScreenPuzzle : MonoBehaviour
 
     private SpriteRenderer currentSprite;
 
-    private void OnEnable()
-    {
-        _lever.onResultingTag += ChooseNeededSprite;
-    }
-    private void OnDisable()
-    {
-        _lever.onResultingTag -= ChooseNeededSprite;
-    }
-
     private void Start()
     {
         currentSprite = GetComponent<SpriteRenderer>();
     }
 
-    private void ChooseNeededSprite(string tag)
+    public void UpdateSprite()
     {
-        tag = _lever.ObjectTag;
-
-        switch (tag)
+        switch (_lever.CharacterTag)
         {
             case "Tomas":
-                
-                if (_lever.LeverPosition)
+
+                if (_lever.IsActive)
                     currentSprite.sprite = _activatedIconThomas;
                 else
                     currentSprite.sprite = _inactivatedIconThomas;
                 break;
 
             case "Alice":
-                
-                if (_lever.LeverPosition)
+
+                if (_lever.IsActive)
                     currentSprite.sprite = _activatedIconAlice;
-                else if(!_lever.LeverPosition) 
+                else
                     currentSprite.sprite = _inactivatedIconAlice;
+                break;
+            default:
+                Debug.Log("Chracter tag not found");
                 break;
         }
     }
