@@ -6,6 +6,10 @@ public class Zombie : Enemy, ISoundHearable
 {
     private void Update()
     {
+
+        bool _isWalk = GetCurrentSpeed() > 0;
+        Animator.SetBool("IsWalk", _isWalk);
+
         if (IsCanMove)
         {
             MoveToTarget();

@@ -1,32 +1,43 @@
 ﻿using UnityEngine;
-using System;
+using System.Linq;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class Lever : MonoBehaviour
 {
+    private BoxCollider2D _boxCollider;
+    private List<PlayerController2d> _playerControllers2D = new List<PlayerController2d>();
 
     [SerializeField] private AudioSource _clickSound;
-
     [SerializeField] private UnityEvent _onClick;
 
     public string CharacterTag
     {
         get;
         private set;
-    }
+    } = "Tomas";
 
     public bool IsActive
     {
         get;
         private set;
+    } = false;
+
+    private void Start()
+    {
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider.isTrigger = true;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.gameObject.TryGetComponent(out PlayerController2d player))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (IsActiveCharacterClose())
             {
+                CharacterTag = CharacterSwapper.Instance.CurrentPlayerController2D.tag;
+
                 if (!IsActive)
                 {
                     IsActive = true;
@@ -36,12 +47,30 @@ public class Lever : MonoBehaviour
                     IsActive = false;
                 }
 
-                CharacterTag = player.tag;
                 _clickSound.Play();
                 _onClick?.Invoke();
             }
-
-            Debug.Log(player.name);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out PlayerController2d playerController2D))
+        {
+            _playerControllers2D.Add(playerController2D);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out PlayerController2d playerController2D))
+        {
+            _playerControllers2D.Remove(playerController2D);
+        }
+    }
+
+    private bool IsActiveCharacterClose()
+    {
+        return _playerControllers2D.FindIndex(i => i.IsActive == true) > -1;
     }
 }

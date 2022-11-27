@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour, ITakeDamage
 {
     public enum States
@@ -21,7 +23,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     [Header("Movement")]
     [SerializeField] private AnimationCurve _speedIncreaseAnimationCurve;
     [SerializeField] private AnimationCurve _speedDecreaseAnimationCurve;
-    [SerializeField] [Range(0.1f, 0.5f)] private float _distanceToStopping;
+    [SerializeField] [Range(0.1f, 1f)] private float _distanceToStopping;
     [SerializeField] private float _agressiveAdditionalSpeed = 2;
     private AnimationCurve _speedAnimationCurve;
     private bool _isCanMove = true;
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private PlayerController2d _playerController2D;
 
     [Header("Attack")]
+    [SerializeField] private string _animationAttackName;
     [SerializeField] [Min(0)] private Vector2 _damageBetween;
     [SerializeField] [Min(0)] private float _timeBetweenAtacks = 1f;
     [SerializeField] [Min(0)] private float _distanceToAttack;
@@ -48,6 +51,14 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private float _currentAtackTime;
     private bool _isAttack;
     private bool _isInZoneAttack;
+
+    private Animator _animator;
+
+    public Animator Animator
+    {
+        get;
+        private set;
+    }
 
     private Rigidbody2D _rigibidy2D;
 
@@ -73,6 +84,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     void Start()
     {
+        Animator = GetComponent<Animator>();
+
         _rigibidy2D = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
         _health = Random.Range(2, 5);
@@ -104,6 +117,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
             RotateToTarget();
            _rigibidy2D.velocity = GetMovementVector() * GetCurrentSpeed();
 
+
             if (_state == States.Patroling)
             {
                 Patroling();
@@ -130,6 +144,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         if (GetDistanceToTarget() <= _distanceToAttack)
         {
+
             if (_playerController2D != null)
             {
                 _currentAtackTime += Time.deltaTime;
@@ -158,7 +173,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     public Vector2 GetMovementVector()
     {
-        Vector2 toTargetVector = new Vector2(Target.x - _transform.position.x, _transform.position.y).normalized;
+        Vector2 toTargetVector = new Vector2(Target.x - _transform.position.x, Rigidbody2D.velocity.y).normalized;
         return toTargetVector;
     }
 
@@ -230,6 +245,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         _indexOfCurrentfPatrolingPoint = GetNextIndexOfPatroolingPoint();
         Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint].position;
+        Debug.Log(Target);
     }
 
     private int GetNextIndexOfPatroolingPoint()
@@ -252,6 +268,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
     {
         RaycastHit2D raycastHit2D = Physics2D.Raycast(_transform.position, _transform.right * transform.localScale.x, _viewDistance, _characterMask);
         bool isRaycastHitColliderExist = raycastHit2D.collider != null;
+
+        Debug.Log(raycastHit2D.collider);
 
         if (isRaycastHitColliderExist)
         {
@@ -305,11 +323,18 @@ public class Enemy : MonoBehaviour, ITakeDamage
         {
             _isAttack = true;
             _currentAtackTime = 0;
-
-            int _damage = (int)Random.Range(_damageBetween.x, _damageBetween.y);
-            _playerController2D.TakeDamage(_damage);
+            Animator.Play(_animationAttackName);
 
             Invoke(nameof(StopAttack), _attackTime);
+        }
+    }
+
+    public void GetDamageToPlayer()
+    {
+        if (_playerController2D != null)
+        {
+            int _damage = (int)Random.Range(_damageBetween.x, _damageBetween.y);
+            _playerController2D.TakeDamage(_damage);
             Debug.Log($"{_playerController2D.gameObject.name} take {_damage} damage from {gameObject.name}");
         }
     }
@@ -333,12 +358,12 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, (_viewDistance + Mathf.Abs(transform.localScale.x) / 2) * Mathf.Clamp(transform.localScale.x, -1, 1) * transform.right);
+        Gizmos.DrawRay(transform.position, (_viewDistance) * Mathf.Clamp(transform.localScale.x, -1, 1) * transform.right);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _distanceToStopping);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position + new Vector3(0, 0.2f), (_distanceToAttack + Mathf.Abs(transform.localScale.x) / 2) * Mathf.Clamp(transform.localScale.x, -1, 1) * transform.right);
+        Gizmos.DrawRay(transform.position + new Vector3(0, 0.2f), (_distanceToAttack / 2) * Mathf.Clamp(transform.localScale.x, -1, 1) * transform.right);
     }
 }

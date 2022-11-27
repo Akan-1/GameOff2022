@@ -16,11 +16,11 @@ public class PuzzleWithScreen : MonoBehaviour
     private class Order
     {
         [SerializeField] private Lever _lever;
-        [SerializeField] private ScreenLever _screenLever;
+        [SerializeField] private ActivatedScreen _activatedScreen;
         [SerializeField] private CharactersTags _needCharacter;
         [SerializeField] private bool _isNeedActiveLever;
         public Lever Lever => _lever;
-        public ScreenLever ScreenLever => _screenLever;
+        public ActivatedScreen ActivatedScreen => _activatedScreen;
         public CharactersTags NeedCharacter => _needCharacter;
         public bool IsNeedActiveLever => _isNeedActiveLever;
     }
