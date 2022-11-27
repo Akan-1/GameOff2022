@@ -144,6 +144,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         }
     }
+
+    public bool IsLockJump
+    {
+        get;
+        set;
+    }
     public bool IsCanJump
     {
         get;
@@ -297,7 +303,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             Invoke("IgnoreLayerOff", 0.5f);
         }
 
-        if (Input.GetButtonDown("Jump") && IsOnGround && IsCanJump)
+        if (Input.GetButtonDown("Jump") && IsOnGround && IsCanJump && !IsLockJump)
         {
             Jump();
         }
