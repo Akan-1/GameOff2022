@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Music/Sounds.meta
 guid: 0bf01bc11de0c544e92444310819692d
+========
+guid: b42c44444acca8546a4a3aa9508adb19
+>>>>>>>> b7a1fd4781128b77ae9f1c1387eb5d0c26690eba:Assets/Prefab/UI/Weapons.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
