@@ -4,18 +4,19 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 5049379566361358950
-    second: keyboarKeys_0
+    second: KeySpace
   - first:
       213: -4310795388185966267
-    second: keyboarKeys_1
+    second: KeyS
   - first:
       213: 2675466803537430073
-    second: keyboarKeys_2
+    second: KeyF
   - first:
       213: -4829524793810205049
-    second: keyboarKeys_3
+    second: Shift
   - first:
       213: -2973386793160989186
+<<<<<<< HEAD
     second: keyboarKeys_4
   - first:
       213: 4198384380870398329
@@ -30,6 +31,9 @@ TextureImporter:
   - first:
       213: 4198384380870398329
     second: KeyE
+=======
+    second: KeyMouse1
+>>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes)
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -64,13 +68,13 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -85,14 +89,14 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,21 +106,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,15 +119,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: keyboarKeys_0
+      name: KeySpace
       rect:
         serializedVersion: 2
-        x: 72
-        y: 43
-        width: 13
+        x: 106
+        y: 17
+        width: 40
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,15 +140,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: keyboarKeys_1
+      name: KeyS
       rect:
         serializedVersion: 2
-        x: 65
+        x: 78
         y: 30
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,15 +161,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: keyboarKeys_2
+      name: KeyF
       rect:
         serializedVersion: 2
-        x: 78
+        x: 104
         y: 30
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,15 +182,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: keyboarKeys_3
+      name: Shift
       rect:
         serializedVersion: 2
-        x: 91
+        x: 44
         y: 30
-        width: 12
+        width: 20
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,49 +203,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: keyboarKeys_4
-      rect:
-        serializedVersion: 2
-        x: 104
-        y: 30
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef52dcd17786cb6d0800000000000000
-      internalID: -2973386793160989186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: keyboarKeys_6
-      rect:
-        serializedVersion: 2
-        x: 106
-        y: 17
-        width: 40
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b47225c66d42983c0800000000000000
-      internalID: -4356910661145319605
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: keyboarKeys_7
+      name: KeyMouse1
       rect:
         serializedVersion: 2
         x: 175
@@ -267,8 +217,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4af517dc45b66c90800000000000000
-      internalID: -7176849614537622965
+      spriteID: ef52dcd17786cb6d0800000000000000
+      internalID: -2973386793160989186
       vertices: []
       indices: 
       edges: []
