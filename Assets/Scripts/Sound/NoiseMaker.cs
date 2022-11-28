@@ -34,7 +34,7 @@ public class NoiseMaker : MonoBehaviour
         if (MasterObjectPooler.Instance != null)
         {
             AudioSource _audioSource = MasterObjectPooler.Instance.GetObjectComponent<AudioSource>(_audioSourcePoolName);
-            _audioSource.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
+            _audioSource.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             _audioSource.minDistance = 0;
             _audioSource.maxDistance = audioSourceRadius;
 

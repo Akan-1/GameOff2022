@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 using System;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(AudioSource))]
 public class PressurePlate : MonoBehaviour
 {
     private Animator animator;
+    private AudioSource _audioSource;
 
-    [Space]
     [SerializeField] private bool _isNeedHeavyBox;
 
     [SerializeField] private UnityEvent _onPressed;
     [SerializeField] private UnityEvent _onLeaved;
 
+    [Header("Audio")]
+    [SerializeField] private List<AudioClip> _activateSounds = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> _disactivateSounds = new List<AudioClip>();
+    [SerializeField] private float _volumeScale;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,6 +36,7 @@ public class PressurePlate : MonoBehaviour
             {
                 animator.SetBool("ButtonPressed", true);
                 _onPressed.Invoke();
+                AudioPlayer.TryPlayRandom(_audioSource, _activateSounds, _volumeScale);
             }
         }    
         else if (_isNeedHeavyBox)
@@ -36,6 +45,7 @@ public class PressurePlate : MonoBehaviour
             {
                 animator.SetBool("ButtonPressed", true);
                 _onPressed.Invoke();
+                AudioPlayer.TryPlayRandom(_audioSource, _activateSounds, _volumeScale);
             }
         }
     }
@@ -43,6 +53,7 @@ public class PressurePlate : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         animator.SetBool("ButtonPressed", false);
+                AudioPlayer.TryPlayRandom(_audioSource, _disactivateSounds, _volumeScale);
         _onLeaved?.Invoke();
     }
 

@@ -16,6 +16,11 @@ public class Weapon : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private List<AudioClip> _shotSounds;
+    [SerializeField] private List<AudioClip> _reloadSounds;
+    [SerializeField] private List<AudioClip> _noAmmoSounds;
+    [SerializeField] private float _shotVolume = .8f;
+    [SerializeField] private float _reloadVolume = 0.5f;
+    [SerializeField] private float _noAmmoVolume = 0.5f;
 
     [Header("Particles")]
     [SerializeField] private ParticlesPoolNames _shotParticles;
@@ -90,14 +95,14 @@ public class Weapon : MonoBehaviour
 
     public void ShotFrom(PlayerController2d playerController2D)
     {
-        if (playerController2D.IsCanShoot)
+        if (playerController2D.IsCanShoot && !playerController2D.IsLockShoting)
         {
-            if (CurrentAmmoInMagazine > 0)
+            ShotDelayTime -= Time.deltaTime;
+            if (ShotDelayTime <= 0)
             {
-                ShotDelayTime -= Time.deltaTime;
-
-                if (ShotDelayTime <= 0)
+                if (CurrentAmmoInMagazine > 0)
                 {
+
                     playerController2D.EnableShotAnimationBool();
                     for (int bulletCount = 0; WeaponInfo.BulletPerShot > bulletCount; bulletCount++)
                     {
@@ -107,15 +112,25 @@ public class Weapon : MonoBehaviour
                         AddForceToBullet(bullet, playerController2D.transform.localScale);
                     }
                     CurrentAmmoInMagazine--;
-                    ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
 
                     playerController2D.Rigibody2D.AddForce(-Mathf.Lerp(playerController2D.transform.localScale.x, -1, 1) * transform.right, ForceMode2D.Impulse);
                     CreateNoise();
                 }
-            }
-            else
-            {
-                GunHolder.ReloadWeaponAfter(WeaponInfo.ReloadTime);
+                else
+                {
+                    if (BulletsAviable > 0)
+                    {
+                        GunHolder.ReloadWeaponAfter(WeaponInfo.ReloadTime);
+                        GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_reloadSounds, _reloadVolume, 0);
+                    }
+                    else
+                    {
+                        GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_noAmmoSounds, _noAmmoVolume, 0);
+                    }
+
+                }
+
+                ShotDelayTime = WeaponInfo.SecondsBeforeNextShot;
             }
         }
     }
@@ -172,7 +187,7 @@ public class Weapon : MonoBehaviour
 
     public void CreateNoise()
     {
-        GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, 1, _weaponInfo.ShotNoiseRadius);
+        GunHolder.NoiseMaker.PlayRandomAudioWithCreateNoise(_shotSounds, _shotVolume, _weaponInfo.ShotNoiseRadius);
         GunHolder.StartNoiseDisabler();
     }
 

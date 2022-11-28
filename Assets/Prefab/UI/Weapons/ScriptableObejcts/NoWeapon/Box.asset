@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Box
   m_EditorClassIdentifier: 
   _sprite: {fileID: 7265313343042191254, guid: f7e0510a838214e489e00144bf8a716b, type: 3}
+  _pickUpSounds:
+  - {fileID: 8300000, guid: d339260de2bce0b43a7004a58d45169e, type: 3}
   _type: 0
   _bulletPoolName: 0
   _FirePoint: {x: 0, y: 0}

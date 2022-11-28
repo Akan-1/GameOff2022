@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: -4004860913340282569, guid: f7e0510a838214e489e00144bf8a716b,
     type: 3}
+  _pickUpSounds:
+  - {fileID: 8300000, guid: 61e1362a9b1505e41a80859bb75a4955, type: 3}
+  - {fileID: 8300000, guid: 4219deb68199d8045b0418ec3a563e79, type: 3}
+  - {fileID: 8300000, guid: f4cd22e6176b85c4f8e12aa4bae1f418, type: 3}
   _type: 2
   _bulletPoolName: 0
   _FirePoint: {x: 1.5, y: 0}
@@ -24,6 +28,8 @@ MonoBehaviour:
   _scatter: 1
   _shotNoiseRadius: 0
   _recoilStrength: 0
+  _throwForce: 2
   _reloadTime: 2
   _secondsBeforeNextShot: 2
+  _isLockJump: 0
   _bulletForceBetween: {x: 25, y: 35}
