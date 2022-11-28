@@ -41,12 +41,6 @@ TextureImporter:
   - first:
       213: -2109578579430464046
     second: Zombie_12
-  - first:
-      213: 6164015348754923961
-    second: Zombie_13
-  - first:
-      213: 4370258187439953208
-    second: Zombie_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -392,7 +386,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -400,48 +394,6 @@ TextureImporter:
       bones: []
       spriteID: 2d52643857549b2e0800000000000000
       internalID: -2109578579430464046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie_13
-      rect:
-        serializedVersion: 2
-        x: 201
-        y: 56
-        width: 36
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b1c7942d4bfa8550800000000000000
-      internalID: 6164015348754923961
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zombie_14
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 34
-        width: 17
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 835d917baa646ac30800000000000000
-      internalID: 4370258187439953208
       vertices: []
       indices: 
       edges: []
