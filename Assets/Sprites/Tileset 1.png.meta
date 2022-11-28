@@ -152,6 +152,39 @@ TextureImporter:
   - first:
       213: 7801377103264528752
     second: Tileset 1_49
+  - first:
+      213: -6367459872798421616
+    second: Tileset 1_50
+  - first:
+      213: 7707917677056030909
+    second: Tileset 1_51
+  - first:
+      213: -170707748553747446
+    second: Tileset 1_52
+  - first:
+      213: -2366517158150111134
+    second: Tileset 1_53
+  - first:
+      213: -8487283465147297410
+    second: Tileset 1_54
+  - first:
+      213: -5159789053427732530
+    second: Tileset 1_55
+  - first:
+      213: -4949616423936752137
+    second: Tileset 1_56
+  - first:
+      213: -3566371893716914678
+    second: Tileset 1_57
+  - first:
+      213: -837973022730595720
+    second: Tileset 1_58
+  - first:
+      213: 46161403534252164
+    second: Tileset 1_59
+  - first:
+      213: -5597187249037286043
+    second: Tileset 1_60
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1211,7 +1244,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1232,7 +1265,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1253,7 +1286,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1274,7 +1307,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1286,7 +1319,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-<<<<<<< HEAD
     - serializedVersion: 2
       name: Tileset 1_50
       rect:
@@ -1518,8 +1550,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-=======
->>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes)
     outline: []
     physicsShape: []
     bones: []

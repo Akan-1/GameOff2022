@@ -146,7 +146,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
         }
     }
-<<<<<<< HEAD
 
     public bool IsLockJump
     {
@@ -159,8 +158,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get;
         set;
     }
-=======
->>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes)
     public bool IsCanJump
     {
         get;
@@ -331,7 +328,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             Invoke("IgnoreLayerOff", 0.5f);
         }
 
-        if (Input.GetButtonDown("Jump") && IsOnGround && IsCanJump)
+        if (Input.GetButtonDown("Jump") && IsOnGround && IsCanJump && !IsLockJump)
         {
             Jump();
         }

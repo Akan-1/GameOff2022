@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 94695904378845291}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: LedgeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 38066561340740859}
   - component: {fileID: 4539733736376262526}
   - component: {fileID: 7080992101996450483}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: NoiseMaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2194720033927972137}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2194720034700246512}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 6540130483031146564}
   - component: {fileID: 7640551949848591939}
   - component: {fileID: 1843335697253384154}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &7640551949848591939
 MonoBehaviour:
@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 3746048112798900259}
   - component: {fileID: 4923636689127801737}
   - component: {fileID: 2645315969406617558}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,6 +985,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 3570496883198891399, guid: efc7f701b7869f64db9a669a958867f4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_RootOrder
@@ -993,17 +998,17 @@ PrefabInstance:
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.028
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.028
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.028
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}

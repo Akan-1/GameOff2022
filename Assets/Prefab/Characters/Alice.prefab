@@ -191,7 +191,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &5798255143523647931
 MonoBehaviour:
@@ -807,11 +807,11 @@ MonoBehaviour:
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 33536
+    m_Bits: 295680
   _groundCheckRadius: 0.22
   _health: 1
   _defaultSpeed: 7
-  _jumpForce: 11
+  _jumpForce: 12
   _wallMask:
     serializedVersion: 2
     m_Bits: 512
@@ -870,14 +870,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9d14cd75528b145ac3ba1e0a808066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSourcePoolName: AudioSource
   _noiseMaker: {fileID: 3581681370239274830}
   _activeNoiseTime: 0.1
+  _soundVolume: 0.5
+  _noiseRadius: 0
   _minTimeBetweenAudio: 0.3
-  FallSounds:
-  - {fileID: 8300000, guid: 8f201476460b22541b707301a441e017, type: 3}
-  _fallSoundVoluve: 0.5
-  _fallNoiseRadius: 2
 --- !u!114 &4300201073541381260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1031,6 +1028,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}

@@ -19,7 +19,6 @@ public class GunHolder : MonoBehaviour
     private IEnumerator _noiseDisabler;
 
     [SerializeField] private float _throwOutAngularVelocity = 245;
-    [SerializeField] private float _throwForce = 3;
 
     [Header("Animations")]
     [SerializeField] private string _idleAnimation;
@@ -74,7 +73,7 @@ public class GunHolder : MonoBehaviour
             
             if (Input.GetMouseButtonDown(1) && IsCanThrowWeapon)
             {
-                Weapon.ThrowOut(_throwForce, _throwOutAngularVelocity);
+                Weapon.ThrowOut(_throwOutAngularVelocity);
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -89,17 +88,15 @@ public class GunHolder : MonoBehaviour
         _spriteRenderer.sprite = weapon.WeaponInfo.Sprite;
         weapon.gameObject.SetActive(false);
         Weapon = weapon;
-<<<<<<< HEAD
         _playerController2D.IsLockJump = weapon.WeaponInfo.IsLockJump;
         NoiseMaker.PlayRandomAudioWithCreateNoise(weapon.WeaponInfo.PickUpSounds, _pickUpSoundVolume, _pickUpNoiseRadius);
-=======
->>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes)
         Debug.Log($"{Weapon.gameObject.name} has {Weapon.CurrentAmmoInMagazine} bullets in magazine and has {Weapon.BulletsAviable} aviableBullets");
     }
 
     public void ClearWeapon()
     {
         StopReloadWeapon();
+        _playerController2D.IsLockJump = false;
         _spriteRenderer.sprite = null;
         IsCanThrowWeapon = false;
         Weapon.GunHolder = null;
