@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2913378973104362544}
   m_Layer: 15
   m_Name: Box
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3.8
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_ShapePathHash: -776540547
   m_Mesh: {fileID: 0}
   m_InstanceId: -314708
+<<<<<<< HEAD:Assets/Prefab/Box.prefab
 --- !u!58 &2446575754854382487
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,9 +174,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012574578, y: 0}
+  m_Offset: {x: -0.0039268495, y: 0}
   serializedVersion: 2
-  m_Radius: 0.49102783
+  m_Radius: 0.26330948
 --- !u!114 &2913378973104362544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,4 +191,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponInfo: {fileID: 11400000, guid: 3e2e323e6cdc0164da9f00898e52629a, type: 2}
   _shotSounds: []
+  _reloadSounds: []
+  _noAmmoSounds: []
+  _shotVolume: 0.8
+  _reloadVolume: 0.5
+  _noAmmoVolume: 0.5
   _shotParticles: 0
+=======
+>>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes):Assets/Prefab/Props_0.prefab
