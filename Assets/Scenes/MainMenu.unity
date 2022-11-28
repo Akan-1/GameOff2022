@@ -642,7 +642,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 46b26e7290939ab48be0c91990f6da45, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.42
+  m_Volume: 0.45
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2235,14 +2235,6 @@ PlayableDirector:
     value: {fileID: 1622043122}
   m_ExposedReferences:
     m_References: []
---- !u!81 &1622043126
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622043121}
-  m_Enabled: 1
 --- !u!4 &1622043127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7486182275480622830, guid: 59d12ffb36783fe43a7b7d243cb8a53f,

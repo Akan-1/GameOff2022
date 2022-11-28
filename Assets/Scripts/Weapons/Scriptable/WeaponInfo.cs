@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon")]
 public class WeaponInfo : ScriptableObject
@@ -8,7 +7,6 @@ public class WeaponInfo : ScriptableObject
     [Space]
     [Header("Weapon Config")]
     [SerializeField] private Sprite _sprite;
-    [SerializeField] private List<AudioClip> _pickUpSounds = new List<AudioClip>();
     [SerializeField] private WeaponTypes _type;
     [SerializeField] private ObjectPoolsNames _bulletPoolName;
     [SerializeField] private Vector2 _FirePoint;
@@ -29,7 +27,6 @@ public class WeaponInfo : ScriptableObject
     #endregion
 
     public Sprite Sprite => _sprite;
-    public List<AudioClip> PickUpSounds => _pickUpSounds;
     public ObjectPoolsNames BulletPoolName => _bulletPoolName;
     public WeaponTypes Type => _type;
     public Vector2 OffsetFirePoint => _FirePoint;

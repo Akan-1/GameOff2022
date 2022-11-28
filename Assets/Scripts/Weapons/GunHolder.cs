@@ -14,8 +14,6 @@ public class GunHolder : MonoBehaviour
     [Header("Noise")]
     [SerializeField] private float _activeNoiseTime = .1f;
     [SerializeField] private NoiseMaker _noiseMaker;
-    [SerializeField] private float _pickUpSoundVolume = .35f;
-    [SerializeField] private float _pickUpNoiseRadius = .35f;
     private IEnumerator _noiseDisabler;
 
     [SerializeField] private float _throwOutAngularVelocity = 245;
@@ -91,9 +89,12 @@ public class GunHolder : MonoBehaviour
         Weapon = weapon;
 <<<<<<< HEAD
         _playerController2D.IsLockJump = weapon.WeaponInfo.IsLockJump;
+<<<<<<< HEAD
         NoiseMaker.PlayRandomAudioWithCreateNoise(weapon.WeaponInfo.PickUpSounds, _pickUpSoundVolume, _pickUpNoiseRadius);
 =======
 >>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes)
+=======
+>>>>>>> parent of 6f25865 (Merge branch 'dev' of https://github.com/Akan-1/GameOff2022 into dev)
         Debug.Log($"{Weapon.gameObject.name} has {Weapon.CurrentAmmoInMagazine} bullets in magazine and has {Weapon.BulletsAviable} aviableBullets");
     }
 

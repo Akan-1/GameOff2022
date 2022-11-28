@@ -27,6 +27,7 @@ TextureImporter:
   - first:
       213: -7176849614537622965
     second: keyboarKeys_7
+<<<<<<< HEAD
     second: KeyMouse1
   - first:
       213: 4198384380870398329
@@ -34,6 +35,8 @@ TextureImporter:
 =======
     second: KeyMouse1
 >>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes)
+=======
+>>>>>>> parent of 6f25865 (Merge branch 'dev' of https://github.com/Akan-1/GameOff2022 into dev)
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -211,7 +214,7 @@ TextureImporter:
         width: 9
         height: 13
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -219,27 +222,6 @@ TextureImporter:
       bones: []
       spriteID: ef52dcd17786cb6d0800000000000000
       internalID: -2973386793160989186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: KeyE
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 43
-        width: 12
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9711454b958a34a30800000000000000
-      internalID: 4198384380870398329
       vertices: []
       indices: 
       edges: []

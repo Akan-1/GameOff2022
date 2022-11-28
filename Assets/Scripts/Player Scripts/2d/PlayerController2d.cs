@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioListener))]
 public class PlayerController2d : MonoBehaviour, ITakeDamage
 {
     private Animator _anim;
     private float _xPositionOfCurrentWall;
+
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _pushOffWallSound;
+    [SerializeField] private NoiseMaker _noiseMaker;
 
     private int _facingDirection = 1;
 
@@ -21,13 +24,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private bool _cantMove;
 
     [Header("Audio")]
-    [SerializeField] private NoiseMaker _noiseMaker;
     [SerializeField] private List<AudioClip> _stepSounds = new List<AudioClip>();
     [SerializeField] private float _stepNoiseRadius = 0.2f;
-    [SerializeField] private float _stepSoundVolume = .25f;
-    [SerializeField] private float _jumpNoiseRadius = 0.4f;
-    [SerializeField] private float _jumpSoundVolume = .35f;
-    private AudioListener _audioListener;
+    [SerializeField] private float _stepSoundVolume = .5f;
 
     private float _movementInputDirection;
 
@@ -42,7 +41,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private float _defaultSpeed;
     [SerializeField] private float _jumpForce;
     private float _speed;
-    private bool _isActive;
     private bool _isCanMove = true;
 
 
@@ -99,6 +97,10 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get => _anim;
         set => _anim = value;
     }
+    public AudioSource AudioSource
+    {
+        get => _audioSource;
+    }
     public float XPositionOfCurrentWall
     {
         get => _xPositionOfCurrentWall;
@@ -109,12 +111,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     }
     public bool IsActive
     {
-        get => _isActive;
-        set
-        {
-            _isActive = value;
-            _audioListener.enabled = value;
-        }
+        get;
+        set;
     }
     public float Speed
     {
@@ -153,6 +151,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get;
         set;
     }
+<<<<<<< HEAD
 
     public bool IsLockShoting
     {
@@ -161,6 +160,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     }
 =======
 >>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes)
+=======
+>>>>>>> parent of 6f25865 (Merge branch 'dev' of https://github.com/Akan-1/GameOff2022 into dev)
     public bool IsCanJump
     {
         get;
@@ -176,12 +177,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     void Awake()
     {
         Rigibody2D = GetComponent<Rigidbody2D>();
-
         _anim = GetComponent<Animator>();
         Speed = _defaultSpeed;
-
-        _audioListener = GetComponent<AudioListener>();
-        _audioListener.enabled = false;
 
 
     }
@@ -223,16 +220,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     public void UnlockMovement()
     {
         _cantMove = false;
-    }
-
-    public void LockShoting()
-    {
-        IsLockShoting = true;
-    }
-
-    public void UnlockShoting()
-    {
-        IsLockShoting = false;
     }
 
     private void TryAddCharacterToPossible()
@@ -282,20 +269,17 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void WallSlide()
     {
-        if (!IsLockJump)
+        if (XPositionOfCurrentWall != _xPreviousWallPosition && _isTouchWall && !IsOnGround && Rigibody2D.velocity.y < 0)
         {
-            if (XPositionOfCurrentWall != _xPreviousWallPosition && _isTouchWall && !IsOnGround && Rigibody2D.velocity.y < 0)
-            {
-                _isWallSliding = true;
-                IsCanJump = true;
-                _anim.SetBool("IsWallStick", true);
-            }
-            else
-            {
-                _isWallSliding = false;
-                IsCanJump = false;
-                _anim.SetBool("IsWallStick", false);
-            }
+            _isWallSliding = true;
+            IsCanJump = true;
+            _anim.SetBool("IsWallStick", true);
+        }
+        else
+        {
+            _isWallSliding = false;
+            IsCanJump = false;
+            _anim.SetBool("IsWallStick", false);
         }
     }
 
@@ -353,7 +337,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
 
         _anim.Play(_wallJumpAnimation);
-        _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, _jumpSoundVolume, _jumpNoiseRadius);
+        _audioSource.PlayOneShot(_pushOffWallSound);
     }
 
 
@@ -415,8 +399,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         Rigibody2D.AddForce(Vector2.up * _ledgeClimbForce, ForceMode2D.Impulse);
         _anim.SetBool("IsClimb", false);
         _canClimbLedge = false;
-
-        _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, _jumpSoundVolume, _jumpNoiseRadius);
     }
 
     #endregion
@@ -424,7 +406,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         _anim.Play(_jumpAnimation);
         Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, _jumpForce);
-        _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, _jumpSoundVolume, _jumpNoiseRadius);
     }
 
     private void IgnoreLayerOff() => Physics2D.IgnoreLayerCollision(11, 15, false);
@@ -477,6 +458,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
             if (_isTouchingLedge && !_ledgeDetected)
             {
+                Debug.Log(_isTouchingLedge);
                 _ledgeDetected = true;
                 _ledgePosBot = _wallCheck.position;
             }
@@ -558,8 +540,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         Gizmos.DrawSphere(new Vector2(transform.position.x - (_wallJumpDirection.x * (transform.localScale.x > 0 ? -1 : 1)), transform.position.y + _wallJumpDirection.y) * _wallJumpStrength, .4f);
     }
 
-    #region Audio
-
     public void PlayStepSound()
     {
         _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, _stepSoundVolume, _stepNoiseRadius);
@@ -569,6 +549,4 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         _noiseMaker.Noise.enabled = false;
     }
-
-    #endregion
 }

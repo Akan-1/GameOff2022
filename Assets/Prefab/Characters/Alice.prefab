@@ -583,7 +583,6 @@ GameObject:
   - component: {fileID: 3277016618979534768}
   - component: {fileID: 2728185459852032522}
   - component: {fileID: 246062818944759476}
-  - component: {fileID: 6064561175497400550}
   m_Layer: 11
   m_Name: Alice
   m_TagString: Alice
@@ -794,16 +793,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 5634829330410110239}
-  _pushOffWallSound: {fileID: 8300000, guid: fde9251bc71a4b540abb6d517c87d6c3, type: 3}
+  _pushOffWallSound: {fileID: 8300000, guid: 8ecac8cf3d2430f4895971e6e3c38ba5, type: 3}
   _noiseMaker: {fileID: 3581681370239274830}
   _canSquat: 1
   _stepSounds:
   - {fileID: 8300000, guid: 2fde2eb8d1302a3479481c1e04293875, type: 3}
-  - {fileID: 8300000, guid: f5996f2754aecea438c1e29abec44e0d, type: 3}
-  - {fileID: 8300000, guid: fde9251bc71a4b540abb6d517c87d6c3, type: 3}
-  - {fileID: 8300000, guid: 1b8947d1f4ae9fc40adeea6944d4a0e8, type: 3}
   _stepNoiseRadius: 0.2
-  _stepSoundVolume: 0.25
+  _stepSoundVolume: 0.5
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
@@ -977,14 +973,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!81 &6064561175497400550
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5634829330410110231}
-  m_Enabled: 1
 --- !u!1 &5634829330461363434
 GameObject:
   m_ObjectHideFlags: 0

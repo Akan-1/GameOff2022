@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using QFSW.MOP2;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -53,14 +52,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private bool _isAttack;
     private bool _isInZoneAttack;
 
-    [Header("Sounds")]
-    [SerializeField] private string _audioSourcePoolName = "AudioSource";
-    [SerializeField] private List<AudioClip> _stepSounds = new List<AudioClip>();
-    [SerializeField] private List<AudioClip> _attackSounds = new List<AudioClip>();
-    [SerializeField] private float _stepSoundsVolume = .25f;
-    [SerializeField] private float _attackSoundsVolume = .35f;
-    [SerializeField] private float _audioSourceRadius = 25f;
-
     private Animator _animator;
 
     public Animator Animator
@@ -80,14 +71,8 @@ public class Enemy : MonoBehaviour, ITakeDamage
         get => _health;
         set
         {
-            if (value > 0)
-            {
-                _health = value;
-                return;
-            }
-
-            Death();
-
+            _health = value;
+            GameObjectsManager.CheckLifeAmount(_health, gameObject);
         }
     }
 
@@ -366,29 +351,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
     public void TakeDamage(int damage)
     {
         Health -= damage;
-    }
-
-    private void Death()
-    {
-        gameObject.SetActive(false);
-    }
-
-    #endregion
-
-    #region Audio
-
-    public void PlayStepSound()
-    {
-        AudioSource audioSource = MasterObjectPooler.Instance.GetObjectComponent<AudioSource>(_audioSourcePoolName);
-        audioSource.transform.position = transform.position;
-        AudioPlayer.TryPlayRandom(audioSource, _stepSounds, _stepSoundsVolume, _audioSourceRadius);
-    }
-
-    public void PlayAttackSound()
-    {
-        AudioSource audioSource = MasterObjectPooler.Instance.GetObjectComponent<AudioSource>(_audioSourcePoolName);
-        audioSource.transform.position = transform.position;
-        AudioPlayer.TryPlayRandom(audioSource, _attackSounds, _attackSoundsVolume, _audioSourceRadius);
     }
 
     #endregion
