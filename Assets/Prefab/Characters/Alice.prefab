@@ -812,6 +812,8 @@ MonoBehaviour:
   _health: 1
   _defaultSpeed: 7
   _jumpForce: 12
+  _rightHand: {fileID: 4204321113100758282}
+  _leftHand: {fileID: 4298892530760815187}
   _wallMask:
     serializedVersion: 2
     m_Bits: 512

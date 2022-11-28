@@ -41,9 +41,12 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private int _health = 1;
     [SerializeField] private float _defaultSpeed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private GameObject _rightHand, _leftHand;
+
     private float _speed;
     private bool _isActive;
     private bool _isCanMove = true;
+    private bool _isDead = false;
 
 
     [Space]
@@ -168,6 +171,16 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         get;
         set;
     } = true;
+
+    public bool IsPlayerDeath
+    {
+        get => _isDead;
+        set
+        {
+            _isDead = value;
+        }
+    }
+
     #endregion
 
     void Awake()
@@ -191,7 +204,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     void Update()
     {
-        if (IsActive)
+        if (IsActive && !IsPlayerDeath)
         {
             CheckMovement();
             CheckMovementDirection();
@@ -215,6 +228,14 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _anim.SetBool("IsWalk", false);
         PlayIdleAnimation();
 
+    }
+
+    public void PlayDeathAnim()
+    {
+        _rightHand.SetActive(false);
+        _leftHand.SetActive(false);
+        IsPlayerDeath = true;
+        _anim.SetBool("IsDead", true);
     }
 
     public void UnlockMovement()

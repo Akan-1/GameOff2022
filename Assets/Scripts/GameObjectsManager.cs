@@ -24,7 +24,7 @@ public class GameObjectsManager : MonoBehaviour
         if (obj.CompareTag("Tomas") || obj.CompareTag("Alice"))
         {
             onShownBar?.Invoke();
-            Destroy(obj); //Временное решение, позже, думаю, будем просто спавнить спрайт с анимацией смерти игрока.
+            obj.GetComponent<PlayerController2d>().PlayDeathAnim();
         }
         else
             Destroy(obj);
