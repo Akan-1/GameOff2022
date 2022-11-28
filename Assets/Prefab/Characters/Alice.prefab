@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7128968648486033763}
   - component: {fileID: 5070988152898542196}
   - component: {fileID: 195423774736542423}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 5243343916619903698}
   - component: {fileID: 5798255143523647931}
   - component: {fileID: 5381533690058826949}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 9006417684278089738}
   - component: {fileID: 3934442162625047019}
   - component: {fileID: 3581681370239274830}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: NoiseMaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5634829328916192574}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5634829329943817301}
   - component: {fileID: 5634829329943817300}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Top Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,14 +792,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d270e6b1fc6a547448cd7272ed10a5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 5634829330410110239}
-  _pushOffWallSound: {fileID: 8300000, guid: 8ecac8cf3d2430f4895971e6e3c38ba5, type: 3}
-  _noiseMaker: {fileID: 3581681370239274830}
   _canSquat: 1
+  _noiseMaker: {fileID: 3581681370239274830}
   _stepSounds:
   - {fileID: 8300000, guid: 2fde2eb8d1302a3479481c1e04293875, type: 3}
   _stepNoiseRadius: 0.2
-  _stepSoundVolume: 0.5
+  _stepSoundVolume: 0.25
+  _jumpNoiseRadius: 0.4
+  _jumpSoundVolume: 0.35
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
@@ -982,7 +982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5634829330461363437}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,6 +1014,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GunHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570496883198891399, guid: efc7f701b7869f64db9a669a958867f4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}

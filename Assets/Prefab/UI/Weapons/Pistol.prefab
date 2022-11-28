@@ -216,7 +216,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponInfo: {fileID: 11400000, guid: 3ab9f3c8dfd3a524dadb2ab38dbdfe27, type: 2}
   _shotSounds:
-  - {fileID: 8300000, guid: 6c3d6c5c54ea3e84580eb1532cbe2725, type: 3}
+  - {fileID: 8300000, guid: dacbc9351af4a8541809f53c67f55761, type: 3}
+  _reloadSounds:
+  - {fileID: 8300000, guid: 81e1afd0bd6fb27408428f043754adf2, type: 3}
+  _noAmmoSounds:
+  - {fileID: 8300000, guid: 1cc522f556359fe48a1e7db333d9b7a1, type: 3}
+  _shotVolume: 0.8
+  _reloadVolume: 0.6
+  _noAmmoVolume: 0.5
   _shotParticles: 0
 --- !u!1 &6233375749357208986
 GameObject:

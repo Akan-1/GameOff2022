@@ -26,4 +26,5 @@ MonoBehaviour:
   _recoilStrength: 0
   _reloadTime: 2
   _secondsBeforeNextShot: 0.3
-  _bulletForceBetween: {x: 25, y: 30}
+  _isLockJump: 0
+  _bulletForceBetween: {x: 50, y: 60}

@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 5760977059833140366}
   - component: {fileID: 5760977059833140367}
   - component: {fileID: 3879926013354998388}
-  m_Layer: 0
-  m_Name: Props_0
-  m_TagString: Untagged
+  - component: {fileID: 2446575754854382487}
+  - component: {fileID: 2913378973104362544}
+  m_Layer: 15
+  m_Name: Box
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,6 +191,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponInfo: {fileID: 11400000, guid: 3e2e323e6cdc0164da9f00898e52629a, type: 2}
   _shotSounds: []
+  _reloadSounds: []
+  _noAmmoSounds: []
+  _shotVolume: 0.8
+  _reloadVolume: 0.5
+  _noAmmoVolume: 0.5
   _shotParticles: 0
 =======
 >>>>>>> parent of 779c4b5 (Add new sprites, upgrade scenes):Assets/Prefab/Props_0.prefab

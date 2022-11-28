@@ -243,9 +243,11 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     private void GoToNextPatrolingPoint()
     {
-        _indexOfCurrentfPatrolingPoint = GetNextIndexOfPatroolingPoint();
-        Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint].position;
-        Debug.Log(Target);
+        if (_patrolingPoints.Count > 0)
+        {
+            _indexOfCurrentfPatrolingPoint = GetNextIndexOfPatroolingPoint();
+            Target = _patrolingPoints[_indexOfCurrentfPatrolingPoint].position;
+        }
     }
 
     private int GetNextIndexOfPatroolingPoint()
