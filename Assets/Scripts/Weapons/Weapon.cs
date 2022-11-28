@@ -141,7 +141,7 @@ public class Weapon : MonoBehaviour
 
     #endregion
 
-    public void ThrowOut(float throwForce, float throwAngularVelocity)
+    public void ThrowOut(float throwAngularVelocity)
     {
 
         transform.position = GunHolder.transform.position;
@@ -156,7 +156,7 @@ public class Weapon : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        Rigibody2D.AddForce(dir * throwForce, ForceMode2D.Impulse);
+        Rigibody2D.AddForce(dir * WeaponInfo.ThrowForce, ForceMode2D.Impulse);
         Rigibody2D.angularVelocity = throwAngularVelocity;
 
         GunHolder.ClearWeapon();

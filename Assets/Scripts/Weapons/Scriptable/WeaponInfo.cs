@@ -17,8 +17,10 @@ public class WeaponInfo : ScriptableObject
     [SerializeField] [Min(0)] private float _scatter;
     [SerializeField] [Min(0)] private float _shotNoiseRadius;
     [SerializeField] [Min(0)] private float _recoilStrength;
+    [SerializeField] [Min(0)] private float _throwForce = 2;
     [SerializeField] [Min(0.01f)] private float _reloadTime;
     [SerializeField] [Min(.1f)] private float _secondsBeforeNextShot;
+    [SerializeField] private bool _isLockJump;
 
     [Space]
     [Header("Bullet Config")]
@@ -37,6 +39,7 @@ public class WeaponInfo : ScriptableObject
     public float ReloadTime => _reloadTime;
     public float ShotNoiseRadius => _shotNoiseRadius;
     public float RecoilStrength => _recoilStrength;
+    public float ThrowForce => _throwForce;
     public int MaximumBulletsInMagazine => _maximumBulletsInMagazine;
     public int BulletPerShot => _bulletPerShot;
     public int BulletsAviable => _bulletsAviable;
@@ -44,4 +47,5 @@ public class WeaponInfo : ScriptableObject
     {
         get;
     }
+    public bool IsLockJump => _isLockJump;
 }

@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 5760977059833140366}
   - component: {fileID: 5760977059833140367}
   - component: {fileID: 3879926013354998388}
-  m_Layer: 0
-  m_Name: Props_0
+  - component: {fileID: 2446575754854382487}
+  - component: {fileID: 2913378973104362544}
+  m_Layer: 15
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,3 +160,34 @@ MonoBehaviour:
   m_ShapePathHash: -776540547
   m_Mesh: {fileID: 0}
   m_InstanceId: -314708
+--- !u!58 &2446575754854382487
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5760977059833140364}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0039268495, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.26330948
+--- !u!114 &2913378973104362544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5760977059833140364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e61ebb7fb5a0144d9f839459b1380a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponInfo: {fileID: 11400000, guid: 3e2e323e6cdc0164da9f00898e52629a, type: 2}
+  _shotSounds: []
+  _shotParticles: 0

@@ -64,6 +64,29 @@ public class TransferObject : MonoBehaviour
 
     #endregion
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Box")
+            || collision.gameObject.CompareTag("HeavyBox")
+            || collision.gameObject.CompareTag("Tomas")
+            || collision.gameObject.CompareTag("Alice"))
+        {
+            collision.gameObject.transform.SetParent(gameObject.transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Box")
+            || collision.gameObject.CompareTag("HeavyBox")
+            || collision.gameObject.CompareTag("Tomas")
+            || collision.gameObject.CompareTag("Alice"))
+        {
+            collision.gameObject.transform.SetParent(null);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
