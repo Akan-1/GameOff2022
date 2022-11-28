@@ -1070,6 +1070,8 @@ Tilemap:
       type: 3}
   m_TileMatrixArray:
   - m_RefCount: 66
+  m_TileMatrixArray:
+  - m_RefCount: 59
     m_Data:
       e00: 1
       e01: 0
@@ -1089,6 +1091,7 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 63
+  - m_RefCount: 56
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 1
     m_Data: {r: 0.8632474, g: 0.54791677, b: 0.627877, a: 1}

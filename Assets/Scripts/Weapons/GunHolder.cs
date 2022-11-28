@@ -14,6 +14,8 @@ public class GunHolder : MonoBehaviour
     [Header("Noise")]
     [SerializeField] private float _activeNoiseTime = .1f;
     [SerializeField] private NoiseMaker _noiseMaker;
+    [SerializeField] private float _pickUpSoundVolume = .35f;
+    [SerializeField] private float _pickUpNoiseRadius = .35f;
     private IEnumerator _noiseDisabler;
 
     [SerializeField] private float _throwOutAngularVelocity = 245;
@@ -87,6 +89,7 @@ public class GunHolder : MonoBehaviour
         weapon.gameObject.SetActive(false);
         Weapon = weapon;
         _playerController2D.IsLockJump = weapon.WeaponInfo.IsLockJump;
+        NoiseMaker.PlayRandomAudioWithCreateNoise(weapon.WeaponInfo.PickUpSounds, _pickUpSoundVolume, _pickUpNoiseRadius);
         Debug.Log($"{Weapon.gameObject.name} has {Weapon.CurrentAmmoInMagazine} bullets in magazine and has {Weapon.BulletsAviable} aviableBullets");
     }
 

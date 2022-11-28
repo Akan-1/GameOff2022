@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerController2d))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerSayer : MonoBehaviour
 {
     private Vector3 _textStarLocalScale;
@@ -24,6 +25,7 @@ public class PlayerSayer : MonoBehaviour
     [SerializeField] private string _audioSourcePoolName = "AudioSource";
     [SerializeField] private float _mumblingVolume = 1;
     [SerializeField] private List<AudioClip> _mumblingSounds = new List<AudioClip>();
+    private AudioSource _audioSource;
 
     public UnityEvent OnStartSay
     {
@@ -42,6 +44,10 @@ public class PlayerSayer : MonoBehaviour
         private set;
     }
 
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     private void Start()
     {
         PlayerController2D = GetComponent<PlayerController2d>();
@@ -72,6 +78,8 @@ public class PlayerSayer : MonoBehaviour
         OnStartSay?.RemoveAllListeners();
 
         PlayerController2D.LockMovement();
+        PlayerController2D.LockShoting();
+        
 
     }
 
@@ -93,6 +101,7 @@ public class PlayerSayer : MonoBehaviour
             if (isTextSayed)
             {
                 PlayerController2D.UnlockMovement();
+                PlayerController2D.UnlockShoting();
                 StartScaleChange(false);
                 OnEndSay.Invoke();
                 OnEndSay.RemoveAllListeners();
@@ -183,8 +192,7 @@ public class PlayerSayer : MonoBehaviour
 
     private void PlayMumblingSound()
     {
-        AudioSource audioSource = PlayerController2D.AudioSource;
-        AudioPlayer.TryPlayRandom(audioSource, _mumblingSounds, _mumblingVolume);
+        AudioPlayer.TryPlayRandom(_audioSource, _mumblingSounds, _mumblingVolume);
     }
 
     #endregion
