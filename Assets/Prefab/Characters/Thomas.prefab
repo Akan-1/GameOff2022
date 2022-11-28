@@ -381,10 +381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d270e6b1fc6a547448cd7272ed10a5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 2194720033611990508}
-  _pushOffWallSound: {fileID: 8300000, guid: bb1f6e81042d9624d9c950eafc956e32, type: 3}
-  _noiseMaker: {fileID: 7080992101996450483}
   _canSquat: 0
+  _noiseMaker: {fileID: 7080992101996450483}
   _stepSounds:
   - {fileID: 8300000, guid: 2fde2eb8d1302a3479481c1e04293875, type: 3}
   - {fileID: 8300000, guid: f5996f2754aecea438c1e29abec44e0d, type: 3}
@@ -392,6 +390,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1b8947d1f4ae9fc40adeea6944d4a0e8, type: 3}
   _stepNoiseRadius: 0.2
   _stepSoundVolume: 0.25
+  _jumpNoiseRadius: 0.4
+  _jumpSoundVolume: 0.35
   _groudCheck: {fileID: 2194720034700246512}
   _whatIsGround:
     serializedVersion: 2
@@ -715,7 +715,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &7640551949848591939
 MonoBehaviour:

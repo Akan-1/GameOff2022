@@ -2,21 +2,22 @@
 public class Door : MonoBehaviour
 {
     BoxCollider2D boxCollider;
-
+    Animator animator;
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
     public void OpenDoor()
     {
         boxCollider.isTrigger = true;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+        animator.SetBool("DoorIsOpen", true);
     }
 
     public void CloseDoor()
     {
         boxCollider.isTrigger = false;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 100, 100);
+        animator.SetBool("DoorIsOpen", false);
     }
 }
