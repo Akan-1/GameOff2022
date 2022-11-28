@@ -13,7 +13,8 @@ public class NextLevelTrigger : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent(out PlayerController2d player))
         {
-            currentPlayers++;
+            
+            player.IsActive = false;
 
             if (currentPlayers >= playersNeededToCompleteLevel)
             {
@@ -25,14 +26,7 @@ public class NextLevelTrigger : MonoBehaviour
                     SceneLoader.NextScene();
                 }
             }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out PlayerController2d player))
-        {
-            currentPlayers--;
+            currentPlayers++;
         }
     }
 
