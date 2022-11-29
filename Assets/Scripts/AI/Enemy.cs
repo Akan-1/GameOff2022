@@ -336,7 +336,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     private void Attack()
     {
-        if (_playerController2D != null)
+        if (_playerController2D != null && !_playerController2D.IsPlayerDeath)
         {
             _isAttack = true;
             _currentAtackTime = 0;
@@ -348,7 +348,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     public void GetDamageToPlayer()
     {
-        if (_playerController2D != null)
+        if (_playerController2D != null && !_playerController2D.IsPlayerDeath)
         {
             int _damage = (int)Random.Range(_damageBetween.x, _damageBetween.y);
             _playerController2D.TakeDamage(_damage);

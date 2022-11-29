@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-
     private Transform _camera;
     [SerializeField, Range(-1f, 1f)] private float _paralax_multiply;
     Vector3 _prev_pos;
