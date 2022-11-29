@@ -8,6 +8,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 {
     private Animator _anim;
     private float _xPositionOfCurrentWall;
+    private Vector3 _startLocalScale;
 
     private int _facingDirection = 1;
 
@@ -190,6 +191,8 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _audioListener = GetComponent<AudioListener>();
         _audioListener.enabled = false;
 
+        _startLocalScale = transform.localScale;
+
 
     }
 
@@ -274,11 +277,11 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         {
             if (_isFacingRight && _movementInputDirection < 0)
             {
-                Flip();
+                FlipTo(-1);
             }
             else if (!_isFacingRight && _movementInputDirection > 0)
             {
-                Flip();
+                FlipTo(1);
             }
         }
     }
@@ -498,14 +501,14 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
     }
 
-    private void Flip() // поворот игрока (влево, вправо)
+
+    public void FlipTo(int xDirection = 1)
     {
         if (!_isWallSliding)
         {
-            _facingDirection *= -1;
-            _isFacingRight = !_isFacingRight;
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        }      
+            _isFacingRight = xDirection > 0;
+            transform.localScale = xDirection > 0 ? new Vector3(-_startLocalScale.x, _startLocalScale.y, _startLocalScale.z) : _startLocalScale;
+        }
     }
 
     #region Animations

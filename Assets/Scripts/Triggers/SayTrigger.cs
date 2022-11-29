@@ -34,7 +34,6 @@ public class SayTrigger : MonoBehaviour
                 playerSayer.OnStartSay = _onStartSay;
                 playerSayer.OnEndSay = _onEndSay;
                 playerSayer.SayFew(_texts);
-
                 _isActiveted = true;
             }
 

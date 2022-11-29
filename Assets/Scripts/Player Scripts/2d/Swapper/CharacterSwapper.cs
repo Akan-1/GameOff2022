@@ -25,6 +25,12 @@ public class CharacterSwapper : MonoBehaviour
         }
     }
 
+    public bool IsLockSwap
+    {
+        get;
+        set;
+    } = false;
+
     private void Awake()
     {
         _cameraFollow = Camera.main.GetComponent<CameraFollow>();
@@ -50,14 +56,17 @@ public class CharacterSwapper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!IsLockSwap)
         {
-            SwapToPreviousCharacter();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SwapToNextCharacter();
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SwapToPreviousCharacter();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                SwapToNextCharacter();
 
+            }
         }
     }
 
