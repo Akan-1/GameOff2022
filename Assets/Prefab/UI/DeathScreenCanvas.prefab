@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4893754787843145256
+--- !u!1 &722391401071053831
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,73 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4893754787843145263}
-  - component: {fileID: 4893754787843145262}
-  - component: {fileID: 4893754787843145257}
+  - component: {fileID: 7831869048015783961}
+  - component: {fileID: 1059626322033109885}
+  m_Layer: 0
+  m_Name: DeathScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7831869048015783961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722391401071053831}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 365.52597, y: -346.91708, z: -282.11932}
+  m_LocalScale: {x: 53.991386, y: 53.991386, z: 53.991386}
+  m_Children:
+  - {fileID: 4220890988701521644}
+  m_Father: {fileID: 8753170221250515253}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1059626322033109885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722391401071053831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761a25914a2906648a8180f3e03ac9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _panelBar: {fileID: 4220890988701521651}
+  _text: {fileID: 4220890988651138999}
+  _TomasPhrasesArr:
+  - It`s because I`m a man, right?...
+  - I`m also felling pain too!
+  - Not smart move.
+  - I shouldn't have done that...
+  - Let's try this again, but use my plan.
+  - Hey, Alice... You know... you're very beautiful.
+  - Ouch!
+  - Think again, and maybe we can complete this level.
+  _AlicePhrasesArr:
+  - Tomas gives me wrong way...
+  - Call a doctor! Oh, wait, there isn't a goddamn doctor here.
+  - Help me, Tomas, I`m hurt!
+  - My leg!
+  - I can`t go through anymore...
+  - I`m not immortal!
+  - You without me can`t do anything... Help me!
+  - Let`s think how we can solve this puzzle a bit different.
+--- !u!1 &4220890988651138998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4220890988651138993}
+  - component: {fileID: 4220890988651138992}
+  - component: {fileID: 4220890988651138999}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -18,18 +82,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4893754787843145263
+--- !u!224 &4220890988651138993
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754787843145256}
+  m_GameObject: {fileID: 4220890988651138998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4893754788262487922}
+  m_Father: {fileID: 4220890988701521644}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -37,21 +101,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4893754787843145262
+--- !u!222 &4220890988651138992
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754787843145256}
+  m_GameObject: {fileID: 4220890988651138998}
   m_CullTransparentMesh: 0
---- !u!114 &4893754787843145257
+--- !u!114 &4220890988651138999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754787843145256}
+  m_GameObject: {fileID: 4220890988651138998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -133,7 +197,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &4893754788262487917
+--- !u!1 &4220890988701521651
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,8 +205,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4893754788262487922}
-  - component: {fileID: 4893754788262487923}
+  - component: {fileID: 4220890988701521644}
+  - component: {fileID: 4220890988701521645}
   m_Layer: 5
   m_Name: Object
   m_TagString: Untagged
@@ -150,35 +214,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!224 &4893754788262487922
+--- !u!224 &4220890988701521644
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754788262487917}
+  m_GameObject: {fileID: 4220890988701521651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5.2252655}
   m_LocalScale: {x: 0.018521473, y: 0.018521473, z: 0.018521473}
   m_Children:
-  - {fileID: 4893754788617507009}
-  - {fileID: 4893754787843145263}
-  m_Father: {fileID: 1570035087497017735}
+  - {fileID: 4220890989421322591}
+  - {fileID: 4220890988651138993}
+  m_Father: {fileID: 7831869048015783961}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.770079, y: -5.8358154}
+  m_AnchoredPosition: {x: -6.7700806, y: -2.17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &4893754788262487923
+--- !u!95 &4220890988701521645
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754788262487917}
+  m_GameObject: {fileID: 4220890988701521651}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5874c6fa3dcb84a4a98d009860dd6b08, type: 2}
@@ -190,7 +254,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &4893754788617507008
+--- !u!1 &4220890989421322590
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,9 +262,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4893754788617507009}
-  - component: {fileID: 4893754788617507015}
-  - component: {fileID: 4893754788617507014}
+  - component: {fileID: 4220890989421322591}
+  - component: {fileID: 4220890989421322585}
+  - component: {fileID: 4220890989421322584}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -208,18 +272,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4893754788617507009
+--- !u!224 &4220890989421322591
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754788617507008}
+  m_GameObject: {fileID: 4220890989421322590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4893754788262487922}
+  m_Father: {fileID: 4220890988701521644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -227,21 +291,21 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00073242, y: 45.399902}
   m_SizeDelta: {x: 1920.0006, y: 154.83484}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4893754788617507015
+--- !u!222 &4220890989421322585
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754788617507008}
+  m_GameObject: {fileID: 4220890989421322590}
   m_CullTransparentMesh: 0
---- !u!114 &4893754788617507014
+--- !u!114 &4220890989421322584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893754788617507008}
+  m_GameObject: {fileID: 4220890989421322590}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -264,7 +328,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &8322637639166475673
+--- !u!1 &8753170221250515249
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,59 +336,94 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1570035087497017735}
-  - component: {fileID: 8632570861634509539}
-  m_Layer: 0
-  m_Name: DeathScreen
+  - component: {fileID: 8753170221250515253}
+  - component: {fileID: 8753170221250515250}
+  - component: {fileID: 8753170221250515251}
+  - component: {fileID: 8753170221250515248}
+  m_Layer: 5
+  m_Name: DeathScreenCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1570035087497017735
-Transform:
+--- !u!224 &8753170221250515253
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8322637639166475673}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 365.52597, y: -346.91708, z: -282.11932}
-  m_LocalScale: {x: 53.991386, y: 53.991386, z: 53.991386}
+  m_GameObject: {fileID: 8753170221250515249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 4893754788262487922}
+  - {fileID: 7831869048015783961}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8632570861634509539
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!223 &8753170221250515250
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8753170221250515249}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 50
+  m_TargetDisplay: 0
+--- !u!114 &8753170221250515251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8322637639166475673}
+  m_GameObject: {fileID: 8753170221250515249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 761a25914a2906648a8180f3e03ac9c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelBar: {fileID: 4893754788262487917}
-  _text: {fileID: 4893754787843145257}
-  _TomasPhrasesArr:
-  - It`s because I`m a man, right?...
-  - I`m also felling pain too!
-  - Not smart move.
-  - I shouldn't have done that...
-  - Let's try this again, but use my plan.
-  - Hey, Alice... You know... you're very beautiful.
-  - Ouch!
-  - Think again, and maybe we can complete this level.
-  _AlicePhrasesArr:
-  - Tomas gives me wrong way...
-  - Call a doctor! Oh, wait, there isn't a goddamn doctor here.
-  - Help me, Tomas, I`m hurt!
-  - My leg!
-  - I can`t go through anymore...
-  - I`m not immortal!
-  - You without me can`t do anything... Help me!
-  - Let`s think how we can solve this puzzle a bit different.
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!114 &8753170221250515248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8753170221250515249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

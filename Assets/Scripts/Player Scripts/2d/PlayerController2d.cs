@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioListener))]
@@ -146,8 +145,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
             {
                 _xPreviousWallPosition = -999f;
             }
-
-
         }
     }
 
