@@ -188,7 +188,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     public Vector2 GetMovementVector()
     {
-        Vector2 toTargetVector = new Vector2(Target.x - _transform.position.x, Rigidbody2D.velocity.y).normalized;
+        Vector2 toTargetVector = new Vector2(Target.x - _transform.position.x, 0).normalized;
         return toTargetVector;
     }
 
