@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using QFSW.MOP2;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +9,9 @@ using UnityEngine.Events;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerSayer : MonoBehaviour
 {
+    [Serializable]
+    public class UnityEventStringList : UnityEvent<List<string>> { }
+
     private Vector3 _textStarLocalScale;
 
     [SerializeField] private TextMeshProUGUI _text;
@@ -21,6 +24,11 @@ public class PlayerSayer : MonoBehaviour
     private IEnumerator _scaleChange; 
     private IEnumerator _addChar;
 
+    [Header("Events")]
+    [SerializeField] [HideInInspector] private UnityEvent _onStartSay;
+    [SerializeField] [HideInInspector] private UnityEvent _onEndSay;
+    [SerializeField] [HideInInspector] UnityEventStringList _onEndSayTexts;
+
     [Header("Audio")]
     [SerializeField] private string _audioSourcePoolName = "AudioSource";
     [SerializeField] private float _mumblingVolume = 1;
@@ -29,14 +37,21 @@ public class PlayerSayer : MonoBehaviour
 
     public UnityEvent OnStartSay
     {
-        get;
-        set;
+        get => _onStartSay;
+        set => _onStartSay = value;
     }
     public UnityEvent OnEndSay
     {
-        get;
-        set;
+        get => _onEndSay;
+        set => _onEndSay = value;
     }
+
+    public UnityEventStringList OnEndSayTexts
+    {
+        get => _onEndSayTexts;
+        set => _onEndSayTexts = value;
+    }
+
 
     public PlayerController2d PlayerController2D
     {
@@ -68,19 +83,21 @@ public class PlayerSayer : MonoBehaviour
     {
         _isSaying = true;
         _texts = texts;
-        _currentText = texts[0];
+        _currentText = _texts[0];
 
         StartScaleChange(true);
         NextText();
-
 
         OnStartSay?.Invoke();
         OnStartSay?.RemoveAllListeners();
 
         PlayerController2D.LockMovement();
         PlayerController2D.LockShoting();
-        
+    }
 
+    public void AddTexts(List<string> texts)
+    {
+        _texts = texts;
     }
 
     private void NextText()
@@ -103,14 +120,23 @@ public class PlayerSayer : MonoBehaviour
                 PlayerController2D.UnlockMovement();
                 PlayerController2D.UnlockShoting();
                 StartScaleChange(false);
-                OnEndSay.Invoke();
-                OnEndSay.RemoveAllListeners();
+                OnEndSay?.Invoke();
+                OnEndSay?.RemoveAllListeners();
                 _isSaying = false;
             }
         }
 
 
         PrintText();
+    }
+
+    #endregion
+
+    #region Dialog
+
+    public void SayNextTextOfDialog(List<string> texts)
+    {
+        SayFew(texts);
     }
 
     #endregion
@@ -143,7 +169,7 @@ public class PlayerSayer : MonoBehaviour
 
         foreach (char textChar in _currentText)
         {
-            float randomTime = Random.Range(_randomTimeBetweenChar.x, _randomTimeBetweenChar.y);
+            float randomTime = UnityEngine.Random.Range(_randomTimeBetweenChar.x, _randomTimeBetweenChar.y);
             yield return new WaitForSeconds(randomTime);
             _text.text += textChar;
         }
