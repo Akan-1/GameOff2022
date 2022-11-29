@@ -46,13 +46,6 @@ public class PlayerSayer : MonoBehaviour
         set => _onEndSay = value;
     }
 
-    public UnityEventStringList OnEndSayTexts
-    {
-        get => _onEndSayTexts;
-        set => _onEndSayTexts = value;
-    }
-
-
     public PlayerController2d PlayerController2D
     {
         get;
@@ -82,7 +75,8 @@ public class PlayerSayer : MonoBehaviour
     public void SayFew(List<string> texts)
     {
         _isSaying = true;
-        _texts = texts;
+        _texts.Clear();
+        _texts.AddRange(texts);
         _currentText = _texts[0];
 
         StartScaleChange(true);
@@ -93,11 +87,6 @@ public class PlayerSayer : MonoBehaviour
 
         PlayerController2D.LockMovement();
         PlayerController2D.LockShoting();
-    }
-
-    public void AddTexts(List<string> texts)
-    {
-        _texts = texts;
     }
 
     private void NextText()
@@ -128,15 +117,6 @@ public class PlayerSayer : MonoBehaviour
 
 
         PrintText();
-    }
-
-    #endregion
-
-    #region Dialog
-
-    public void SayNextTextOfDialog(List<string> texts)
-    {
-        SayFew(texts);
     }
 
     #endregion

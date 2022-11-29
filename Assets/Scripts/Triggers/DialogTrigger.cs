@@ -22,6 +22,7 @@ public class DialogTrigger : MonoBehaviour
 
     private int _dialogIndex = 0;
     private bool _isAliceSay;
+    private bool _isDialogueStart;
 
     [SerializeField] private string _aliceTag = "Alice";
     [SerializeField] private bool _isAliceStartDialog;
@@ -34,7 +35,6 @@ public class DialogTrigger : MonoBehaviour
         {
             _dialogIndex = value;
 
-            Debug.Log($"Dialog Index: {value}, Dialogs count: {_dialog.Count}");
 
             if (value < _dialog.Count)
             {
@@ -92,42 +92,55 @@ public class DialogTrigger : MonoBehaviour
 
     private void StartDialog()
     {
-        _alicePlayerSayer.PlayerController2D.FlipTo((int)_thomasPlayerSayer.transform.position.x > _alicePlayerSayer.transform.position.x ? 1: -1);
-        _thomasPlayerSayer.PlayerController2D.FlipTo((int)_thomasPlayerSayer.transform.position.x < _alicePlayerSayer.transform.position.x ? 1 : -1);
+        if (!_isDialogueStart)
+        {
 
-        _alicePlayerSayer.PlayerController2D.LockMovement();
-        _thomasPlayerSayer.PlayerController2D.LockMovement();
+            DialogIndex = 0;
 
-        CharacterSwapper.Instance.IsLockSwap = true;
+            _alicePlayerSayer.OnEndSay.RemoveAllListeners();
+            _thomasPlayerSayer.OnEndSay.RemoveAllListeners();
 
-        NextDialog();
+            _alicePlayerSayer.PlayerController2D.FlipTo((int)_thomasPlayerSayer.transform.position.x > _alicePlayerSayer.transform.position.x ? 1 : -1);
+            _thomasPlayerSayer.PlayerController2D.FlipTo((int)_thomasPlayerSayer.transform.position.x < _alicePlayerSayer.transform.position.x ? 1 : -1);
+
+            _alicePlayerSayer.PlayerController2D.LockMovement();
+            _thomasPlayerSayer.PlayerController2D.LockMovement();
+
+            CharacterSwapper.Instance.IsLockSwap = true;
+
+            _isDialogueStart = true;
+
+            NextDialog();
+
+        }
     }
 
     private void NextDialog()
     {
-        _alicePlayerSayer.OnEndSay.RemoveAllListeners();
-        _thomasPlayerSayer.OnEndSay.RemoveAllListeners();
-
-        _alicePlayerSayer.PlayerController2D.LockMovement();
-        _thomasPlayerSayer.PlayerController2D.LockMovement();
-
-        _alicePlayerSayer.OnEndSay?.AddListener(() => ChangeSayPlayerBool());
-        _thomasPlayerSayer.OnEndSay?.AddListener(() => ChangeSayPlayerBool());
+        _isAliceSay = _isAliceStartDialog;
 
         PlayerSayer _currentPlayerSayer = _isAliceStartDialog ? _alicePlayerSayer : _thomasPlayerSayer;
         PlayerSayer _nextPlayer = _isAliceStartDialog ? _thomasPlayerSayer : _alicePlayerSayer;
         List<string> _currentDialog = _thomasPlayerSayer ? _dialog[DialogIndex].FirstCharacterTexts : _dialog[DialogIndex].SecondCharacterTexts;
         List<string> _nextDialog = _thomasPlayerSayer ? _dialog[DialogIndex].SecondCharacterTexts : _dialog[DialogIndex].FirstCharacterTexts;
 
+        _currentPlayerSayer.PlayerController2D.LockMovement();
+        _currentPlayerSayer.OnEndSay?.AddListener(() => ChangeSayPlayerBool());
+        _currentPlayerSayer.OnEndSay?.AddListener(() => _nextPlayer.SayFew(_nextDialog));
+        _currentPlayerSayer.OnEndSay?.AddListener(() => _nextPlayer.OnEndSay?.AddListener(() => AddDialogIndex()));
+
+        _nextPlayer.PlayerController2D.LockMovement();
+        _nextPlayer.OnEndSay?.AddListener(() => ChangeSayPlayerBool());
+
         _currentPlayerSayer.SayFew(_currentDialog);
-        _nextPlayer.OnEndSay?.AddListener(() => DialogIndex++);
-        _currentPlayerSayer.OnEndSayTexts.AddListener(AddTextToNextCharacter);
-        _currentPlayerSayer.OnEndSay?.AddListener(() => _nextPlayer.SayNextTextOfDialog(_nextDialog));
 
     }
 
     private void EndDialog()
     {
+        Debug.Log("End Dialog");
+
+        _isDialogueStart = false;
 
         _alicePlayerSayer.OnEndSay.RemoveAllListeners();
         _thomasPlayerSayer.OnEndSay.RemoveAllListeners();
@@ -136,35 +149,21 @@ public class DialogTrigger : MonoBehaviour
         _thomasPlayerSayer.PlayerController2D.UnlockMovement();
 
         CharacterSwapper.Instance.IsLockSwap = false;
+
         gameObject.SetActive(false);
     }
 
     #endregion
 
-    #region Events
-
-    public void AddTextToNextCharacter(List<string> nextText)
+    private void AddDialogIndex()
     {
-
-        nextText = !_isAliceSay ? _dialog[DialogIndex].SecondCharacterTexts : _dialog[DialogIndex].FirstCharacterTexts;
-
-        if (_isAliceSay)
-        {
-            _thomasPlayerSayer.SayFew(nextText);
-        }
-        else
-        {
-            _alicePlayerSayer.SayFew(nextText);
-        }
-
+        DialogIndex += 1;
+        Debug.Log($"Dialog Index: {DialogIndex}, Dialogs count: {_dialog.Count}");
     }
-
-    #endregion
-
     public void ChangeSayPlayerBool()
     {
-        Debug.Log($"Is Alice Say: {_isAliceSay}");
         _isAliceSay = !_isAliceSay;
+        Debug.Log($"Is Alice Say: {_isAliceSay}");
     }
 
 }
