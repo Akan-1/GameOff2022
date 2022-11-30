@@ -1172,7 +1172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 200768616}
   _swapSound: {fileID: 8300000, guid: f6665563bef69d74fb7ad41548564cde, type: 3}
-  _whichCharacter: 0
 --- !u!4 &200768619
 Transform:
   m_ObjectHideFlags: 0
@@ -4099,6 +4098,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6244361896450076902, guid: 59d12ffb36783fe43a7b7d243cb8a53f,
+        type: 3}
+      propertyPath: _clampsWidth.x
+      value: -7.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244361896450076902, guid: 59d12ffb36783fe43a7b7d243cb8a53f,
+        type: 3}
+      propertyPath: _clampsWidth.y
+      value: 9.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7486182275480622827, guid: 59d12ffb36783fe43a7b7d243cb8a53f,
         type: 3}
       propertyPath: m_Name
@@ -4113,21 +4122,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7486182275480622830, guid: 59d12ffb36783fe43a7b7d243cb8a53f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7486182275480622830, guid: 59d12ffb36783fe43a7b7d243cb8a53f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7486182275480622830, guid: 59d12ffb36783fe43a7b7d243cb8a53f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7486182275480622830, guid: 59d12ffb36783fe43a7b7d243cb8a53f,
         type: 3}
@@ -4221,7 +4215,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -9171479452509205714, guid: f7e0510a838214e489e00144bf8a716b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4242,7 +4236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110857786}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.900048, y: -6.975249, z: 0}
+  m_LocalPosition: {x: 14.900048, y: -6.975249, z: 1}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1775428577}

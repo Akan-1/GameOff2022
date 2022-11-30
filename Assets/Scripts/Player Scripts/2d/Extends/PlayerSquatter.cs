@@ -13,7 +13,6 @@ public class PlayerSquatter : MonoBehaviour
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
     [SerializeField] private float _squatSpeed = 5;
-    [SerializeField] private string _squatAnimation = "AliceSquat";
     private bool _isStand;
 
     private void Start()
@@ -27,6 +26,14 @@ public class PlayerSquatter : MonoBehaviour
         private set
         {
             Animator _animator = _playerController2D.Animator;
+
+            Debug.Log(value == _isStand);
+
+            if (value != _isStand)
+            {
+                _playerController2D.PlayIdleAnimation();
+                _isStand = value;
+            }
 
             if (value)
             {
@@ -42,19 +49,12 @@ public class PlayerSquatter : MonoBehaviour
             {
                 _poseStand.enabled = false;
                 _poseSquat.enabled = true;
-                _animator.Play(_squatAnimation);
                 _animator.SetBool("IsSquat", true);
                 _playerController2D.Speed = _squatSpeed;
                 _playerController2D.IsCanJump = false;
                 _animator.SetFloat("Speed", _playerController2D.Speed);
             }
         }
-    }
-
-    private void Awake()
-    {
-        _topCheckRadius = _topCheck.GetComponent<CircleCollider2D>().radius;
-
     }
 
     private void Update()
@@ -67,10 +67,9 @@ public class PlayerSquatter : MonoBehaviour
 
     private void Squat()
     {
-        bool canStand =  _playerController2D.IsOnGround;
         bool cantStand = Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask);
 
-        if (canStand)
+        if (!cantStand)
         {
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
@@ -86,6 +85,11 @@ public class PlayerSquatter : MonoBehaviour
         {
             IsStand = false;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(_topCheck.position, _topCheckRadius);
     }
 
 }

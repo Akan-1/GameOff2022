@@ -52,6 +52,15 @@ public class DialogTrigger : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
     }
 
+    private void Update()
+    {
+        if (_isDialogueStart)
+        {
+            _alicePlayerSayer.LockActivities();
+            _thomasPlayerSayer.LockActivities();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out PlayerSayer _playerSayer))
@@ -103,9 +112,6 @@ public class DialogTrigger : MonoBehaviour
             _alicePlayerSayer.PlayerController2D.FlipTo((int)_thomasPlayerSayer.transform.position.x > _alicePlayerSayer.transform.position.x ? 1 : -1);
             _thomasPlayerSayer.PlayerController2D.FlipTo((int)_thomasPlayerSayer.transform.position.x < _alicePlayerSayer.transform.position.x ? 1 : -1);
 
-            _alicePlayerSayer.PlayerController2D.LockMovement();
-            _thomasPlayerSayer.PlayerController2D.LockMovement();
-
             CharacterSwapper.Instance.IsLockSwap = true;
 
             _isDialogueStart = true;
@@ -124,15 +130,14 @@ public class DialogTrigger : MonoBehaviour
         List<string> _currentDialog = _thomasPlayerSayer ? _dialog[DialogIndex].FirstCharacterTexts : _dialog[DialogIndex].SecondCharacterTexts;
         List<string> _nextDialog = _thomasPlayerSayer ? _dialog[DialogIndex].SecondCharacterTexts : _dialog[DialogIndex].FirstCharacterTexts;
 
-        _currentPlayerSayer.PlayerController2D.LockMovement();
+
         _currentPlayerSayer.OnEndSay?.AddListener(() => ChangeSayPlayerBool());
         _currentPlayerSayer.OnEndSay?.AddListener(() => _nextPlayer.SayFew(_nextDialog));
         _currentPlayerSayer.OnEndSay?.AddListener(() => _nextPlayer.OnEndSay?.AddListener(() => AddDialogIndex()));
 
-        _nextPlayer.PlayerController2D.LockMovement();
         _nextPlayer.OnEndSay?.AddListener(() => ChangeSayPlayerBool());
-
         _currentPlayerSayer.SayFew(_currentDialog);
+
 
     }
 
@@ -147,6 +152,8 @@ public class DialogTrigger : MonoBehaviour
 
         _alicePlayerSayer.PlayerController2D.UnlockMovement();
         _thomasPlayerSayer.PlayerController2D.UnlockMovement();
+        _alicePlayerSayer.PlayerController2D.UnlockShoting();
+        _thomasPlayerSayer.PlayerController2D.UnlockShoting();
 
         CharacterSwapper.Instance.IsLockSwap = false;
 

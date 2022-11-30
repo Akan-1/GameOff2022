@@ -65,7 +65,7 @@ public class PlayerSayer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _isSaying)
         {
             NextText();
         }
@@ -85,8 +85,7 @@ public class PlayerSayer : MonoBehaviour
         OnStartSay?.Invoke();
         OnStartSay?.RemoveAllListeners();
 
-        PlayerController2D.LockMovement();
-        PlayerController2D.LockShoting();
+        LockActivities();
     }
 
     private void NextText()
@@ -106,17 +105,30 @@ public class PlayerSayer : MonoBehaviour
         {
             if (isTextSayed)
             {
-                PlayerController2D.UnlockMovement();
-                PlayerController2D.UnlockShoting();
+                _isSaying = false;
+                UnlockActivities();
                 StartScaleChange(false);
                 OnEndSay?.Invoke();
                 OnEndSay?.RemoveAllListeners();
-                _isSaying = false;
             }
         }
 
 
         PrintText();
+    }
+
+    public void LockActivities()
+    {
+        Debug.Log($"{gameObject.name} Lock");
+        PlayerController2D.LockMovement();
+        PlayerController2D.LockShoting();
+    }  
+    
+    public void UnlockActivities()
+    {
+        Debug.Log($"{gameObject.name} UnLock");
+        PlayerController2D.UnlockMovement();
+        PlayerController2D.UnlockShoting();
     }
 
     #endregion

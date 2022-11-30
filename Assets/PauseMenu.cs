@@ -29,26 +29,30 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume()
     {
-        Time.timeScale = 1f;
         GameIsPaused = false;
         pausedMenuUI.SetActive(false);
     }
 
     void Pause()
     {
-        Time.timeScale = 0f;
         GameIsPaused = true;
         pausedMenuUI.SetActive(true);
     }
 
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
     public void MainMenuButton()
     {
-        SceneManager.LoadScene("MainMenu");
-        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CharacterSwapper.Instance.CurrentPlayerController2D = null;
+        CharacterSwapper.Instance.ClearCharacters();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -90,7 +90,6 @@ public class GunHolder : MonoBehaviour
         Weapon = weapon;
         _playerController2D.IsLockJump = weapon.WeaponInfo.IsLockJump;
         NoiseMaker.PlayRandomAudioWithCreateNoise(weapon.WeaponInfo.PickUpSounds, _pickUpSoundVolume, _pickUpNoiseRadius);
-        Debug.Log($"{Weapon.gameObject.name} has {Weapon.CurrentAmmoInMagazine} bullets in magazine and has {Weapon.BulletsAviable} aviableBullets");
     }
 
     public void ClearWeapon()

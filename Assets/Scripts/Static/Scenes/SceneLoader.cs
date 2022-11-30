@@ -9,14 +9,23 @@ public static class SceneLoader
     }
     public static void LoadByIndex(int sceneIndex)
     {
+        CharacterSwapper.Instance.CurrentPlayerController2D = null;
         CharacterSwapper.Instance.ClearCharacters();
         SceneManager.LoadScene(sceneIndex);
     }
 
     public static void NextScene()
     {
+        CharacterSwapper.Instance.CurrentPlayerController2D = null;
         CharacterSwapper.Instance.ClearCharacters();
-        SceneLoader.LoadByIndex(GetNextSceneIndex());
+        LoadByIndex(GetNextSceneIndex());
+    }
+
+    public static void Reload()
+    {
+        CharacterSwapper.Instance.CurrentPlayerController2D = null;
+        CharacterSwapper.Instance.ClearCharacters();
+        LoadByIndex(SceneManager.GetActiveScene().buildIndex);
     }
 
     public static void Quit()

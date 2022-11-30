@@ -510,6 +510,15 @@ MonoBehaviour:
     m_RotationOrder: 4
   _randomTimeBetweenChar: {x: 0.01, y: 0.05}
   _texts: []
+  _onStartSay:
+    m_PersistentCalls:
+      m_Calls: []
+  _onEndSay:
+    m_PersistentCalls:
+      m_Calls: []
+  _onEndSayTexts:
+    m_PersistentCalls:
+      m_Calls: []
   _audioSourcePoolName: AudioSource
   _mumblingVolume: 1
   _mumblingSounds:
@@ -717,7 +726,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &7640551949848591939
 MonoBehaviour:
@@ -1024,7 +1033,7 @@ PrefabInstance:
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3570496883198891400, guid: efc7f701b7869f64db9a669a958867f4,
         type: 3}

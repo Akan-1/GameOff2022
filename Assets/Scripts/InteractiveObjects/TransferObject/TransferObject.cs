@@ -25,7 +25,7 @@ public class TransferObject : MonoBehaviour
     public void TransferToEndPoint()
     {
         _speed = _speedOnActivate;
-        StartTransferTo(_transform.position + newPosition);
+        StartTransferTo(newPosition);
     }
 
     public void TransferToStartPoint()

@@ -25,6 +25,7 @@ public class PlayerObjectMover : MonoBehaviour
 
     public void EnableDragAnimation()
     {
+        PlayerController2D.PlayIdleAnimation();
         PlayerController2D.Animator.SetBool("IsDragHeavyProp", true);
     }
 

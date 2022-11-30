@@ -57,4 +57,9 @@ public class PressurePlate : MonoBehaviour
         _onLeaved?.Invoke();
     }
 
+    public void DestoryScript()
+    {
+        Destroy(this);
+    }
+
 }

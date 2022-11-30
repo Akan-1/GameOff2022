@@ -4,7 +4,6 @@ using UnityEngine;
 public class CameraBehaviour : MonoBehaviour
 {
     private Transform _transfrom;
-    private Transform _target;
     private float _zPosition;
 
     [SerializeField] private float _speed;
@@ -18,6 +17,12 @@ public class CameraBehaviour : MonoBehaviour
     [SerializeField] private int _shakeCount;
     private IEnumerator _shake;
 
+    public Transform Target
+    {
+        get;
+        set;
+    }
+
     public Vector2 Offset => _offset;
     private void Awake()
     {
@@ -25,24 +30,18 @@ public class CameraBehaviour : MonoBehaviour
         _zPosition = _transfrom.position.z;
     }
 
-    public void StartFollowTo(Transform target)
-    {
-        _target = target;
-    }
-
     private void FixedUpdate()
     {
-        if (_target != null)
+        if (Target != null)
         {
-            float xLocalScaleMultiplier = _target.localScale.x > 0 ? -1 : 1;
-            float xPosition = Mathf.Clamp(_target.transform.position.x + _offset.x * xLocalScaleMultiplier, _clampsWidth.x, _clampsWidth.y) ;
-            float yPosition = Mathf.Clamp(_target.transform.position.y + _offset.y, _clampsHeight.x, _clampsHeight.y);
+            float xLocalScaleMultiplier = Target.localScale.x > 0 ? -1 : 1;
+            float xPosition = Mathf.Clamp(Target.transform.position.x + _offset.x * xLocalScaleMultiplier, _clampsWidth.x, _clampsWidth.y) ;
+            float yPosition = Mathf.Clamp(Target.transform.position.y + _offset.y, _clampsHeight.x, _clampsHeight.y);
             Vector3 followVector = new Vector3(xPosition, yPosition, _zPosition + _offset.z);
             _transfrom.position = Vector3.Lerp(_transfrom.position, followVector, _speed * Time.fixedDeltaTime);
         } else
         {
-            StartFollowTo(CharacterSwapper.Instance.CurrentPlayerController2D?.transform);
-
+            Debug.LogWarning("Follow target is null");
         }
     }
 
@@ -75,7 +74,7 @@ public class CameraBehaviour : MonoBehaviour
     {
         PlayerController2d _currentPlayer = CharacterSwapper.Instance.CurrentPlayerController2D;
 
-        float xLocalScaleMultiplier = _target.localScale.x > 0 ? -1 : 1;
+        float xLocalScaleMultiplier = Target.localScale.x > 0 ? -1 : 1;
 
         float newXAdditionalPosition = Random.Range(-(_shakeStrenght / shakeNumber), _shakeStrenght / shakeNumber);
         float newYAdditionalPosition = Random.Range(-(_shakeStrenght / shakeNumber), _shakeStrenght / shakeNumber);

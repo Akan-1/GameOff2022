@@ -97,7 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 5990929373131248328}
   _swapSound: {fileID: 8300000, guid: f6665563bef69d74fb7ad41548564cde, type: 3}
-  _whichCharacter: 0
 --- !u!82 &5990929373131248328
 AudioSource:
   m_ObjectHideFlags: 0

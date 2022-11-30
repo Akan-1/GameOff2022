@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioListener))]
 public class PlayerController2d : MonoBehaviour, ITakeDamage
@@ -47,6 +48,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     private bool _isActive;
     private bool _isCanMove = true;
     private bool _isDead = false;
+    [SerializeField] private UnityEvent _onDeath;
 
 
     [Space]
@@ -192,8 +194,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _audioListener.enabled = false;
 
         _startLocalScale = transform.localScale;
-
-
     }
 
     private void Start()
@@ -287,8 +287,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _movementInputDirection = 0;
 
         _anim.SetBool("IsWalk", false);
-        PlayIdleAnimation();
-
     }
 
     public void UnlockMovement()
@@ -311,7 +309,10 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _anim.SetBool("IsDead", true);
     }
 
-
+    public void DeathInvoke()
+    {
+        _onDeath.Invoke();
+    }
 
     public void LockShoting()
     {
@@ -325,14 +326,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     private void TryAddCharacterToPossible()
     {
-        try
-        {
-            CharacterSwapper.Instance.AddCharacter(this);
-        }
-        catch (Exception e)
-        {
-            throw new Exception("Possible characters not found, please start game from main menu");
-        }
+        CharacterSwapper.Instance?.AddCharacter(this);
     }
 
     public void TakeDamage(int damage)
@@ -384,6 +378,11 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
                 IsCanJump = false;
                 _anim.SetBool("IsWallStick", false);
             }
+        } else
+        {
+            _isWallSliding = false;
+            IsCanJump = false;
+            _anim.SetBool("IsWallStick", false);
         }
     }
 
@@ -529,6 +528,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     {
         if (GunHolder.Weapon != null)
         {
+            _anim.Play(_idleAnimation);
             switch (GunHolder.Weapon.WeaponInfo.Type)
             {
                 case WeaponTypes.Pistol:

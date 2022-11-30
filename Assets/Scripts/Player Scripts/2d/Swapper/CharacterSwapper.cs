@@ -13,7 +13,12 @@ public class CharacterSwapper : MonoBehaviour
     
     [Space]
     private List<PlayerController2d> _possibleCharacters = new List<PlayerController2d>();
-    [SerializeField] private int _whichCharacter;
+
+    public int CurrentCharacterIndex
+    {
+        get;
+        set;
+    } = 0;
 
     public PlayerController2d CurrentPlayerController2D
     {
@@ -21,7 +26,6 @@ public class CharacterSwapper : MonoBehaviour
         set
         {
             _character = value;
-            _cameraFollow.StartFollowTo(CurrentPlayerController2D.transform);
         }
     }
 
@@ -33,9 +37,9 @@ public class CharacterSwapper : MonoBehaviour
 
     private void Awake()
     {
-        _cameraFollow = Camera.main.GetComponent<CameraBehaviour>();
         if (Instance == null)
         {
+
             Instance = this;
             DontDestroyOnLoad(gameObject);
             return;
@@ -46,10 +50,9 @@ public class CharacterSwapper : MonoBehaviour
 
     void Start()
     {
-
         if (_possibleCharacters.Count > 0)
         {
-            ActiveCharacter(0);
+            ActiveCharacter();
         }
     }
 
@@ -65,7 +68,6 @@ public class CharacterSwapper : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 SwapToNextCharacter();
-
             }
         }
     }
@@ -74,16 +76,16 @@ public class CharacterSwapper : MonoBehaviour
 
     private void SwapToNextCharacter()
     {
-        int indexOfNextCharacter = _whichCharacter += 1;
-        _whichCharacter = _whichCharacter < _possibleCharacters.Count ? indexOfNextCharacter : 0;
+        int indexOfNextCharacter = CurrentCharacterIndex + 1;
+        CurrentCharacterIndex = CurrentCharacterIndex < _possibleCharacters.Count - 1 ? indexOfNextCharacter : 0;
         Swap();
     }
 
     private void SwapToPreviousCharacter()
     {
-        int indexOfPreviousCharacter = _whichCharacter -= 1;
+        int indexOfPreviousCharacter = CurrentCharacterIndex - 1;
         int indexOfLastCharacter = _possibleCharacters.Count - 1;
-        _whichCharacter = _whichCharacter > -1 ? indexOfPreviousCharacter : indexOfLastCharacter;
+        CurrentCharacterIndex = CurrentCharacterIndex > 0 ? indexOfPreviousCharacter : indexOfLastCharacter;
         Swap();
     }
 
@@ -91,17 +93,22 @@ public class CharacterSwapper : MonoBehaviour
     {
         if (_possibleCharacters.Count > 0)
         {
-            ActiveCharacter(_whichCharacter);
+            ActiveCharacter();
             DisactiveNonCurrentCharacters();
             _audioSource.PlayOneShot(_swapSound);
         }
     }
 
-    private void ActiveCharacter(int _characterIndex)
+    private void ActiveCharacter()
     {
-        CurrentPlayerController2D = _possibleCharacters[_characterIndex];
-        CurrentPlayerController2D.enabled = true;
-        CurrentPlayerController2D.IsActive = true;
+        if (_possibleCharacters.Count > 0)
+        {
+            CurrentPlayerController2D = _possibleCharacters[CurrentCharacterIndex];
+            CurrentPlayerController2D.enabled = true;
+            CurrentPlayerController2D.IsActive = true;
+
+            _cameraFollow.Target = CurrentPlayerController2D.transform;
+        }
     }
 
     private void DisactiveNonCurrentCharacters()
@@ -124,11 +131,13 @@ public class CharacterSwapper : MonoBehaviour
 
     public void ClearCharacters()
     {
-        _possibleCharacters = new List<PlayerController2d>();
+        _possibleCharacters.Clear();
     }
 
     public void AddCharacter(PlayerController2d playerController2D)
     {
+        _cameraFollow = Camera.main.GetComponent<CameraBehaviour>();
+
         _possibleCharacters.Add(playerController2D);
 
         bool _isCurrentCharacterIsNull = CurrentPlayerController2D == null;
@@ -136,7 +145,8 @@ public class CharacterSwapper : MonoBehaviour
 
         if (_isCurrentCharacterIsNull && _areHavePossibleCharacters)
         {
-            ActiveCharacter(_whichCharacter);
+            CurrentCharacterIndex = 0;
+            ActiveCharacter();
         }
     }
 

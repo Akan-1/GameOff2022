@@ -192,7 +192,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 1450076535
-  m_SortingOrder: 15
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &5798255143523647931
 MonoBehaviour:
@@ -860,7 +860,6 @@ MonoBehaviour:
   _poseStand: {fileID: 3277016618979534768}
   _poseSquat: {fileID: 2728185459852032522}
   _squatSpeed: 5
-  _squatAnimation: AliceSquat
 --- !u!114 &5602429195294773991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +916,15 @@ MonoBehaviour:
     m_RotationOrder: 4
   _randomTimeBetweenChar: {x: 0.01, y: 0.05}
   _texts: []
+  _onStartSay:
+    m_PersistentCalls:
+      m_Calls: []
+  _onEndSay:
+    m_PersistentCalls:
+      m_Calls: []
+  _onEndSayTexts:
+    m_PersistentCalls:
+      m_Calls: []
   _audioSourcePoolName: AudioSource
   _mumblingVolume: 1
   _mumblingSounds:
