@@ -6,7 +6,7 @@ public class CharacterSwapper : MonoBehaviour
 {
     public static CharacterSwapper Instance;
     private PlayerController2d _character;
-    private CameraFollow _cameraFollow;
+    private CameraBehaviour _cameraFollow;
 
     [SerializeField] AudioSource _audioSource;
     [SerializeField] private AudioClip _swapSound;
@@ -33,7 +33,7 @@ public class CharacterSwapper : MonoBehaviour
 
     private void Awake()
     {
-        _cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        _cameraFollow = Camera.main.GetComponent<CameraBehaviour>();
         if (Instance == null)
         {
             Instance = this;

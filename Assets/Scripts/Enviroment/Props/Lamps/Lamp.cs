@@ -17,7 +17,12 @@ public class Lamp : MonoBehaviour
     private void Start()
     {
         float time = Random.Range(_startChangeIntencityTimeBetween.x, _startChangeIntencityTimeBetween.y);
-        _audioSource.volume = _lightIntencity.Evaluate(_currentTime) * _volumeScaler;
+
+        if (_audioSource != null)
+        {
+            _audioSource.volume = _lightIntencity.Evaluate(_currentTime) * _volumeScaler;
+        }
+
         Invoke(nameof(StartChangeIntencity), time);
     }
 
@@ -31,7 +36,12 @@ public class Lamp : MonoBehaviour
         while (true)
         {
             _lightSource.intensity = _lightIntencity.Evaluate(_currentTime);
-            _audioSource.volume = _lightIntencity.Evaluate(_currentTime) * _volumeScaler;
+
+            if (_audioSource != null)
+            {
+                _audioSource.volume = _lightIntencity.Evaluate(_currentTime) * _volumeScaler;
+            }
+
 
             yield return new WaitForSeconds(Time.deltaTime);
 

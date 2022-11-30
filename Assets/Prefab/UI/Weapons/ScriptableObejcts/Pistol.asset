@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f4cd22e6176b85c4f8e12aa4bae1f418, type: 3}
   _type: 1
   _bulletPoolName: 0
-  _FirePoint: {x: 0.21, y: 0.1}
+  _FirePoint: {x: 0.7, y: 0.15}
   _maximumBulletsInMagazine: 16
   _bulletPerShot: 1
   _bulletsAviable: 8

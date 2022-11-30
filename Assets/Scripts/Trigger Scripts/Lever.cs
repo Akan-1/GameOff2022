@@ -47,7 +47,11 @@ public class Lever : MonoBehaviour
                     IsActive = false;
                 }
 
-                _clickSound.Play();
+                if (_clickSound != null)
+                {
+                    _clickSound.Play();
+                }
+
                 _onClick?.Invoke();
             }
         }
