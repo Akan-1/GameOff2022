@@ -14,25 +14,25 @@ public class FadeChanger : MonoBehaviour
         _blackForeground.color = Color.black;
         StartFadeOut();
     }
-    public void StartFadeIn()
+    public void StartFadeIn(float delay)
     {
         StopFadeIn();
         StopFadeOut();
 
-        _fadeInBlack = FadeInBlack();
+        _fadeInBlack = FadeInBlack(-1, delay);
         StartCoroutine(_fadeInBlack);
     }
 
-    public void StartFadeInAndChangeScene(int index)
+    public void StartFadeInAndChangeScene(int index, float delay = .1f)
     {
         StopFadeIn();
         StopFadeOut();
 
-        _fadeInBlack = FadeInBlack(index);
+        _fadeInBlack = FadeInBlack(index, delay);
         StartCoroutine(_fadeInBlack);
     }
 
-    public void StartFadeOut()
+    public void StartFadeOut(float _delay = .1f)
     {
         StopFadeIn();
         StopFadeOut();
@@ -57,13 +57,15 @@ public class FadeChanger : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeInBlack(int index = -1)
+    private IEnumerator FadeInBlack(int index = -1, float delay = 0.1f)
     {
         while (_blackForeground.color.a < 1)
         {
             _blackForeground.color = new Color(0, 0, 0, _blackForeground.color.a + _changeAlphaPerTick);
             yield return new WaitForSeconds(.01f);
         }
+
+        StartFadeOut();
 
         if (index != -1)
         {
@@ -73,12 +75,24 @@ public class FadeChanger : MonoBehaviour
 
     }
 
-    private IEnumerator FadeOutBlack()
+    private IEnumerator FadeOutBlack(float delay = .1f)
     {
+        yield return new WaitForSeconds(delay);
+
         while (_blackForeground.color.a > 0)
         {
             _blackForeground.color = new Color(0, 0, 0, _blackForeground.color.a - _changeAlphaPerTick);
             yield return new WaitForSeconds(.01f);
         }
+    }
+
+    public void FadeOutFastAfterDelay(float delay = .1f)
+    {
+        Invoke(nameof(ResetColor), delay);
+    }
+
+    public void ResetColor()
+    {
+        _blackForeground.color = Color.black;
     }
 }

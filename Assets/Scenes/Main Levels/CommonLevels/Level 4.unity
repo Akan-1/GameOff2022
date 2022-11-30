@@ -11273,7 +11273,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1274236258}
     m_Modifications:
     - target: {fileID: 5634829330410110231, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
@@ -11283,17 +11283,17 @@ PrefabInstance:
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.802632
+      value: -18.315475
       objectReference: {fileID: 0}
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5285861
+      value: -1.5457354
       objectReference: {fileID: 0}
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
@@ -11308,17 +11308,17 @@ PrefabInstance:
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
         type: 3}
@@ -11423,6 +11423,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1540177408387246003, guid: df6b8c75b7b5f4244bffe39e762d9e2f,
     type: 3}
   m_PrefabInstance: {fileID: 167899884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &617677787 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5634829330410110237, guid: 7bc1242abf74cf746a98b5725a7f2a83,
+    type: 3}
+  m_PrefabInstance: {fileID: 412507885}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &689860594 stripped
 MonoBehaviour:
@@ -11530,6 +11536,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &806189075 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8771311498197406191, guid: 7bdbca54fc612eb4fb8138c415f215aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 9954663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a90030b7e32c148afc2fb11d41631d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &828770649
 GameObject:
   m_ObjectHideFlags: 0
@@ -11600,7 +11618,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &891485414 stripped
 Transform:
@@ -11653,7 +11671,7 @@ Transform:
   - {fileID: 2123845208}
   - {fileID: 1368630128}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1086438135 stripped
 Transform:
@@ -11800,6 +11818,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1362177733}
+  - {fileID: 617677787}
   m_Father: {fileID: 997001550}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12849,7 +12868,7 @@ Transform:
   m_LocalScale: {x: 10.210987, y: 10.210987, z: 10.210987}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1936978374
 MonoBehaviour:
@@ -12985,6 +13004,39 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1936978375}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 806189075}
+        m_MethodName: FadeOutFastAfterDelay
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 806189075}
+        m_MethodName: StartFadeOut
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
