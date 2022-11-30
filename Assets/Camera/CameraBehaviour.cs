@@ -50,22 +50,25 @@ public class CameraBehaviour : MonoBehaviour
 
     public void BeginShake()
     {
+        if (_shake != null)
+        {
+            StopCoroutine(_shake);
+        }
+
         _shake = Shake();
         StartCoroutine(_shake);
     }
 
     private IEnumerator Shake()
     {
-        PlayerController2d _currentPlayer = CharacterSwapper.Instance.CurrentPlayerController2D;
         float timeOfOneShake = _shakeDuration / _shakeCount;
 
-        for (int i = 1; i < _shakeCount; ++i)
+        for (int i = 1; i < _shakeCount + 1; i++)
         {
             transform.position = GetNewShakePosition(i);
             yield return new WaitForSeconds(timeOfOneShake);
         }
 
-/*        transform.position = _currentPlayer.transform.position;*/
     }
 
     private Vector3 GetNewShakePosition(int shakeNumber)
@@ -74,8 +77,8 @@ public class CameraBehaviour : MonoBehaviour
 
         float xLocalScaleMultiplier = _target.localScale.x > 0 ? -1 : 1;
 
-        float newXAdditionalPosition = Random.Range(-_shakeStrenght / shakeNumber, _shakeStrenght / shakeNumber);
-        float newYAdditionalPosition = Random.Range(-_shakeStrenght / shakeNumber, _shakeStrenght / shakeNumber);
+        float newXAdditionalPosition = Random.Range(-(_shakeStrenght / shakeNumber), _shakeStrenght / shakeNumber);
+        float newYAdditionalPosition = Random.Range(-(_shakeStrenght / shakeNumber), _shakeStrenght / shakeNumber);
 
         float XPosition = Mathf.Clamp(_currentPlayer.transform.position.x + Offset.x * xLocalScaleMultiplier + newXAdditionalPosition, _clampsWidth.x, _clampsWidth.y);
         float YPosition = Mathf.Clamp(_currentPlayer.transform.position.y - Offset.y + newYAdditionalPosition, _clampsHeight.x, _clampsHeight.y);

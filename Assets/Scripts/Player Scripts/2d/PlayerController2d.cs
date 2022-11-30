@@ -220,6 +220,67 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         ApllyMovement();
     }
 
+    #region Movement
+
+    private void ApllyMovement()
+    {
+        if (!_isWallSliding)
+        {
+            Rigibody2D.velocity = new Vector2(_movementInputDirection * Speed, Rigibody2D.velocity.y); // придаёт движение
+        }
+
+        if (_isWallSliding)
+        {
+            if (Rigibody2D.velocity.y < -_wallSlideSpeed)
+            {
+                Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, -_wallSlideSpeed);
+            }
+        }
+    }
+
+    private void CheckMovement()
+    {
+        if (!_isWallSliding)
+        {
+            if (!_cantMove)
+            {
+                _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
+                if (_movementInputDirection != 0)
+                {
+                    _anim.SetBool("IsWalk", true);
+                }
+                else
+                {
+                    _anim.SetBool("IsWalk", false);
+                }
+            }
+            else
+            {
+                Rigibody2D.velocity = new Vector2(0, Rigibody2D.velocity.y);
+            }
+
+        }
+        else
+        {
+            _anim.SetBool("IsWalk", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Physics2D.IgnoreLayerCollision(11, 15, true);
+            Invoke("IgnoreLayerOff", 0.5f);
+        }
+
+        if (Input.GetButtonDown("Jump") && IsOnGround && IsCanJump && !IsLockJump)
+        {
+            Jump();
+        }
+        else if (Input.GetButton("Jump") && _isWallSliding && !IsOnGround && !_anim.GetBool("IsClimb"))
+        {
+            _anim.Play(_wallJumpAnimation);
+        }
+    }
+
     public void LockMovement()
     {
         _cantMove = true;
@@ -230,6 +291,18 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
 
     }
 
+    public void UnlockMovement()
+    {
+        _cantMove = false;
+    }
+
+    public void TeleportToNewXPosition(float newXPosition)
+    {
+        transform.localPosition = new Vector3(newXPosition, transform.localPosition.y, transform.localPosition.z);
+    }
+
+    #endregion
+
     public void PlayDeathAnim()
     {
         _rightHand.SetActive(false);
@@ -238,10 +311,7 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _anim.SetBool("IsDead", true);
     }
 
-    public void UnlockMovement()
-    {
-        _cantMove = false;
-    }
+
 
     public void LockShoting()
     {
@@ -317,48 +387,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         }
     }
 
-    private void CheckMovement()
-    {
-        if (!_isWallSliding)
-        {
-            if (!_cantMove)
-            {
-                _movementInputDirection = Input.GetAxisRaw("Horizontal"); // вносит значение при нажатии клавиш
-                if (_movementInputDirection != 0)
-                {
-                    _anim.SetBool("IsWalk", true);
-                }
-                else
-                {
-                    _anim.SetBool("IsWalk", false);
-                }
-            } else
-            {
-                Rigibody2D.velocity = new Vector2(0, Rigibody2D.velocity.y);
-            }
-
-        }
-        else
-        {
-            _anim.SetBool("IsWalk", false);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Physics2D.IgnoreLayerCollision(11, 15, true);
-            Invoke("IgnoreLayerOff", 0.5f);
-        }
-
-        if (Input.GetButtonDown("Jump") && IsOnGround && IsCanJump && !IsLockJump)
-        {
-            Jump();
-        }
-        else if (Input.GetButton("Jump") && _isWallSliding && !IsOnGround && !_anim.GetBool("IsClimb"))
-        {
-            _anim.Play(_wallJumpAnimation);
-        }
-    }
-
     private void JumpOnWall()
     {
         if (_isWallSliding)
@@ -374,22 +402,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _noiseMaker.PlayRandomAudioWithCreateNoise(_stepSounds, _jumpSoundVolume, _jumpNoiseRadius);
     }
 
-
-    private void ApllyMovement()
-    {
-        if (!_isWallSliding)
-        {
-            Rigibody2D.velocity = new Vector2(_movementInputDirection * Speed, Rigibody2D.velocity.y); // придаёт движение
-        }
-
-        if (_isWallSliding)
-        {
-            if(Rigibody2D.velocity.y < -_wallSlideSpeed)
-            {
-                Rigibody2D.velocity = new Vector2(Rigibody2D.velocity.x, -_wallSlideSpeed);
-            }
-        }
-    }
 
     #region Climb
     private void CheckLedgeClimb()

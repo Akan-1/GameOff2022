@@ -23,12 +23,12 @@ public class FadeChanger : MonoBehaviour
         StartCoroutine(_fadeInBlack);
     }
 
-    public void StartFadeInAndChangeScene(int index, float delay = .1f)
+    public void StartFadeInAndChangeScene(int index)
     {
         StopFadeIn();
         StopFadeOut();
 
-        _fadeInBlack = FadeInBlack(index, delay);
+        _fadeInBlack = FadeInBlack(index);
         StartCoroutine(_fadeInBlack);
     }
 
@@ -37,7 +37,7 @@ public class FadeChanger : MonoBehaviour
         StopFadeIn();
         StopFadeOut();
 
-        _fadeOutBlack = FadeOutBlack();
+        _fadeOutBlack = FadeOutBlack(_delay);
         StartCoroutine(_fadeOutBlack);
     }
 
@@ -78,6 +78,7 @@ public class FadeChanger : MonoBehaviour
     private IEnumerator FadeOutBlack(float delay = .1f)
     {
         yield return new WaitForSeconds(delay);
+        Debug.Log("delay");
 
         while (_blackForeground.color.a > 0)
         {

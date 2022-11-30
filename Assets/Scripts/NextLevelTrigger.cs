@@ -17,13 +17,7 @@ public class NextLevelTrigger : MonoBehaviour
 
             if (currentPlayers >= playersNeededToCompleteLevel)
             {
-                if (_fadeChanger != null)
-                {
-                    _fadeChanger.StartFadeInAndChangeScene(SceneLoader.GetNextSceneIndex());
-                } else
-                {
-                    SceneLoader.NextScene();
-                }
+                NextScene();
             }
         }
     }
@@ -34,6 +28,23 @@ public class NextLevelTrigger : MonoBehaviour
         {
             currentPlayers--;
         }
+    }
+
+    public void NextScene()
+    {
+        if (_fadeChanger != null)
+        {
+            _fadeChanger.StartFadeInAndChangeScene(SceneLoader.GetNextSceneIndex());
+        }
+        else
+        {
+            SceneLoader.NextScene();
+        }
+    }
+
+    public void ToMenu()
+    {
+        SceneLoader.LoadByIndex(0);
     }
 
 }

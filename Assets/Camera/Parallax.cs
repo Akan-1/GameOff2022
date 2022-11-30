@@ -16,7 +16,5 @@ public class Parallax : MonoBehaviour
 
         _prev_pos = _camera.position;
         transform.position += new Vector3(delta.x * _paralax_multiply, delta.y * _paralax_multiply, 0);
-
-
     }
 }
