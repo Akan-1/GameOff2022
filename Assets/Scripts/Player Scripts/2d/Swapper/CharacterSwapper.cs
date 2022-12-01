@@ -117,8 +117,7 @@ public class CharacterSwapper : MonoBehaviour
         {
             if (_possibleCharacters[i] != CurrentPlayerController2D)
             {
-                _possibleCharacters[i].StopAninmationBool();
-                _possibleCharacters[i].PlayIdleAnimation();
+                _possibleCharacters[i].StopWalkAninmation();
                 _possibleCharacters[i].Rigibody2D.velocity = Vector2.zero;
                 _possibleCharacters[i].enabled = false;
                 _possibleCharacters[i].IsActive = false;

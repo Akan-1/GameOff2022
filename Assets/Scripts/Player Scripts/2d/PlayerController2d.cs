@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -92,8 +93,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     [SerializeField] private string _climbAnimation = "ThomasClimb";
     [SerializeField] private string _wallJumpAnimation = "ThomasWallJump";
     [SerializeField] private string _fallAnimation = "ThomasFall";
-
-    [SerializeField] ParticlesPoolNames _bloodParticles;
     public Rigidbody2D Rigibody2D
     {
         get;
@@ -333,7 +332,6 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        ParticleCreator.Create($"{_bloodParticles}", transform.position);
         GameObjectsManager.CheckLifeAmount(_health, gameObject);
     }
 
@@ -559,10 +557,9 @@ public class PlayerController2d : MonoBehaviour, ITakeDamage
         _anim.Play(_idleAnimation);
     }
 
-    public void StopAninmationBool()
+    public void StopWalkAninmation()
     {
         _anim.SetBool("IsWalk", false);
-        _anim.SetBool("IsFall", false);
     }
 
     public void EnableShotAnimationBool()
