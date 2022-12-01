@@ -11,13 +11,11 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        boxCollider.isTrigger = true;
         animator.SetBool("DoorIsOpen", true);
     }
 
     public void CloseDoor()
     {
-        boxCollider.isTrigger = false;
         animator.SetBool("DoorIsOpen", false);
     }
 }

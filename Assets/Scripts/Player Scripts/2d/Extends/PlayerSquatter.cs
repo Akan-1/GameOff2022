@@ -13,7 +13,7 @@ public class PlayerSquatter : MonoBehaviour
     [SerializeField] private Collider2D _poseStand;
     [SerializeField] private Collider2D _poseSquat;
     [SerializeField] private float _squatSpeed = 5;
-    private bool _isStand;
+    private bool _isStand = true;
 
     private void Start()
     {
@@ -27,32 +27,29 @@ public class PlayerSquatter : MonoBehaviour
         {
             Animator _animator = _playerController2D.Animator;
 
-            Debug.Log(value == _isStand);
-
-            if (value != _isStand)
-            {
-                _playerController2D.PlayIdleAnimation();
-                _isStand = value;
-            }
-
             if (value)
             {
                 _poseStand.enabled = true;
                 _poseSquat.enabled = false;
-                _animator.SetBool("IsSquat", false);
                 _playerController2D.Speed = _playerController2D.DefaultSpeed;
                 _playerController2D.IsCanJump = true;
-                _playerController2D.PlayIdleAnimation();
+                _animator.SetBool("IsSquat", false);
                 _animator.SetFloat("Speed", _playerController2D.Speed);
             }
             else
             {
                 _poseStand.enabled = false;
                 _poseSquat.enabled = true;
-                _animator.SetBool("IsSquat", true);
                 _playerController2D.Speed = _squatSpeed;
                 _playerController2D.IsCanJump = false;
+                _animator.SetBool("IsSquat", true);
                 _animator.SetFloat("Speed", _playerController2D.Speed);
+            }
+
+            if (value != _isStand)
+            {
+                _playerController2D.PlayIdleAnimation();
+                _isStand = value;
             }
         }
     }
@@ -67,23 +64,26 @@ public class PlayerSquatter : MonoBehaviour
 
     private void Squat()
     {
-        bool cantStand = Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask);
+        bool cantStand = Physics2D.OverlapCircle(_topCheck.position, _topCheckRadius, _roofMask) && _playerController2D.IsOnGround;
 
         if (!cantStand)
         {
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 IsStand = true;
+                _playerController2D.IsLockJump = false;
             }
             else if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 IsStand = false;
+                _playerController2D.IsLockJump = true;
             }
         }
 
         if (cantStand)
         {
             IsStand = false;
+            _playerController2D.IsLockJump = true;
         }
     }
 
