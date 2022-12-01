@@ -9,6 +9,7 @@ public class PrintEffect : MonoBehaviour
     [SerializeField] private bool _isPrintOnStart;
 
     [SerializeField] private TextMeshProUGUI _tmpro;
+    [TextArea(4, 10)]
     [SerializeField] private string _text;
     [SerializeField] private float _timeBetweenChar;
     [SerializeField] private float _timeBetweenPunctuationMarks;

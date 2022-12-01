@@ -29,10 +29,10 @@ PlayerSettings:
   m_SplashScreenBackgroundPortraitAspect: 1
   m_SplashScreenBackgroundLandscapeUvs:
     serializedVersion: 2
-    x: 0.22644629
-    y: 0.0042918455
-    width: 0.3338843
-    height: 0.16523606
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   m_SplashScreenBackgroundPortraitUvs:
     serializedVersion: 2
     x: 0
@@ -41,7 +41,11 @@ PlayerSettings:
     height: 1
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: 829bf9073d6d33c4481f889cdbeb4de7, type: 3}
-    duration: 2
+    duration: 3
+  - logo: {fileID: 21300000, guid: d433ac57c9cdc484d8febe1e6e21791f, type: 3}
+    duration: 3
+  - logo: {fileID: 21300000, guid: affad03589fc2dd43ba3a1dbbd8eb575, type: 3}
+    duration: 3
   - logo: {fileID: 10404, guid: 0000000000000000e000000000000000, type: 0}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
@@ -574,7 +578,7 @@ PlayerSettings:
   ps5SharedBinaryContentLabels: []
   ps5SharedBinarySystemFolders: []
   monoEnv: 
-  splashScreenBackgroundSourceLandscape: {fileID: -3200769012248108066, guid: f7e0510a838214e489e00144bf8a716b,
+  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: a92654ff8c4c7394dab576c2bb084435,
     type: 3}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
   blurSplashScreenBackground: 1
