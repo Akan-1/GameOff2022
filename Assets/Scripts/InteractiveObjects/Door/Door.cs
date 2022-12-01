@@ -18,4 +18,14 @@ public class Door : MonoBehaviour
     {
         animator.SetBool("DoorIsOpen", false);
     }
+
+    public void EnableCollider()
+    {
+        boxCollider.enabled = true;
+    }
+
+    public void DisableCollider()
+    {
+        boxCollider.enabled = false;
+    }
 }

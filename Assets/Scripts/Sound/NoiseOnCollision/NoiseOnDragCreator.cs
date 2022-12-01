@@ -27,7 +27,7 @@ public class NoiseOnDragCreator : NoiseOnCollisionCreator
             if (!_isDragging)
             {
                 CurrentPosition = new Vector3(transform.position.x, CurrentPosition.y, CurrentPosition.z);
-                NoiseMaker.PlayRandomAudioWithCreateNoiseOnAudioSource(_audioSource, _dragSounds, SoundVolume, NoiseRadius);
+                NoiseMaker.PlayRandomAudioWithCreateNoiseOnAudioSource(_audioSource, _dragSounds, SoundVolume, NoiseRadius, AudioSourceRadius);
                 _isDragging = true;
             }
         }

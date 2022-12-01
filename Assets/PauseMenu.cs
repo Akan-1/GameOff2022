@@ -54,5 +54,6 @@ public class PauseMenu : MonoBehaviour
         CharacterSwapper.Instance.CurrentPlayerController2D = null;
         CharacterSwapper.Instance.ClearCharacters();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("restart");
     }
 }

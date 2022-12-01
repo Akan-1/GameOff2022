@@ -26,8 +26,8 @@ MonoBehaviour:
   _bulletsAviable: 8
   _fireRate: 4
   _scatter: 0.06
-  _shotNoiseRadius: 0
-  _recoilStrength: 0
+  _shotNoiseRadius: 10
+  _recoilStrength: 3
   _throwForce: 2
   _reloadTime: 2
   _secondsBeforeNextShot: 0.3

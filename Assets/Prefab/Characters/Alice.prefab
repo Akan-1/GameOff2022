@@ -601,7 +601,7 @@ Transform:
   m_GameObject: {fileID: 5634829330410110231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.83, y: -2.84, z: 0}
-  m_LocalScale: {x: 8.521003, y: 8.521003, z: 1}
+  m_LocalScale: {x: 8.359533, y: 8.359533, z: 0.98105043}
   m_Children:
   - {fileID: 5634829329943817301}
   - {fileID: 5634829328916192574}
@@ -891,6 +891,7 @@ MonoBehaviour:
   _activeNoiseTime: 0.1
   _soundVolume: 0.5
   _noiseRadius: 0
+  _audioSourceRadius: 13
   _minTimeBetweenAudio: 0.3
 --- !u!114 &4300201073541381260
 MonoBehaviour:

@@ -8,6 +8,7 @@ public class NoiseOnCollisionCreator : MonoBehaviour
     [SerializeField] private float _activeNoiseTime = .1f;
     [SerializeField] private float _soundVolume = .5f;
     [SerializeField] private float _noiseRadius;
+    [SerializeField] private float _audioSourceRadius = 13;
     private Vector3 _currentPosition;
 
     [Header("Settings")]
@@ -25,6 +26,7 @@ public class NoiseOnCollisionCreator : MonoBehaviour
     public float SoundVolume => _soundVolume;
     public float NoiseRadius => _noiseRadius;
     public float ActiveNoiseTime => _activeNoiseTime;
+    public float AudioSourceRadius => _audioSourceRadius;
 
     public bool IsCanPlayAudio
     {

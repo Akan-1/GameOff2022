@@ -50,7 +50,7 @@ public class NoiseMaker : MonoBehaviour
 
     public void PlayRandomAudioWithCreateNoiseOnAudioSource(AudioSource _audioSource, List<AudioClip> _audioClips, float volumeScale, float noiseRadius, float audioSourceRadius = 13)
     {
-        AudioPlayer.TryPlayRandom(_audioSource, _audioClips, volumeScale);
+        AudioPlayer.TryPlayRandom(_audioSource, _audioClips, volumeScale, audioSourceRadius);
     }
 
 }
