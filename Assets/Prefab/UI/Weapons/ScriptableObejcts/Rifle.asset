@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec9220f11732124eaa5103289d32537, type: 3}
+  m_Name: Rifle
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 4556875247267356194, guid: f7e0510a838214e489e00144bf8a716b, type: 3}
+  _pickUpSounds:
+  - {fileID: 8300000, guid: 61e1362a9b1505e41a80859bb75a4955, type: 3}
+  - {fileID: 8300000, guid: 4219deb68199d8045b0418ec3a563e79, type: 3}
+  - {fileID: 8300000, guid: f4cd22e6176b85c4f8e12aa4bae1f418, type: 3}
+  _type: 0
+  _bulletPoolName: 0
+  _FirePoint: {x: 2, y: 0.35}
+  _maximumBulletsInMagazine: 32
+  _bulletPerShot: 1
+  _bulletsAviable: 64
+  _fireRate: 15
+  _scatter: 0.1
+  _shotNoiseRadius: 32
+  _recoilStrength: 0.05
+  _throwForce: 2
+  _reloadTime: 2
+  _secondsBeforeNextShot: 0.1
+  _isLockJump: 0
+  _bulletForceBetween: {x: 45, y: 60}

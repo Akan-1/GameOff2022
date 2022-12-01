@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Weapon
+  - Tomas
+  - Alice
+  - Box
+  - HeavyBox
   layers:
   - Default
   - TransparentFX
@@ -13,18 +19,18 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Wall
+  - Bullet
+  - Character
+  - Roof
+  - WeaponCollider
+  - PostProcess
+  - Platform
+  - IgnoreCharacters
+  - Prop
+  - Ledge
+  - EnemyClampWall
   - 
   - 
   - 
@@ -38,6 +44,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3875546547
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 3376040051
+    locked: 0
+  - name: UI
+    uniqueID: 1450076535
     locked: 0
