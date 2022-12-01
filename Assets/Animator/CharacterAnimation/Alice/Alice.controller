@@ -117,6 +117,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsWalk
+    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsHasRifle
     m_EventTreshold: 0
@@ -128,9 +131,6 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsSquat
-    m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsWalk
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2139895908771190075}
@@ -271,8 +271,8 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
@@ -595,9 +595,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: IsHasShotgun
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsSquat
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1366721112862925172}
@@ -1075,9 +1072,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsHasPistol
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsSquat
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5904247802821906133}
   m_Solo: 0
@@ -1352,9 +1346,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: IsHasRifle
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsSquat
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8739683358450777198}

@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
     private Vector3 _startScale;
 
     [Header("Characteristic")]
-    [SerializeField] ParticlesPoolNames _bloodParticles;
     [SerializeField] private int _health;
 
     [Header("Movement")]
@@ -368,7 +367,6 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
     public void TakeDamage(int damage)
     {
-        ParticleCreator.Create($"{_bloodParticles}", transform.position);
         Health -= damage;
     }
 

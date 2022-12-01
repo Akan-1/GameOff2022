@@ -804,7 +804,7 @@ MonoBehaviour:
   _stepNoiseRadius: 0.2
   _stepSoundVolume: 0.25
   _jumpNoiseRadius: 0.4
-  _jumpSoundVolume: 0.55
+  _jumpSoundVolume: 0.35
   _groudCheck: {fileID: 5634829328916192574}
   _whatIsGround:
     serializedVersion: 2
@@ -815,20 +815,6 @@ MonoBehaviour:
   _jumpForce: 12
   _rightHand: {fileID: 4204321113100758282}
   _leftHand: {fileID: 4298892530760815187}
-  _onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: StartFadeInAndChangeScene
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   _wallMask:
     serializedVersion: 2
     m_Bits: 512
@@ -854,7 +840,6 @@ MonoBehaviour:
   _climbAnimation: AliceClimb
   _wallJumpAnimation: AliceWallJump
   _fallAnimation: AliceFall
-  _bloodParticles: 1
 --- !u!114 &535623535142546310
 MonoBehaviour:
   m_ObjectHideFlags: 0
